@@ -1,0 +1,32 @@
+.logo{
+    display: flex;
+    justify-content: center;
+}
+.title{
+    display: flex;
+    justify-content: center;
+    color: #D04F4F;
+    font-weight: 700;
+}
+.search-bar__main{
+    display: flex;
+    justify-content: center;
+    input {
+        width: 1240px;
+        height: 60px;
+    }
+}
+
+
+.filtres {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 15px;
+    &__ingredient {
+    }
+    &__appareil {
+    }
+    &__ustensile {
+
+    }
+}

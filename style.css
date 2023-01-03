@@ -1,25 +1,26 @@
-.logo{
-    display: flex;
-    justify-content: center;
+.logo {
+  display: flex;
+  justify-content: center;
 }
-.title{
-    display: flex;
-    justify-content: center;
-    color: #D04F4F;
-    font-weight: 700;
+
+.title {
+  display: flex;
+  justify-content: center;
+  color: #D04F4F;
+  font-weight: 700;
 }
-.search-bar__main{
-    display: flex;
-    justify-content: center;
+
+.search-bar__main {
+  display: flex;
+  justify-content: center;
 }
 .search-bar__main input {
-    width: 1240px;
-    height: 60px;
+  width: 1240px;
+  height: 60px;
 }
 
 .filtres {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-
-}
+  display: flex;
+  flex-flow: row wrap;
+  gap: 15px;
+}/*# sourceMappingURL=style.css.map */
