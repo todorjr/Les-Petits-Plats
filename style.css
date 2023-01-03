@@ -6,8 +6,9 @@
 .title {
   display: flex;
   justify-content: center;
-  color: #D04F4F;
-  font-weight: 700;
+  font-family: "DM Sans", sans-serif;
+  font-weight: bold;
+  color: rgb(208, 79, 79);
 }
 
 .search-bar__main {
@@ -15,12 +16,44 @@
   justify-content: center;
 }
 .search-bar__main input {
-  width: 1240px;
-  height: 60px;
+  font-size: 18px;
+  width: 90%;
+  height: 65px;
+  padding: 15px;
+  border: none;
+  border-radius: 2px;
+  background-color: rgb(231, 231, 231);
 }
 
-.filtres {
+.list {
   display: flex;
-  flex-flow: row wrap;
+  flex-direction: row;
+  align-items: center;
   gap: 15px;
+  margin: 15px 0 0 100px;
+}
+.list .divList {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 600;
+  font-size: 0.75em;
+  width: 87px;
+  min-width: initial;
+  max-width: 397px;
+  height: 19.7px;
+  padding: 1em;
+  border: 1px solid;
+  border-radius: 3px;
+  font-family: "Lato";
+  font-weight: 600;
+  font-size: 0.75em;
+  color: #fff;
+}
+.list #divIngredients {
+  background-color: #3282F7;
+}
+.list #divAppareils {
+  background-color: #68D9A4;
+}
+.list #divUstensiles {
+  background-color: #ED6454;
 }/*# sourceMappingURL=style.css.map */
