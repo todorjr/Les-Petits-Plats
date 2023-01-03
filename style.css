@@ -33,7 +33,6 @@
   margin: 15px 0 0 100px;
 }
 .list .divList {
-  font-family: "DM Sans", sans-serif;
   font-weight: 600;
   font-size: 0.75em;
   width: 87px;
@@ -48,12 +47,12 @@
   font-size: 0.75em;
   color: #fff;
 }
-.list #divIngredients {
+.list #ingredients {
   background-color: #3282F7;
 }
-.list #divAppareils {
+.list #appareils {
   background-color: #68D9A4;
 }
-.list #divUstensiles {
+.list #ustensiles {
   background-color: #ED6454;
 }/*# sourceMappingURL=style.css.map */
