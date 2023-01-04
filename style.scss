@@ -28,7 +28,7 @@
     align-items: center;
     gap: 15px;
     margin: 15px 0 0 100px;
-    .divList{
+    .search_list{
         font-weight: 600;
         font-size: 0.75em;
         width: 87px;
@@ -38,12 +38,15 @@
         padding: 1em;
         border: 1px solid ;
         border-radius: 3px;
-        font-family: "Lato";
-        font-weight: 600;
-        font-size: 0.75em;
         color: #fff;
+        font-family: 'Lato', sans-serif;
+        font-weight: 700;
+        line-height: 22px;  
+        display: flex;
+        gap: 10px;    
+        align-items: baseline;  
     }
-    #ingredients{ background-color: #3282F7; }
+    #ingredients{ background-color: #3282F7;}
     #appareils{ background-color: #68D9A4; }
     #ustensiles{ background-color: #ED6454; }
 }

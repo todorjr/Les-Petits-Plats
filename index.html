@@ -21,7 +21,8 @@
 					<label for="searchBar"></label>
 					<input
                     type="search"
-                    name="search" placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette"
+                    name="search"
+                    placeholder="Rechercher une recette"
                     autocomplete='off'
                     aria-label="Rechercher un ingrédient, appareil, ustensiles ou une recette"
 					class="searchBar"
@@ -31,23 +32,20 @@
 				</div>
 			</nav>
             <div class="list">
-                <div id="ingredients" class="divList" tabindex="0">
-                    <span class="spanIngredients">Ingédients</span>
-                    <i class="fas fa-chevron-up"></i>
-                    <div id="listIngredients" class="list">
-                    </div>
+                <div id="ingredients" class="search_list" tabindex="0">
+                    <span class="spanIngredients">Ingrédients</span>
+                    <i class="fas fa-chevron-down"></i>
+                  
                 </div>
-                <div id="appareils" class="divList" tabindex="0">
+                <div id="appareils" class="search_list" tabindex="0">
                     <span class="spanAppareils">Appareils</span>
-                    <i class="fas fa-chevron-up"></i>
-                    <div id="listAppareils" class="list">
-                    </div>
+                    <i class="fas fa-chevron-down"></i>
+                  
                 </div>
-                <div id="ustensiles" class="divList" tabindex="0">
+                <div id="ustensiles" class="search_list" tabindex="0">
                     <span class="spanUstensiles">Ustensiles</span>
-                    <i class="fas fa-chevron-up"></i>
-                    <div id="listUstensiles" class="list">
-                    </div>
+                    <i class="fas fa-chevron-down"></i>
+                 
                 </div>
             </div>
 		</header>
