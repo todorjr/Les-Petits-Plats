@@ -4,7 +4,7 @@ function displayData(recepies) {
     const section = document.querySelector(".container");
     const recepiesSection = document.createElement("div")
 
-    for(let i=0; i<recepies.length; i++) {
+    recepies.forEach((recepie) => {
         const title = document.createElement("h2")
         title.setAttribute("tabindex", 0)
         title.classList.add("title-recepies")
@@ -16,12 +16,13 @@ function displayData(recepies) {
         description.classList.add("description-recepies")
         description.setAttribute("id", "description");
         description.innerHTML = recepie.description
-    };
+    });
+
+
     recepiesSection.appendChild(description)
     recepiesSection.appendChild(title)
     section.appendChild(recepiesSection)
 }
-
 
 async function init() {
     const recepies = await getRecepies();
