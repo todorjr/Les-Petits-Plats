@@ -5,8 +5,10 @@ function displayData(data) {
     data.forEach((recepie) => {
         const section = document.querySelector(".container");
         const recepiesSection = document.createElement("div")
+        const recepieCard = getCard(recepie)
+        
         recepiesSection.classList.add("card")
-        recepiesSection.innerHTML = getCard(recepie)
+        recepiesSection.append(recepieCard)
         section.appendChild(recepiesSection)
     });
 }
