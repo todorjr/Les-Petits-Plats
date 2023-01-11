@@ -58,4 +58,35 @@
 }
 .list #ustensiles {
   background-color: #ED6454;
+}
+
+.container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  gap: 15px;
+}
+.container .card {
+  width: 25%;
+  height: auto;
+  padding: 10px;
+}
+.container .card .title-section {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: baseline;
+}
+.container .card .content-section {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: baseline;
+}
+.container .card .content-section .description-section {
+  width: 50%;
+}
+.container .card .content-section .ingrediants-section ul {
+  list-style: none;
+  padding: 0;
 }/*# sourceMappingURL=style.css.map */

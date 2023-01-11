@@ -3,7 +3,7 @@
 export function getCard(recipe) {
  return` <div class=title-section>
                 <h2 class="title-recipe">${recipe.name}</h2>
-                <p class="time">${recipe.time}</p>
+                <p class="time"><i class="fa-regular fa-clock"></i> ${recipe.time} min </p>
             </div>
             <div class="content-section">
                 <div class="ingrediants-section">

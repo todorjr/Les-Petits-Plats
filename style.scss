@@ -51,12 +51,36 @@
     #ustensiles{ background-color: #ED6454; }
 }
 
-.container{
+.container {
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-between;
-    &.card {
-        border: 1px solid red;
+    justify-content: center;
+    gap: 15px;
+    .card{
+        width: 25%;
+        height: auto;
+        padding: 10px;
+        .title-section {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            align-items: baseline;
+        }
+          .content-section {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            align-items: baseline;
+            .description-section{
+                width: 50%;
+            }
+            .ingrediants-section{
+                ul{
+                    list-style: none;
+                    padding: 0;
+                }
+            }
+        }
     }
 }
 
