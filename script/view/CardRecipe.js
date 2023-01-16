@@ -39,33 +39,38 @@ function getIngredientItem (ingredient) {
 export function getCard(recipe) {
     const cardElement = document.createElement('article')
     const titleElement = document.createElement('h2')
+    const timeElement = document.createElement('p')
     const listElement = document.createElement('ul')
+    const descriptionElement = document.createElement('p')
+    const contentContainer = document.createElement('div')
+    const titleContainer = document.createElement('div')
+
     const listItemsElement = recipe.ingredients.map(getIngredientItem)
-    
     listElement.append(...listItemsElement)
 
+    timeElement.classList.add('time')
+    timeElement.innerHTML = `<i class="fa-regular fa-clock"></i> ${recipe.time} min`
+    
+    contentContainer.classList.add('content-section')
+    contentContainer.appendChild(listElement)
+    contentContainer.appendChild(descriptionElement)
+
+    descriptionElement.classList.add('description')
+    descriptionElement.innerText = recipe.description
+
+    
     titleElement.classList.add('title-recipe')
     titleElement.innerText = recipe.name
+    
+    titleContainer.classList.add('title-content')
+    titleContainer.appendChild(titleElement)
+    titleContainer.appendChild(timeElement)
 
-    cardElement.append(titleElement)
-    cardElement.appendChild(listElement)
+    cardElement.append(titleContainer)
+    cardElement.appendChild(contentContainer)
+   
     
     cardElement.classList.add('title-section')
 
     return cardElement
-    
- return` <div class=title-section>
-                <h2 class="title-recipe">${recipe.name}</h2>
-                <p class="time"><i class="fa-regular fa-clock"></i> ${recipe.time} min </p>
-            </div>
-            <div class="content-section">
-                <div class="ingrediants-section">
-                    <ul>
-                    
-                    </ul>
-                </div>
-                <div class="description-section">
-                    <p class="description">${recipe.description}</p>
-                </div>
-        </div>`
 }
