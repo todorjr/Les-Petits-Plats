@@ -8,7 +8,7 @@
  * 
  * @returns {string}
  */
-function quantityUnitFormatter (quantity, unit) {
+export function quantityUnitFormatter (quantity, unit) {
     switch (unit) {
         case 'ml':
             return `${quantity}${unit}`
@@ -25,14 +25,14 @@ function quantityUnitFormatter (quantity, unit) {
  * @param {object} ingredient Ingredient to be formatted
  * @returns {HTMLLIElement}
  */
-function getIngredientItem (ingredient) {
+export function getIngredientItem (ingredient) {
     const item = document.createElement('li')
 
     const quantityText = quantityUnitFormatter(ingredient.quantity, ingredient.unit)
     const message = `${ingredient.ingredient}: ${quantityText}`
 
     item.innerText = message
-
+    console.log('item', item);
     return item
 }
 

@@ -1,16 +1,7 @@
 import { getRecepies } from "../api/index.js"
 import { getCard } from "../view/CardRecipe.js";
+import { getIngrediants } from "../view/IngrediantList.js";
 
-
-// function displayIngredients(data) {
-//     const select = document.querySelector("#ingredients");
-//     data.forEach(ingrediant => {
-//         var option = document.createElement("option");
-//         option.value = ingrediant.value;
-//         option.text = ingrediant.text;
-//         select.appendChild(option);
-//       });
-// }
 function displayData(data) {
     data.forEach((recepie) => {
         const section = document.querySelector(".container");
@@ -27,31 +18,42 @@ function displayData(data) {
     });
 }
 
+function dropdownIngredients(data) {
+    console.log(data, 'data');
+    data.forEach((recepie) => {
+        const header = document.querySelector('.list')
+        
+        const dropdownSection = document.createElement("div")
+        const button = document.createElement("button")
+        button.classList.add("dropdown-button")
+        const dropdownContent = document.createElement("div")
+        dropdownContent.classList.add("dropdown-content")
+
+        const dropdown = getIngrediants(recepie)
+        console.log(dropdown, 'dropdown');
+
+        dropdownSection.classList.add("dropdown")
+        dropdownSection.innerHTML = "Ingredients"
+        dropdownSection.append(dropdown)
+        header.appendChild(dropdownSection)
+
+
+    }
+  
+)}
+
 async function init() {
     const recepies = await getRecepies();
-    console.log(recepies, 'data');
     displayData(recepies.recipes)
+    dropdownIngredients(recepies.recipes)
 }
 
-
-// // Create the select element
-// const select = document.createElement("select");
-
-// // Fetch data from API
-// fetch('data/recepies.json')
-//   .then(response => response.json())
-//   .then(data => {
-//     // Loop through the data and create options for the select element
-//     data.forEach(recepie => {
-//       var option = document.createElement("option");
-//       option.innerHTML = recepie.name;
-//       select.appendChild(option);
-//     });
-//   });
-
-// // Append the select element to the body
-// document.body.appendChild(select);
-// select.size = select.options.length;
-
-
 init();
+
+const dropdownButton = document.querySelectorAll(".dropdown-button");
+console.log(dropdownButton, 'dropdownButton');
+const dropdownCnt = document.querySelectorAll(".dropdown-content");
+
+dropdownButton.addEventListener("click", function() {
+dropdownCnt.classList.toggle("show");
+});
