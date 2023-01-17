@@ -38,15 +38,17 @@ function getIngredientItem (ingredient) {
 
 export function getCard(recipe) {
     const cardElement = document.createElement('article')
+    const titleContainer = document.createElement('div')
+    const contentContainer = document.createElement('div')
+
     const titleElement = document.createElement('h2')
     const timeElement = document.createElement('p')
     const listElement = document.createElement('ul')
     const descriptionElement = document.createElement('p')
-    const contentContainer = document.createElement('div')
-    const titleContainer = document.createElement('div')
 
     const listItemsElement = recipe.ingredients.map(getIngredientItem)
     listElement.append(...listItemsElement)
+
 
     timeElement.classList.add('time')
     timeElement.innerHTML = `<i class="fa-regular fa-clock"></i> ${recipe.time} min`
