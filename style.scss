@@ -1,3 +1,4 @@
+
 .logo{
     display: flex;
     justify-content: center;
@@ -17,6 +18,7 @@
         width: 92%;
         height: 65px;
         padding: 15px;
+        margin-left: 10px;
         border: none;
         border-radius: 2px;
         background-color: rgb(231, 231, 231);
@@ -27,7 +29,7 @@
     flex-direction: row;
     align-items: center;
     gap: 15px;
-    margin: 15px 0 0 100px;
+    margin: 15px 0 0 65px;
     .search_list{
         font-weight: 600;
         font-size: 0.75em;
