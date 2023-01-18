@@ -68,7 +68,12 @@
   background-color: #3282F7;
 }
 .list .dropdown-content a {
+  font-family: "Lato", sans-serif;
+  font-style: normal;
+  font-weight: 400;
   font-size: 12px;
+  line-height: 22px;
+  color: #fff;
 }
 .list #ingredients {
   background-color: #3282F7;
