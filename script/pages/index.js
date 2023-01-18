@@ -21,7 +21,8 @@ function displayData(data) {
 function dropdownIngredients(data) {
 
     const ingredients = data.flatMap(r => r.ingredients)
-    const ingredientList = getIngrediants(ingredients)
+    const ingredientList = new Set(getIngrediants(ingredients))
+    console.log(ingredientList, 'ingredientList')
     
     // Get a reference to the element where you want to display the list
     const container = document.querySelector('.list')
