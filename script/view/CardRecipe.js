@@ -32,7 +32,6 @@ export function getIngredientItem (ingredient) {
     const message = `${ingredient.ingredient}: ${quantityText}`
 
     item.innerText = message
-    console.log('item', item);
     return item
 }
 

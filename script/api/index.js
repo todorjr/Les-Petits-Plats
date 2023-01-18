@@ -8,7 +8,6 @@ export async function getRecepies() {
         }
         })
         .then(data => {
-            console.log(data);
             return data;
           })
         .catch((error) => console.error("FETCH ERROR:", error));

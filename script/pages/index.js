@@ -19,37 +19,18 @@ function displayData(data) {
 }
 
 function dropdownIngredients(data) {
-    // data.forEach((recepies) => {
-    //     const header = document.querySelector('.list')
+
+    const ingredients = data.flatMap(r => r.ingredients)
+    const ingredientList = getIngrediants(ingredients)
     
-    //     const dropdownSection = document.createElement("div")
-    //     const button = document.createElement("button")
-    //     button.classList.add("dropdown-button")
-    //     const dropdownContent = document.createElement("div")
-    //     dropdownContent.classList.add("dropdown-content")
-
-    //     const dropdown = getIngrediants(recepies.ingrediant)
-    //     console.log(dropdown, 'dropdown');
-
-    //     dropdownSection.classList.add("dropdown")
-    //     dropdownSection.innerHTML = "Ingredients"
-    //     dropdownSection.append(dropdown)
-    //     header.appendChild(dropdownSection)
-
-
-    // }
-
-data.forEach((recepies) => {
-    const ingredientList = getIngrediants(recepies)
-  
     // Get a reference to the element where you want to display the list
     const container = document.querySelector('.list')
-    
+
     // Append the ingredient list to the container
     container.append(ingredientList)
-}
 
-)}
+    };
+
 
 async function init() {
     const recepies = await getRecepies();
@@ -58,11 +39,3 @@ async function init() {
 }
 
 init();
-
-const dropdownButton = document.querySelectorAll(".dropdown-button");
-console.log(dropdownButton, 'dropdownButton');
-const dropdownCnt = document.querySelectorAll(".dropdown-content");
-
-dropdownButton.addEventListener("click", function() {
-dropdownCnt.classList.toggle("show");
-});
