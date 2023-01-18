@@ -21,9 +21,12 @@ export function getUstensil(ustensil) {
     listElement.append(...uniqueElementList)
 
     const button = document.createElement('button');
+    button.classList.add('ustensil-button')
     button.innerHTML = 'Ustensils';
     const ustensilsBtn = document.querySelector('#ustensils')
     ustensilsBtn.appendChild(button);
+
+
     
     button.addEventListener('click', function() {
         listElement.classList.toggle('show');

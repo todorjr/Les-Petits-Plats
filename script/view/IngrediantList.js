@@ -21,6 +21,9 @@ export function getIngrediants(ingredients) {
 
     const button = document.createElement('button');
     button.innerHTML = 'Ingredients';
+    button.classList.add('ingredients-button')
+
+
     const ingredientsBtn = document.querySelector('#ingredients')
     ingredientsBtn.appendChild(button);
     

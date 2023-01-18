@@ -51,16 +51,37 @@
         line-height: 22px;  
         display: flex;
         gap: 10px;    
-        align-items: baseline;  
-    }
-    .ingrediant-dropdown-content{
-        display: none;
-    }
-    .appliance-dropdown-content{
-        display: none;
-    }
-    .ustensil-dropdown-content{
-        display: none;
+        align-items: baseline; 
+        .ingredients-button{
+            background: #3282F7;
+            border-radius: 5px;
+            border: none;
+            padding: 10px;
+            font-family: 'Lato', sans-serif;
+            font-style: normal;
+            font-size: 14px;
+            color: #FFFFFF;
+        }
+        .appliance-button{
+            background: #68D9A4;
+            border-radius: 5px;
+            border: none;
+            padding: 10px;
+            font-family: 'Lato', sans-serif;
+            font-style: normal;
+            font-size: 14px;
+            color: #FFFFFF;
+        }
+        .ustensil-button {
+            background: #ED6454;
+            border-radius: 5px;
+            border: none;
+            padding: 10px;
+            font-family: 'Lato', sans-serif;
+            font-style: normal;
+            font-size: 14px;
+            color: #FFFFFF;
+        }
     }
 }
 
@@ -140,59 +161,30 @@
         }
     }
 }
-
-.ustensil-dropdown-content.show {
-    padding: 5px;
-    display: flex;
-    flex-flow: column wrap;
-    gap: 4px;
-    width: 500px;
-    height: 300px;
-    border-radius: 5px;
-    background-color: #ED6454; 
-    animation: rotateMenu 400ms ease-in-out forwards;
-    transform-origin: top center;
-    a{
-        font-family: 'Lato', sans-serif;
-        font-style: normal;
-        font-weight: 400;
-        font-size: 12px;
-        line-height: 22px;
-        color: #fff;
-    }
-}
-.ingrediant-dropdown-content.show{
-    padding: 5px;
+.list-content {
     display: flex;
     flex-flow: row wrap;
-    gap: 2px;
-    width: 667px;
-    height: 397px;
-    border-radius: 5px;
-    background-color: #3282F7;
-    animation: rotateMenu 400ms ease-in-out forwards;
-    transform-origin: top center;
-    a{
-    font-family: 'Lato', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 22px;
-    color: #fff;
+    .ingrediant-dropdown-content{
+        display: none;
     }
-}
-.appliance-dropdown-content.show{
+    .appliance-dropdown-content{
+        display: none;
+    }
+    .ustensil-dropdown-content{
+        display: none;
+    }
+    .ustensil-dropdown-content.show {
         padding: 5px;
         display: flex;
         flex-flow: column wrap;
         gap: 4px;
-        width: 300px;
-        height: 200px;
+        width: 500px;
+        height: 300px;
         border-radius: 5px;
-        background-color: #68D9A4;
+        background-color: #ED6454; 
         animation: rotateMenu 400ms ease-in-out forwards;
         transform-origin: top center;
-         a{
+        a{
             font-family: 'Lato', sans-serif;
             font-style: normal;
             font-weight: 400;
@@ -200,7 +192,49 @@
             line-height: 22px;
             color: #fff;
         }
+    }
+    .ingrediant-dropdown-content.show{
+        padding: 5px;
+        display: flex;
+        flex-flow: row wrap;
+        gap: 2px;
+        width: 667px;
+        height: 397px;
+        border-radius: 5px;
+        background-color: #3282F7;
+        animation: rotateMenu 400ms ease-in-out forwards;
+        transform-origin: top center;
+        a{
+        font-family: 'Lato', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 22px;
+        color: #fff;
+        }
+    }
+    .appliance-dropdown-content.show{
+            padding: 5px;
+            display: flex;
+            flex-flow: column wrap;
+            gap: 4px;
+            width: 300px;
+            height: 200px;
+            border-radius: 5px;
+            background-color: #68D9A4;
+            animation: rotateMenu 400ms ease-in-out forwards;
+            transform-origin: top center;
+             a{
+                font-family: 'Lato', sans-serif;
+                font-style: normal;
+                font-weight: 400;
+                font-size: 12px;
+                line-height: 22px;
+                color: #fff;
+            }
+    }
 }
+
 
 
   

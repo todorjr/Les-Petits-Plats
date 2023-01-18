@@ -56,14 +56,35 @@
   gap: 10px;
   align-items: baseline;
 }
-.list .ingrediant-dropdown-content {
-  display: none;
+.list .search_list .ingredients-button {
+  background: #3282F7;
+  border-radius: 5px;
+  border: none;
+  padding: 10px;
+  font-family: "Lato", sans-serif;
+  font-style: normal;
+  font-size: 14px;
+  color: #FFFFFF;
 }
-.list .appliance-dropdown-content {
-  display: none;
+.list .search_list .appliance-button {
+  background: #68D9A4;
+  border-radius: 5px;
+  border: none;
+  padding: 10px;
+  font-family: "Lato", sans-serif;
+  font-style: normal;
+  font-size: 14px;
+  color: #FFFFFF;
 }
-.list .ustensil-dropdown-content {
-  display: none;
+.list .search_list .ustensil-button {
+  background: #ED6454;
+  border-radius: 5px;
+  border: none;
+  padding: 10px;
+  font-family: "Lato", sans-serif;
+  font-style: normal;
+  font-size: 14px;
+  color: #FFFFFF;
 }
 
 .container {
@@ -141,7 +162,20 @@
   font-weight: 400;
 }
 
-.ustensil-dropdown-content.show {
+.list-content {
+  display: flex;
+  flex-flow: row wrap;
+}
+.list-content .ingrediant-dropdown-content {
+  display: none;
+}
+.list-content .appliance-dropdown-content {
+  display: none;
+}
+.list-content .ustensil-dropdown-content {
+  display: none;
+}
+.list-content .ustensil-dropdown-content.show {
   padding: 5px;
   display: flex;
   flex-flow: column wrap;
@@ -154,7 +188,7 @@
           animation: rotateMenu 400ms ease-in-out forwards;
   transform-origin: top center;
 }
-.ustensil-dropdown-content.show a {
+.list-content .ustensil-dropdown-content.show a {
   font-family: "Lato", sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -162,8 +196,7 @@
   line-height: 22px;
   color: #fff;
 }
-
-.ingrediant-dropdown-content.show {
+.list-content .ingrediant-dropdown-content.show {
   padding: 5px;
   display: flex;
   flex-flow: row wrap;
@@ -176,7 +209,7 @@
           animation: rotateMenu 400ms ease-in-out forwards;
   transform-origin: top center;
 }
-.ingrediant-dropdown-content.show a {
+.list-content .ingrediant-dropdown-content.show a {
   font-family: "Lato", sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -184,8 +217,7 @@
   line-height: 22px;
   color: #fff;
 }
-
-.appliance-dropdown-content.show {
+.list-content .appliance-dropdown-content.show {
   padding: 5px;
   display: flex;
   flex-flow: column wrap;
@@ -198,7 +230,7 @@
           animation: rotateMenu 400ms ease-in-out forwards;
   transform-origin: top center;
 }
-.appliance-dropdown-content.show a {
+.list-content .appliance-dropdown-content.show a {
   font-family: "Lato", sans-serif;
   font-style: normal;
   font-weight: 400;

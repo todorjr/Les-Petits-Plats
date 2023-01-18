@@ -25,7 +25,7 @@ function dropdownIngredients(data) {
     const ingredients = data.flatMap(r => r.ingredients)
     const ingredientList = getIngrediants(ingredients)
    // Get a reference to the element where you want to display the list
-    const container = document.querySelector('.list')
+    const container = document.querySelector('.list-content')
     // Append the ingredient list to the container
     container.append(ingredientList)
 
@@ -36,7 +36,7 @@ function dropdownIngredients(data) {
          const appliances = data.flatMap(r => r.appliance)
          const applianceList = getAppliance(appliances)
         // Get a reference to the element where you want to display the list
-         const container = document.querySelector('.list')
+         const container = document.querySelector('.list-content')
          // Append the ingredient list to the container
          container.append(applianceList)
      
@@ -47,7 +47,7 @@ function dropdownUstensil(data) {
      const ustensil = data.flatMap(r => r.ustensils)
      const ustensilList = getUstensil(ustensil)
     // Get a reference to the element where you want to display the list
-     const container = document.querySelector('.list')
+     const container = document.querySelector('.list-content')
      // Append the ingredient list to the container
      container.append(ustensilList)
  
