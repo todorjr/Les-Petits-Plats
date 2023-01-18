@@ -16,6 +16,14 @@ export function getAppliance(appliance) {
         return listItemsElement.find(a => a.innerHTML === ingredient)
     })
     
+    const button = document.createElement('button');
+    button.innerHTML = 'Appliances';
+    const applianceBtn = document.querySelector('#appareils')
+    applianceBtn.appendChild(button);
+    
+    button.addEventListener('click', function() {
+        listElement.classList.toggle('show');
+    });
 
     listElement.append(...uniqueElementList)
 

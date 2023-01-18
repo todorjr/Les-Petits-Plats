@@ -14,10 +14,20 @@ export function getUstensil(ustensil) {
     const listItemsElement = [...new Set(ustensil.map(getUstensilListItem))]
     const uniqueElementList = [...new Set(listItemsElement.map(item => item.innerHTML))].map(ustensil => {
         return listItemsElement.find(a => a.innerHTML === ustensil)
+
+        
     })
     
-
     listElement.append(...uniqueElementList)
+
+    const button = document.createElement('button');
+    button.innerHTML = 'Ustensils';
+    const ustensilsBtn = document.querySelector('#ustensils')
+    ustensilsBtn.appendChild(button);
+    
+    button.addEventListener('click', function() {
+        listElement.classList.toggle('show');
+    });
 
     return listElement
 }

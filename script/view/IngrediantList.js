@@ -19,6 +19,15 @@ export function getIngrediants(ingredients) {
         return listItemsElement.find(a => a.innerHTML === ingredient)
     })
 
+    const button = document.createElement('button');
+    button.innerHTML = 'Ingredients';
+    const ingredientsBtn = document.querySelector('#ingredients')
+    ingredientsBtn.appendChild(button);
+    
+    button.addEventListener('click', function() {
+        listElement.classList.toggle('show');
+    });
+
     listElement.append(...uniqueElementList)
 
     return listElement
