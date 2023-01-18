@@ -19,14 +19,11 @@ function displayData(data) {
 }
 
 function dropdownIngredients(data) {
-
+   // Get the ingredients from the data and flatten the array of arrays into a single array 
     const ingredients = data.flatMap(r => r.ingredients)
-    const ingredientList = new Set(getIngrediants(ingredients))
-    console.log(ingredientList, 'ingredientList')
-    
-    // Get a reference to the element where you want to display the list
+    const ingredientList = getIngrediants(ingredients)
+   // Get a reference to the element where you want to display the list
     const container = document.querySelector('.list')
-
     // Append the ingredient list to the container
     container.append(ingredientList)
 
