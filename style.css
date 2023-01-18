@@ -92,8 +92,23 @@
   line-height: 22px;
   color: #fff;
 }
-.list #ustensiles {
+.list .ustensil-dropdown-content {
+  padding: 5px;
+  display: flex;
+  flex-flow: column wrap;
+  gap: 4px;
+  width: 500px;
+  height: 300px;
+  border-radius: 5px;
   background-color: #ED6454;
+}
+.list .ustensil-dropdown-content a {
+  font-family: "Lato", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 22px;
+  color: #fff;
 }
 
 .container {
