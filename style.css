@@ -35,7 +35,6 @@
 .list {
   display: flex;
   flex-direction: row;
-  align-items: center;
   gap: 15px;
   margin: 15px 0 0 65px;
 }
@@ -57,7 +56,7 @@
   gap: 10px;
   align-items: baseline;
 }
-.list .dropdown-content {
+.list .ingrediant-dropdown-content {
   padding: 5px;
   display: flex;
   flex-flow: row wrap;
@@ -67,7 +66,7 @@
   border-radius: 5px;
   background-color: #3282F7;
 }
-.list .dropdown-content a {
+.list .ingrediant-dropdown-content a {
   font-family: "Lato", sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -75,11 +74,23 @@
   line-height: 22px;
   color: #fff;
 }
-.list #ingredients {
-  background-color: #3282F7;
-}
-.list #appareils {
+.list .appliance-dropdown-content {
+  padding: 5px;
+  display: flex;
+  flex-flow: column wrap;
+  gap: 4px;
+  width: 300px;
+  height: 200px;
+  border-radius: 5px;
   background-color: #68D9A4;
+}
+.list .appliance-dropdown-content a {
+  font-family: "Lato", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 22px;
+  color: #fff;
 }
 .list #ustensiles {
   background-color: #ED6454;

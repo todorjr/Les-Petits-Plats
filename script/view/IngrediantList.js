@@ -9,7 +9,7 @@ export function getIngredientListItem(ingredient) {
 export function getIngrediants(ingredients) {
 
     const listElement = document.createElement('div')
-    listElement.classList.add('dropdown-content')
+    listElement.classList.add('ingrediant-dropdown-content')
 
     const listItemsElement = ingredients.map(getIngredientListItem)
 
