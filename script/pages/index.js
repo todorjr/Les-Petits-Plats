@@ -17,6 +17,7 @@ function displayData(data) {
         recepiesSection.appendChild(emptyElement)
         recepiesSection.append(recepieCard)
         section.appendChild(recepiesSection)
+
     });
 }
 
@@ -31,14 +32,14 @@ function dropdownIngredients(data) {
 
 };
 
-    function dropdownAppliance(data) {
-        // Get the ingredients from the data and flatten the array of arrays into a single array 
-         const appliances = data.flatMap(r => r.appliance)
-         const applianceList = getAppliance(appliances)
-        // Get a reference to the element where you want to display the list
-         const container = document.querySelector('.list-content')
-         // Append the ingredient list to the container
-         container.append(applianceList)
+function dropdownAppliance(data) {
+    // Get the ingredients from the data and flatten the array of arrays into a single array 
+    const appliances = data.flatMap(r => r.appliance)
+    const applianceList = getAppliance(appliances)
+    // Get a reference to the element where you want to display the list
+    const container = document.querySelector('.list-content')
+    // Append the ingredient list to the container
+    container.append(applianceList)
      
 };
 
@@ -51,7 +52,15 @@ function dropdownUstensil(data) {
      // Append the ingredient list to the container
      container.append(ustensilList)
  
-};
+    };
+    
+export function acceptInput() {
+        const userInput = document.querySelector("#userInput");
+        const submitBtn = document.querySelector(".submit-btn")
+        submitBtn.addEventListener("click", () => {
+        console.log(`You entered: ${userInput.value}`);
+      })
+    }
 
 async function init() {
     const recepies = await getRecepies();
@@ -62,3 +71,4 @@ async function init() {
 }
 
 init();
+acceptInput();
