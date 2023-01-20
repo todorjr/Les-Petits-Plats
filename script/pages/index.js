@@ -10,17 +10,16 @@ export function displayData(recipes) {
     const section = document.querySelector(".container");
     section.innerHTML = ''
     recipes.forEach((recepie) => {
-        const emptyElement = document.createElement('div')
-        emptyElement.classList.add('empty')
-
-        const recepiesSection = document.createElement("div")
-        const recepieCard = getCard(recepie)
-        
-        recepiesSection.classList.add("card")
-        recepiesSection.appendChild(emptyElement)
-        recepiesSection.append(recepieCard)
-        section.appendChild(recepiesSection)
-
+            const emptyElement = document.createElement('div')
+            emptyElement.classList.add('empty')
+    
+            const recepiesSection = document.createElement("div")
+            const recepieCard = getCard(recepie)
+            
+            recepiesSection.classList.add("card")
+            recepiesSection.appendChild(emptyElement)
+            recepiesSection.append(recepieCard)
+            section.appendChild(recepiesSection) 
     });
 }
 
@@ -57,12 +56,6 @@ function dropdownUstensil(data) {
  
     };
     
-
- 
-
-
-    
-
 async function init() {
     const recepies = await getRecepies();
     console.log(recepies,'recipes');  // check the returned value of getRecepies() function

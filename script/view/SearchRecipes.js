@@ -15,7 +15,6 @@ export function acceptInput(data) {
     const submitBtn = document.querySelector(".submit-btn")
     submitBtn.addEventListener("click", () => {
         const recipes = searchRecipes(userInput.value, data.recipes);
-
-        displayData(recipes);
+               displayData(recipes);
     });
 }
