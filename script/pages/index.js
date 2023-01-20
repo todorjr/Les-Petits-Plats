@@ -3,10 +3,13 @@ import { getCard } from "../view/CardRecipe.js";
 import { getIngrediants } from "../view/IngrediantList.js";
 import { getAppliance } from "../view/ApplianceList.js";
 import { getUstensil } from "../view/UstensilList.js";
+import { searchRecipes, acceptInput } from "../view/SearchRecipes.js";
 
-function displayData(data) {
-    data.forEach((recepie) => {
-        const section = document.querySelector(".container");
+
+export function displayData(recipes) {
+    const section = document.querySelector(".container");
+    section.innerHTML = ''
+    recipes.forEach((recepie) => {
         const emptyElement = document.createElement('div')
         emptyElement.classList.add('empty')
 
@@ -54,21 +57,20 @@ function dropdownUstensil(data) {
  
     };
     
-export function acceptInput() {
-        const userInput = document.querySelector("#userInput");
-        const submitBtn = document.querySelector(".submit-btn")
-        submitBtn.addEventListener("click", () => {
-        console.log(`You entered: ${userInput.value}`);
-      })
-    }
+
+ 
+
+
+    
 
 async function init() {
     const recepies = await getRecepies();
+    console.log(recepies,'recipes');  // check the returned value of getRecepies() function
+
     displayData(recepies.recipes)
     dropdownIngredients(recepies.recipes)
     dropdownAppliance(recepies.recipes)
     dropdownUstensil(recepies.recipes)
+    acceptInput(recepies)
 }
-
 init();
-acceptInput();
