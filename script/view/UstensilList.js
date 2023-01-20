@@ -1,7 +1,7 @@
 export function getUstensilListItem(ustensil) {
     const item = document.createElement('a')
     const message = `${ustensil}`
-    item.innerHTML = message
+    item.innerHTML = message.charAt(0).toUpperCase() + message.slice(1)
     item.classList.add('list-ustensil-item')
     return item
 }
@@ -17,7 +17,6 @@ export function getUstensil(ustensil) {
 
         
     })
-    
     listElement.append(...uniqueElementList)
 
     const button = document.createElement('button');
@@ -26,8 +25,6 @@ export function getUstensil(ustensil) {
     const ustensilsBtn = document.querySelector('#ustensils')
     ustensilsBtn.appendChild(button);
 
-
-    
     button.addEventListener('click', function() {
         listElement.classList.toggle('show');
     });
