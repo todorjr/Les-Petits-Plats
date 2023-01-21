@@ -185,9 +185,12 @@
   height: 300px;
   border-radius: 5px;
   background-color: #ED6454;
-  -webkit-animation: rotateMenu 400ms ease-in-out forwards;
-          animation: rotateMenu 400ms ease-in-out forwards;
+  -webkit-animation: rotateDropdown 400ms ease-in-out forwards;
+          animation: rotateDropdown 400ms ease-in-out forwards;
   transform-origin: top center;
+  position: absolute;
+  left: 343px;
+  margin-top: 10px;
 }
 .list-content .ustensil-dropdown-content.show a {
   font-family: "Lato", sans-serif;
@@ -206,11 +209,14 @@
   height: 397px;
   border-radius: 5px;
   background-color: #3282F7;
-  -webkit-animation: rotateMenu 400ms ease-in-out forwards;
-          animation: rotateMenu 400ms ease-in-out forwards;
+  -webkit-animation: rotateDropdown 400ms ease-in-out forwards;
+          animation: rotateDropdown 400ms ease-in-out forwards;
   transform-origin: top center;
+  position: absolute;
+  left: 86px;
+  margin-top: 10px;
 }
-.list-content .ingrediant-dropdown-content.show a {
+.list-content a {
   font-family: "Lato", sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -227,9 +233,12 @@
   height: 200px;
   border-radius: 5px;
   background-color: #68D9A4;
-  -webkit-animation: rotateMenu 400ms ease-in-out forwards;
-          animation: rotateMenu 400ms ease-in-out forwards;
+  -webkit-animation: rotateDropdown 400ms ease-in-out forwards;
+          animation: rotateDropdown 400ms ease-in-out forwards;
   transform-origin: top center;
+  position: absolute;
+  left: 214px;
+  margin-top: 10px;
 }
 .list-content .appliance-dropdown-content.show a {
   font-family: "Lato", sans-serif;
@@ -240,7 +249,7 @@
   color: #fff;
 }
 
-@-webkit-keyframes rotateMenu {
+@-webkit-keyframes rotateDropdown {
   0% {
     transform: rotateX(-90deg);
   }
@@ -252,7 +261,7 @@
   }
 }
 
-@keyframes rotateMenu {
+@keyframes rotateDropdown {
   0% {
     transform: rotateX(-90deg);
   }

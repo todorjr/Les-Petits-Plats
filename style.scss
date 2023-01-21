@@ -183,8 +183,12 @@
         height: 300px;
         border-radius: 5px;
         background-color: #ED6454; 
-        animation: rotateMenu 400ms ease-in-out forwards;
+        animation: rotateDropdown 400ms ease-in-out forwards;
         transform-origin: top center;
+        position: absolute;
+        left: 343px;
+        margin-top: 10px;
+    
         a{
             font-family: 'Lato', sans-serif;
             font-style: normal;
@@ -203,8 +207,12 @@
         height: 397px;
         border-radius: 5px;
         background-color: #3282F7;
-        animation: rotateMenu 400ms ease-in-out forwards;
+        animation: rotateDropdown 400ms ease-in-out forwards;
         transform-origin: top center;
+        position: absolute;
+        left: 86px;
+        margin-top: 10px;
+    }
         a{
         font-family: 'Lato', sans-serif;
         font-style: normal;
@@ -213,7 +221,7 @@
         line-height: 22px;
         color: #fff;
         }
-    }
+    
     .appliance-dropdown-content.show{
             padding: 5px;
             display: flex;
@@ -223,8 +231,12 @@
             height: 200px;
             border-radius: 5px;
             background-color: #68D9A4;
-            animation: rotateMenu 400ms ease-in-out forwards;
+            animation: rotateDropdown 400ms ease-in-out forwards;
             transform-origin: top center;
+            position: absolute;
+            left: 214px;
+            margin-top: 10px;
+        
              a{
                 font-family: 'Lato', sans-serif;
                 font-style: normal;
@@ -236,12 +248,7 @@
     }
 }
 
-
-
-  
-
-    
-@keyframes rotateMenu {
+@keyframes rotateDropdown {
     0% {
         transform: rotateX(-90deg)
     }

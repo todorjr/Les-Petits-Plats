@@ -55,11 +55,9 @@ function dropdownUstensil(data) {
      container.append(ustensilList)
  
     };
-    
+
 async function init() {
     const recepies = await getRecepies();
-    console.log(recepies,'recipes');  // check the returned value of getRecepies() function
-
     displayData(recepies.recipes)
     dropdownIngredients(recepies.recipes)
     dropdownAppliance(recepies.recipes)
