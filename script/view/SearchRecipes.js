@@ -13,8 +13,14 @@ function hasIngredient(recipe, ingredientName) {
 export function acceptInput(data) {
     const userInput = document.querySelector("#userInput");
     const submitBtn = document.querySelector(".submit-btn")
+    const resultsContainer = document.querySelector(".container");
+
     submitBtn.addEventListener("click", () => {
         const recipes = searchRecipes(userInput.value, data.recipes);
-               displayData(recipes);
+        if(recipes.length === 0) {
+            resultsContainer.innerHTML = "No results found.";
+        } else {
+            displayData(recipes);
+        }
     });
 }
