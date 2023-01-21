@@ -1,18 +1,18 @@
 import { displayData } from "../pages/index.js";
 
 export function searchRecipes(userInput, recipes) {
-    return recipes.filter(recipe => hasIngredient(recipe, userInput));
-}
-
-function hasIngredient(recipe, ingredientName) {
-    return recipe.ingredients.find((ingredient) => {
-        return ingredient.ingredient.toUpperCase() === ingredientName.toUpperCase()
+    return recipes.filter(recipe => {
+        const recipeProperties = Object.values(recipe);
+        return recipeProperties.some(property => {
+            if(typeof property === "string"){
+                return property.toUpperCase().includes(userInput.toUpperCase())
+            }
+        });
     });
 }
 
 export function acceptInput(data) {
     const userInput = document.querySelector("#userInput");
-    const submitBtn = document.querySelector(".submit-btn")
     const resultsContainer = document.querySelector(".container");
 
     userInput.addEventListener("blur", () => {
