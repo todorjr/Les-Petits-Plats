@@ -15,7 +15,7 @@ export function acceptInput(data) {
     const submitBtn = document.querySelector(".submit-btn")
     const resultsContainer = document.querySelector(".container");
 
-    submitBtn.addEventListener("click", () => {
+    userInput.addEventListener("blur", () => {
         const recipes = searchRecipes(userInput.value, data.recipes);
         if(recipes.length === 0) {
             resultsContainer.innerHTML = "No results found.";
