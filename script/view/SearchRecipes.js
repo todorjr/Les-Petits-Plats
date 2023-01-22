@@ -26,9 +26,6 @@ export function acceptInput(data) {
 }
 
 
-
-
-
 export function ingrediantsOptions(data) {
     const userInput = document.querySelector(".list-ingrediant-item");
     const resultsContainer = document.querySelector(".container");
