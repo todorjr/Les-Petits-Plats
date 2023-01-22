@@ -10,24 +10,25 @@ export function displayData(recipes) {
     const section = document.querySelector(".container");
     section.innerHTML = ''
     recipes.forEach((recepie) => {
-            const emptyElement = document.createElement('div')
-            emptyElement.classList.add('empty')
-    
-            const recepiesSection = document.createElement("div")
-            const recepieCard = getCard(recepie)
-            
-            recepiesSection.classList.add("card")
-            recepiesSection.appendChild(emptyElement)
-            recepiesSection.append(recepieCard)
-            section.appendChild(recepiesSection) 
+        const emptyElement = document.createElement('div')
+        emptyElement.classList.add('empty')
+
+        const recepiesSection = document.createElement("div")
+        const recepieCard = getCard(recepie)
+
+        recepiesSection.classList.add("card")
+        recepiesSection.appendChild(emptyElement)
+        recepiesSection.append(recepieCard)
+        section.appendChild(recepiesSection)
     });
 }
 
+//dropdownIngredients: It takes an array of data and flattens it to a single array of ingredients using the flatMap() method. Then it calls the function getIngrediants() passing the ingredients array and appends the returned result to the element with the class '.list-content' using container.append()
 function dropdownIngredients(data) {
-   // Get the ingredients from the data and flatten the array of arrays into a single array 
+    // Get the ingredients from the data and flatten the array of arrays into a single array 
     const ingredients = data.flatMap(r => r.ingredients)
     const ingredientList = getIngrediants(ingredients)
-   // Get a reference to the element where you want to display the list
+    // Get a reference to the element where you want to display the list
     const container = document.querySelector('.list-content')
     // Append the ingredient list to the container
     container.append(ingredientList)
@@ -42,19 +43,20 @@ function dropdownAppliance(data) {
     const container = document.querySelector('.list-content')
     // Append the ingredient list to the container
     container.append(applianceList)
-     
+
 };
 
 function dropdownUstensil(data) {
     // Get the ingredients from the data and flatten the array of arrays into a single array 
-     const ustensil = data.flatMap(r => r.ustensils)
-     const ustensilList = getUstensil(ustensil)
+    const ustensil = data.flatMap(r => r.ustensils)
+    const ustensilList = getUstensil(ustensil)
     // Get a reference to the element where you want to display the list
-     const container = document.querySelector('.list-content')
-     // Append the ingredient list to the container
-     container.append(ustensilList)
- 
-    };
+    const container = document.querySelector('.list-content')
+    // Append the ingredient list to the container
+    container.append(ustensilList)
+
+};
+
 
 async function init() {
     const recepies = await getRecepies();
@@ -64,4 +66,6 @@ async function init() {
     dropdownUstensil(recepies.recipes)
     acceptInput(recepies)
 }
+
+
 init();
