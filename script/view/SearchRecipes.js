@@ -19,10 +19,12 @@ export function acceptInput(data) {
         const recipes = searchRecipes(userInput.value, data.recipes);
         if (recipes.length === 0) {
             resultsContainer.innerHTML = "No results found.";
-        } else if (userInput.value.length >= 3) {
+            setInterval (() => {
+                displayData(data.recipes)
+            }, 4000);
+        }else if (userInput.value.length >= 3) {
             displayData(recipes);
-        }
-
+        } 
     });
 }
 
