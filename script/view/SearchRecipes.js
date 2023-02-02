@@ -15,13 +15,14 @@ export function acceptInput(data) {
     const userInput = document.querySelector("#userInput");
     const resultsContainer = document.querySelector(".container");
 
-    userInput.addEventListener("blur", () => {
+    userInput.addEventListener("input", () => {
         const recipes = searchRecipes(userInput.value, data.recipes);
         if (recipes.length === 0) {
             resultsContainer.innerHTML = "No results found.";
-        } else {
+        } else if (userInput.value.length >= 3) {
             displayData(recipes);
         }
+
     });
 }
 
