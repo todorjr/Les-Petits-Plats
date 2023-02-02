@@ -21,7 +21,8 @@ export function acceptInput(data) {
             resultsContainer.innerHTML = "No results found.";
             setInterval(() => {
                 displayData(data.recipes)
-            }, 4000);
+                userInput.value = ""
+            }, 3000);
         } else if (userInput.value.length >= 3) {
             displayData(recipes);
         }
