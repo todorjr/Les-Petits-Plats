@@ -19,52 +19,34 @@ export function acceptInput(data) {
         const recipes = searchRecipes(userInput.value, data.recipes);
         if (recipes.length === 0) {
             resultsContainer.innerHTML = "No results found.";
-            setInterval (() => {
+            setInterval(() => {
                 displayData(data.recipes)
             }, 4000);
-        }else if (userInput.value.length >= 3) {
+        } else if (userInput.value.length >= 3) {
             displayData(recipes);
-        } 
+        }
     });
 }
 
 
-export function ingrediantsOptions(data) {
-    const userInput = document.querySelector(".list-ingrediant-item");
+export function searchOptions(data, type) {
+    const userInput = document.querySelector(`.list-${type}-item`);
     const resultsContainer = document.querySelector(".container");
     userInput.addEventListener("click", () => {
-        const recipes = searchRecipesByIngredient(userInput, data.recipes);
-        console.log(userInput, 'userInput');
+        let recipes;
+        if (type === "ingrediant") {
+            recipes = searchRecipesByIngredient(userInput, data.recipes);
+        } else if (type === "appliance") {
+            recipes = searchRecipesByAppliance(userInput, data.recipes);
+        } else if (type === "ustensil") {
+            recipes = searchRecipesByUstensil(userInput, data.recipes);
+        }
         if (recipes.length === 0) {
             resultsContainer.innerHTML = "No results found.";
         } else {
             displayData(recipes);
         }
-    })
-}
-export function applianceOptions(data) {
-    const userInput = document.querySelector(".list-appliance-item");
-    const resultsContainer = document.querySelector(".container");
-    userInput.addEventListener("click", () => {
-        const recipes = searchRecipesByAppliance(userInput, data.recipes);
-        if (recipes.length === 0) {
-            resultsContainer.innerHTML = "No results found.";
-        } else {
-            displayData(recipes);
-        }
-    })
-}
-export function ustensilOptions(data) {
-    const userInput = document.querySelector(".list-ustensil-item");
-    const resultsContainer = document.querySelector(".container");
-    userInput.addEventListener("click", () => {
-        const recipes = searchRecipesByUstensil(userInput, data.recipes);
-        if (recipes.length === 0) {
-            resultsContainer.innerHTML = "No results found.";
-        } else {
-            displayData(recipes);
-        }
-    })
+    });
 }
 
 

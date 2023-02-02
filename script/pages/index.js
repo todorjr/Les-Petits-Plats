@@ -4,9 +4,7 @@ import { getIngrediants } from "../view/IngrediantList.js";
 import { getAppliance } from "../view/ApplianceList.js";
 import { getUstensil } from "../view/UstensilList.js";
 import { acceptInput } from "../view/SearchRecipes.js";
-import { ingrediantsOptions } from "../view/SearchRecipes.js";
-import { applianceOptions } from "../view/SearchRecipes.js";
-import { ustensilOptions } from "../view/SearchRecipes.js";
+import { searchOptions } from "../view/SearchRecipes.js";
 
 
 export function displayData(recipes) {
@@ -68,11 +66,9 @@ async function init() {
     dropdownAppliance(recepies.recipes)
     dropdownUstensil(recepies.recipes)
     acceptInput(recepies)
-    ingrediantsOptions(recepies)
-    applianceOptions(recepies)
-    ustensilOptions(recepies)
-
+    searchOptions(recepies, "ingrediant")
+    searchOptions(recepies, "appliance")
+    searchOptions(recepies, "ustensil")
 }
-
 
 init();
