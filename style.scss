@@ -33,7 +33,6 @@
 .list {
     display: flex;
     flex-direction: row;
-    gap: 15px;
     margin: 15px 0 0 60px;
     .search_list{
         font-weight: 600;
@@ -193,7 +192,7 @@
         animation: rotateDropdown 400ms ease-in-out forwards;
         transform-origin: top center;
         position: absolute;
-        left: 343px;
+        left: 307px;
         margin-top: 10px;
     
         a{
@@ -217,7 +216,7 @@
         animation: rotateDropdown 400ms ease-in-out forwards;
         transform-origin: top center;
         position: absolute;
-        left: 86px;
+        left: 81px;
         margin-top: 10px;
     }
         a{
@@ -241,7 +240,7 @@
             animation: rotateDropdown 400ms ease-in-out forwards;
             transform-origin: top center;
             position: absolute;
-            left: 214px;
+            left: 195px;
             margin-top: 10px;
         
              a{
