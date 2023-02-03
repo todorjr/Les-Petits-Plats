@@ -18,11 +18,11 @@ export function acceptInput(data) {
     userInput.addEventListener("input", () => {
         const recipes = searchRecipes(userInput.value, data.recipes);
         if (recipes.length === 0) {
-            resultsContainer.innerHTML = "No results found.";
+            resultsContainer.innerHTML = `<p class="no-results">No results found for "${userInput.value}" ! 🚫 <br> Try again, good luck !</p>`;
             setInterval(() => {
                 displayData(data.recipes)
                 userInput.value = ""
-            }, 3000);
+            }, 5000);
         } else if (userInput.value.length >= 3) {
             displayData(recipes);
         }

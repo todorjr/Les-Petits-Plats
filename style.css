@@ -36,7 +36,7 @@
   display: flex;
   flex-direction: row;
   gap: 15px;
-  margin: 15px 0 0 65px;
+  margin: 15px 0 0 60px;
 }
 .list .search_list {
   font-weight: 600;
@@ -92,7 +92,14 @@
   flex-flow: row wrap;
   justify-content: center;
   gap: 20px;
-  margin: 25px;
+  margin: 20px 20px 20px 33px;
+}
+.container .no-results {
+  font-family: "Lato", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 40px;
 }
 .container .card {
   width: 380px;
