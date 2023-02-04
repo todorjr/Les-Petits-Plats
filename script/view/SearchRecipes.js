@@ -19,9 +19,9 @@ export function acceptInput(data) {
         const recipes = searchRecipes(userInput.value, data.recipes);
         if (recipes.length === 0) {
             resultsContainer.innerHTML = `<p class="no-results">No results found for " ${userInput.value} " ! 🚫 <br> Try again, good luck !</p>`;
+            userInput.value = ""
             setInterval(() => {
                 displayData(data.recipes)
-                userInput.value = ""
             }, 5000);
         } else if (userInput.value.length >= 3) {
             displayData(recipes);
@@ -51,29 +51,29 @@ export function searchOptions(data, type) {
 }
 
 
-function hasIngredient(recipe, ingredientName) {
-    return recipe.ingredients.find((ingredient) => {
-        return ingredient.ingredient === ingredientName
-    })
-}
-function hasAppliance(recipe, applianceName) {
-    return recipe.appliance.find((appliance) => {
-        return appliance.appliance === applianceName
-    })
-}
-function hasUstensil(recipe, ustensilName) {
-    return recipe.ustensils.find((ustensil) => {
-        return ustensil.ustensil === ustensilName
-    })
-}
+// function hasIngredient(recipe, ingredientName) {
+//     return recipe.ingredients.find((ingredient) => {
+//         return ingredient.ingredient === ingredientName
+//     })
+// }
+// function hasAppliance(recipe, applianceName) {
+//     return recipe.appliance.find((appliance) => {
+//         return appliance.appliance === applianceName
+//     })
+// }
+// function hasUstensil(recipe, ustensilName) {
+//     return recipe.ustensils.find((ustensil) => {
+//         return ustensil.ustensil === ustensilName
+//     })
+// }
 
 
-function searchRecipesByIngredient(userInput, recipes) {
-    return recipes.filter(recipe => hasIngredient(recipe, userInput));
-}
-function searchRecipesByAppliance(userInput, recipes) {
-    return recipes.filter(recipe => hasAppliance(recipe, userInput));
-}
-function searchRecipesByUstensil(userInput, recipes) {
-    return recipes.filter(recipe => hasUstensil(recipe, userInput));
-}
+// function searchRecipesByIngredient(userInput, recipes) {
+//     return recipes.filter(recipe => hasIngredient(recipe, userInput));
+// }
+// function searchRecipesByAppliance(userInput, recipes) {
+//     return recipes.filter(recipe => hasAppliance(recipe, userInput));
+// }
+// function searchRecipesByUstensil(userInput, recipes) {
+//     return recipes.filter(recipe => hasUstensil(recipe, userInput));
+// }
