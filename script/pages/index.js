@@ -6,9 +6,12 @@ import { getUstensil } from "../view/UstensilList.js";
 import { acceptInput } from "../view/SearchRecipes.js";
 import { searchOptions } from "../view/SearchRecipes.js";
 
+
+// global variables 
 let recepies = []
 let allRecepies = []
 
+// displayData: It takes an array of data and loops through it. For each element it creates a div element and appends it to the element with the class '.container' using section.appendChild()
 export function displayData(recipes) {
     const section = document.querySelector(".container");
     section.innerHTML = ''
@@ -26,6 +29,7 @@ export function displayData(recipes) {
     });
 }
 
+// searchByText uses the map() method to loop through the array of recipes and returns an array of objects with the recipe and the search text. The search text is a combination of the recipe name, ingredients and description.
 export function searchByText(recipes) {
     return Array.from(recipes).map(recipe => {
       const ingredients = recipe.ingredients.reduce((acc,val)=> acc + ' ' + val.ingredient, '');
