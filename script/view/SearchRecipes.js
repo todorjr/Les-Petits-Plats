@@ -14,13 +14,12 @@ export function acceptInput(data) {
     const resultsContainer = document.querySelector(".container");
 
     userInput.addEventListener("input", () => {
-        const recipes = searchAllRecipes(userInput.value, data.recipe);
+        const recipes = searchAllRecipes(userInput.value, data);
         if (recipes.length === 0) {
             resultsContainer.innerHTML = `<p class="no-results">No results found for "${userInput.value}" ! 🚫</p>`;
-            userInput.value = ""
-            // setInterval(() => {
-            //     displayData(data.recipes)
-            // }, 5000);
+            if( userInput.value.length < 3) {
+                displayData(data.map(recipe => recipe.recipe))
+            }
         } else if (userInput.value.length >= 3) {
             displayData(recipes);
         }

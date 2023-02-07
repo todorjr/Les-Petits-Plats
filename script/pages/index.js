@@ -28,10 +28,12 @@ export function displayData(recipes) {
 
 export function searchByText(recipes) {
     return Array.from(recipes).map(recipe => {
-      const ingredients = recipe.ingredients.join(' ');
-      const searchText = [recipe.name, ingredients, recipe.appliance, recipe.description, recipe.ustensils.join(' ')].join(' ');
-      console.log(searchText, 'searchText');
-      return { searchText, recipe };
+      const ingredients = recipe.ingredients.reduce((acc,val)=> acc + ' ' + val.ingredient, '');
+      const searchText = recipe.name + " " + ingredients + " " +recipe.description;
+      return { 
+        searchText: searchText, 
+        recipe: {...recipe}
+     };
     });
   }
 
@@ -77,8 +79,7 @@ async function init() {
     dropdownAppliance(recepies.recipes)
     dropdownUstensil(recepies.recipes)
     allRecepies= searchByText(recepies.recipes)
-    console.log(allRecepies);
-    acceptInput(recepies)
+    acceptInput(allRecepies)
     searchOptions(recepies, "ingrediant")
     searchOptions(recepies, "appliance")
     searchOptions(recepies, "ustensil")
