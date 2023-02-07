@@ -6,6 +6,8 @@ import { getUstensil } from "../view/UstensilList.js";
 import { acceptInput } from "../view/SearchRecipes.js";
 import { searchOptions } from "../view/SearchRecipes.js";
 
+let recepies = []
+let allRecepies = []
 
 export function displayData(recipes) {
     const section = document.querySelector(".container");
@@ -23,6 +25,15 @@ export function displayData(recipes) {
         section.appendChild(recepiesSection)
     });
 }
+
+export function searchByText(recipes) {
+    return Array.from(recipes).map(recipe => {
+      const ingredients = recipe.ingredients.join(' ');
+      const searchText = [recipe.name,ingredients,recipe.appliance, recipe.description, recipe.ustensils.join(' ')].join(' ');
+      console.log(searchText, 'searchText');
+      return { searchText, recipe };
+    });
+  }
 
 //dropdownIngredients: It takes an array of data and flattens it to a single array of ingredients using the flatMap() method. Then it calls the function getIngrediants() passing the ingredients array and appends the returned result to the element with the class '.list-content' using container.append()
 function dropdownIngredients(data) {
@@ -60,11 +71,13 @@ function dropdownUstensil(data) {
 
 
 async function init() {
-    const recepies = await getRecepies();
+    recepies = await getRecepies(); // make global variable
     displayData(recepies.recipes)
     dropdownIngredients(recepies.recipes)
     dropdownAppliance(recepies.recipes)
     dropdownUstensil(recepies.recipes)
+    allRecepies= searchByText(recepies.recipes)
+    console.log(allRecepies);
     acceptInput(recepies)
     searchOptions(recepies, "ingrediant")
     searchOptions(recepies, "appliance")
