@@ -9,20 +9,23 @@ export function searchAllRecipes(userInput, recipes) {
     });
   }
 
-export function acceptInput(data) {
+  export function acceptInput(data) {
     const userInput = document.querySelector("#userInput");
     const resultsContainer = document.querySelector(".container");
 
     userInput.addEventListener("input", () => {
-        const recipes = searchAllRecipes(userInput.value, data);
-        if (recipes.length === 0) {
-            resultsContainer.innerHTML = `<p class="no-results">No results found for "${userInput.value}" ! 🚫</p>`;
-            if( userInput.value.length < 3) {
+        if (userInput.value.length >= 3) {
+            const recipes = searchAllRecipes(userInput.value, data);
+            if (recipes.length === 0) {
+                resultsContainer.innerHTML = `<p class="no-results">No results found for "${userInput.value}" ! 🚫</p>`;
+            }else{
+                displayData(recipes);
+            } 
+         }else{
+            if( userInput.value.length < 1) {
                 displayData(data.map(recipe => recipe.recipe))
             }
-        } else if (userInput.value.length >= 3) {
-            displayData(recipes);
-        }
+         }
     });
 }
 
