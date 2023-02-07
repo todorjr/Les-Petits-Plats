@@ -29,7 +29,7 @@ export function displayData(recipes) {
 export function searchByText(recipes) {
     return Array.from(recipes).map(recipe => {
       const ingredients = recipe.ingredients.join(' ');
-      const searchText = [recipe.name,ingredients,recipe.appliance, recipe.description, recipe.ustensils.join(' ')].join(' ');
+      const searchText = [recipe.name, ingredients, recipe.appliance, recipe.description, recipe.ustensils.join(' ')].join(' ');
       console.log(searchText, 'searchText');
       return { searchText, recipe };
     });
@@ -71,7 +71,7 @@ function dropdownUstensil(data) {
 
 
 async function init() {
-    recepies = await getRecepies(); // make global variable
+    recepies = await getRecepies(); 
     displayData(recepies.recipes)
     dropdownIngredients(recepies.recipes)
     dropdownAppliance(recepies.recipes)

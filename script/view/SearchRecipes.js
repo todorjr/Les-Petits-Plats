@@ -1,6 +1,5 @@
 import { displayData } from "../pages/index.js";
 
-
 export function searchAllRecipes(userInput, recipes) {
     const filteredRecipes = recipes.filter(recipe => {
       return recipe.searchText && recipe.searchText.includes(userInput);
