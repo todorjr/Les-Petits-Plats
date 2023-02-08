@@ -15,13 +15,12 @@ export function getUstensil(ustensil) {
     const uniqueElementList = [...new Set(listItemsElement.map(item => item.innerHTML))].map(ustensil => {
         return listItemsElement.find(a => a.innerHTML === ustensil)
 
-        
     })
     listElement.append(...uniqueElementList)
 
     const button = document.createElement('button');
     button.classList.add('ustensil-button')
-    button.innerHTML = '<input type="text" class="input-ustensil" placeholder="Ustensil">';
+    button.innerHTML = '<input type="text" class="input-ustensil" placeholder="Ustensil"><i class="fa-solid fa-chevron-down"></i>';
     const ustensilsBtn = document.querySelector('#ustensils')
     ustensilsBtn.appendChild(button);
 

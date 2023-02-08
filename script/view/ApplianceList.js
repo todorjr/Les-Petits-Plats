@@ -18,12 +18,13 @@ export function getAppliance(appliance) {
     
     const button = document.createElement('button');
     button.classList.add('appliance-button')
-    button.innerHTML = '<input type="text" class="input-appliance" placeholder="Appliance">';
+    button.innerHTML = '<input type="text" class="input-appliance" placeholder="Appliance"><i class="fa-solid fa-chevron-down"></i>';
     const applianceBtn = document.querySelector('#appareils')
     applianceBtn.appendChild(button);
     
     button.addEventListener('click', function() {
         listElement.classList.toggle('show');
+  
     });
 
     listElement.append(...uniqueElementList)

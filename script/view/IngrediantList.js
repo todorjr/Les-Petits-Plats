@@ -19,7 +19,7 @@ export function getIngrediants(ingredients) {
     })
 
     const button = document.createElement('button');
-    button.innerHTML = '<input type="text" class="input-ingrediants" placeholder="Ingrediants">';
+    button.innerHTML = '<input type="text" class="input-ingrediants" placeholder="Ingrediants"> <i class="fa-solid fa-chevron-down"></i>';
     button.classList.add('ingredients-button')
 
 
