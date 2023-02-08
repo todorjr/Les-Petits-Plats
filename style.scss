@@ -37,7 +37,7 @@
     .search_list{
         font-weight: 600;
         font-size: 0.75em;
-        width: 87px;
+        // width: 87px;
         min-width: initial;
         max-width: 397px;
         height: 19.7px;
@@ -52,6 +52,9 @@
         gap: 10px;    
         align-items: baseline; 
         .ingredients-button{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
             background: #3282F7;
             border-radius: 5px;
             border: none;
@@ -60,8 +63,10 @@
             font-style: normal;
             font-size: 14px;
             color: #FFFFFF;
-            width: 100px;
+            width: 140px;
             .input-ingrediants {
+                display: flex;
+                flex-direction: row;
                 width: 100%;
                 background-color: inherit;
                 border: none;
@@ -74,8 +79,14 @@
                     font-size: 13px;
                 }
             }
+            .open{
+                color: #000;
+             }
         }
         .appliance-button{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
             background: #68D9A4;
             border-radius: 5px;
             border: none;
@@ -99,6 +110,9 @@
             }
         }
         .ustensil-button {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
             background: #ED6454;
             border-radius: 5px;
             border: none;
@@ -234,7 +248,7 @@
         animation: rotateDropdown 400ms ease-in-out forwards;
         transform-origin: top center;
         position: absolute;
-        left: 307px;
+        left: 449px;
         margin-top: 10px;
     
         a{
@@ -282,7 +296,7 @@
             animation: rotateDropdown 400ms ease-in-out forwards;
             transform-origin: top center;
             position: absolute;
-            left: 195px;
+            left: 247px;
             margin-top: 10px;
         
              a{

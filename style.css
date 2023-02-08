@@ -40,7 +40,6 @@
 .list .search_list {
   font-weight: 600;
   font-size: 0.75em;
-  width: 87px;
   min-width: initial;
   max-width: 397px;
   height: 19.7px;
@@ -56,6 +55,9 @@
   align-items: baseline;
 }
 .list .search_list .ingredients-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   background: #3282F7;
   border-radius: 5px;
   border: none;
@@ -64,9 +66,11 @@
   font-style: normal;
   font-size: 14px;
   color: #FFFFFF;
-  width: 100px;
+  width: 140px;
 }
 .list .search_list .ingredients-button .input-ingrediants {
+  display: flex;
+  flex-direction: row;
   width: 100%;
   background-color: inherit;
   border: none;
@@ -83,7 +87,13 @@
   color: #fff;
   font-size: 13px;
 }
+.list .search_list .ingredients-button .open {
+  color: #000;
+}
 .list .search_list .appliance-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   background: #68D9A4;
   border-radius: 5px;
   border: none;
@@ -111,6 +121,9 @@
   font-size: 13px;
 }
 .list .search_list .ustensil-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   background: #ED6454;
   border-radius: 5px;
   border: none;
@@ -246,7 +259,7 @@
   animation: rotateDropdown 400ms ease-in-out forwards;
   transform-origin: top center;
   position: absolute;
-  left: 307px;
+  left: 449px;
   margin-top: 10px;
 }
 .list-content .ustensil-dropdown-content.show a {
@@ -292,7 +305,7 @@
   animation: rotateDropdown 400ms ease-in-out forwards;
   transform-origin: top center;
   position: absolute;
-  left: 195px;
+  left: 247px;
   margin-top: 10px;
 }
 .list-content .appliance-dropdown-content.show a {

@@ -33,7 +33,7 @@ export function displayData(recipes) {
 export function searchByText(recipes) {
     return Array.from(recipes).map(recipe => {
       const ingredients = recipe.ingredients.reduce((acc,val)=> acc + ' ' + val.ingredient, '');
-      const searchText = recipe.name + " " + ingredients + " " +recipe.description;
+      const searchText = recipe.name + " " + ingredients + " " + recipe.description;
       return { 
         searchText: searchText, 
         recipe: {...recipe}
@@ -41,47 +41,43 @@ export function searchByText(recipes) {
     });
   }
 
-//dropdownIngredients: It takes an array of data and flattens it to a single array of ingredients using the flatMap() method. Then it calls the function getIngrediants() passing the ingredients array and appends the returned result to the element with the class '.list-content' using container.append()
-function dropdownIngredients(data) {
-    // Get the ingredients from the data and flatten the array of arrays into a single array 
-    const ingredients = data.flatMap(r => r.ingredients)
-    const ingredientList = getIngrediants(ingredients)
-    // Get a reference to the element where you want to display the list
-    const container = document.querySelector('.list-content')
-    // Append the ingredient list to the container
-    container.append(ingredientList)
+//dropdown: It takes an array of data and flattens it to a single array of items using the flatMap() method. Then it calls the function getIngrediants() passing the ingredients array and appends the returned result to the element with the class '.list-content' using container.append()
 
-};
-
-function dropdownAppliance(data) {
-    // Get the ingredients from the data and flatten the array of arrays into a single array 
-    const appliances = data.flatMap(r => r.appliance)
-    const applianceList = getAppliance(appliances)
-    // Get a reference to the element where you want to display the list
-    const container = document.querySelector('.list-content')
-    // Append the ingredient list to the container
-    container.append(applianceList)
-
-};
-
-function dropdownUstensil(data) {
-    // Get the ingredients from the data and flatten the array of arrays into a single array 
-    const ustensil = data.flatMap(r => r.ustensils)
-    const ustensilList = getUstensil(ustensil)
-    // Get a reference to the element where you want to display the list
-    const container = document.querySelector('.list-content')
-    // Append the ingredient list to the container
-    container.append(ustensilList)
-
-};
+function dropdown (data,type) {
+    const items = data.flatMap(r => r[type])
+    switch (type) {
+        case "ingredients":
+            const ingredientList = getIngrediants(items)
+            // Get a reference to the element where you want to display the list
+            const ingrediantContainer = document.querySelector('.list-content')
+            // Append the ingredient list to the container
+            ingrediantContainer.append(ingredientList)
+            break;
+        case "appliance":
+            const applianceList = getAppliance(items)
+            // Get a reference to the element where you want to display the list
+            const applianceContainer = document.querySelector('.list-content')
+            // Append the ingredient list to the container
+            applianceContainer.append(applianceList)
+            break;
+        case "ustensils":
+            const ustensilList = getUstensil(items)
+            // Get a reference to the element where you want to display the list
+            const ustensilContainer = document.querySelector('.list-content')
+            // Append the ingredient list to the container
+            ustensilContainer.append(ustensilList)
+            break;
+        }
+    }
 
 
 async function init() {
     recepies = await getRecepies(); 
     displayData(recepies.recipes)
-    dropdownIngredients(recepies.recipes)
-    dropdownAppliance(recepies.recipes)
-    dropdownUstensil(recepies.recipes)
+    dropdown(recepies.recipes, "ingredients")
+    dropdown(recepies.recipes, "appliance")
+    dropdown(recepies.recipes, "ustensils")
+
     allRecepies= searchByText(recepies.recipes)
     acceptInput(allRecepies)
     searchOptions(recepies, "ingrediant")
