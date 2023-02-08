@@ -9,7 +9,7 @@ export function getUstensilListItem(ustensil) {
 export function getUstensil(ustensil) {
 
     const listElement = document.createElement('div')
-    listElement.classList.add('ustensil-dropdown-content')
+    listElement.classList.add('ustensils-dropdown-content')
 
     const listItemsElement = [...new Set(ustensil.map(getUstensilListItem))]
     const uniqueElementList = [...new Set(listItemsElement.map(item => item.innerHTML))].map(ustensil => {

@@ -227,16 +227,16 @@
 .list-content {
     display: flex;
     flex-flow: row wrap;
-    .ingrediant-dropdown-content{
+    .ingrediants-dropdown-content{
         display: none;
     }
     .appliance-dropdown-content{
         display: none;
     }
-    .ustensil-dropdown-content{
+    .ustensils-dropdown-content{
         display: none;
     }
-    .ustensil-dropdown-content.show {
+    .ustensils-dropdown-content.show {
         padding: 5px;
         display: flex;
         flex-flow: column wrap;
@@ -260,7 +260,7 @@
             color: #fff;
         }
     }
-    .ingrediant-dropdown-content.show{
+    .ingrediants-dropdown-content.show{
         padding: 5px;
         display: flex;
         flex-flow: column wrap;

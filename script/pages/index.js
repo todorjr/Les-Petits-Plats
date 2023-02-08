@@ -39,7 +39,7 @@ export function searchByText(recipes) {
         recipe: {...recipe}
      };
     });
-  }
+}
 
 //dropdown: It takes an array of data and flattens it to a single array of items using the flatMap() method. Then it calls the function getIngrediants() passing the ingredients array and appends the returned result to the element with the class '.list-content' using container.append()
 
@@ -69,6 +69,8 @@ function dropdown (data,type) {
             break;
         }
     }
+ 
+
 
 
 async function init() {

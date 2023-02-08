@@ -238,16 +238,16 @@
   display: flex;
   flex-flow: row wrap;
 }
-.list-content .ingrediant-dropdown-content {
+.list-content .ingrediants-dropdown-content {
   display: none;
 }
 .list-content .appliance-dropdown-content {
   display: none;
 }
-.list-content .ustensil-dropdown-content {
+.list-content .ustensils-dropdown-content {
   display: none;
 }
-.list-content .ustensil-dropdown-content.show {
+.list-content .ustensils-dropdown-content.show {
   padding: 5px;
   display: flex;
   flex-flow: column wrap;
@@ -262,7 +262,7 @@
   left: 449px;
   margin-top: 10px;
 }
-.list-content .ustensil-dropdown-content.show a {
+.list-content .ustensils-dropdown-content.show a {
   font-family: "Lato", sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -270,7 +270,7 @@
   line-height: 22px;
   color: #fff;
 }
-.list-content .ingrediant-dropdown-content.show {
+.list-content .ingrediants-dropdown-content.show {
   padding: 5px;
   display: flex;
   flex-flow: column wrap;
