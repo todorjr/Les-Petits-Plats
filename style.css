@@ -70,6 +70,7 @@
   width: 100%;
   background-color: inherit;
   border: none;
+  color: #fff;
 }
 .list .search_list .ingredients-button .input-ingrediants:focus {
   outline: none;
@@ -96,6 +97,7 @@
   width: 100%;
   background-color: inherit;
   border: none;
+  color: #fff;
 }
 .list .search_list .appliance-button .input-appliance:focus {
   outline: none;
@@ -122,6 +124,7 @@
   width: 100%;
   background-color: inherit;
   border: none;
+  color: #fff;
 }
 .list .search_list .ustensil-button .input-ustensil:focus {
   outline: none;

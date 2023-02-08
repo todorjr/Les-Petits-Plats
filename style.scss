@@ -65,6 +65,7 @@
                 width: 100%;
                 background-color: inherit;
                 border: none;
+                color: #fff;
                 &:focus {
                     outline: none;
                 }
@@ -87,6 +88,7 @@
                 width: 100%;
                 background-color: inherit;
                 border: none;
+                color: #fff;
                 &:focus {
                     outline: none;
                 }
@@ -109,9 +111,11 @@
                 width: 100%;
                 background-color: inherit;
                 border: none;
+                color: #fff;
                 &:focus {
                     outline: none;
                 }
+                
                 &::placeholder {
                     color: #fff;
                     font-size: 13px;
