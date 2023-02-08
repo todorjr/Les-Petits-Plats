@@ -10,7 +10,6 @@ export function getIngrediants(ingredients) {
 
     const listElement = document.createElement('div')
     listElement.classList.add('ingrediant-dropdown-content')
-
     const listItemsElement = ingredients.map(getIngredientListItem)
 
     // creating a new Set from the innerHTML property of each element in the listItemsElement array
@@ -20,13 +19,12 @@ export function getIngrediants(ingredients) {
     })
 
     const button = document.createElement('button');
-    button.innerHTML = 'Ingredients';
+    button.innerHTML = '<input type="text" class="input-ingrediants" placeholder="Ingrediants">';
     button.classList.add('ingredients-button')
 
 
     const ingredientsBtn = document.querySelector('#ingredients')
     ingredientsBtn.appendChild(button);
-    
     button.addEventListener('click', function() {
         listElement.classList.toggle('show');
     });

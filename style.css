@@ -64,6 +64,23 @@
   font-style: normal;
   font-size: 14px;
   color: #FFFFFF;
+  width: 100px;
+}
+.list .search_list .ingredients-button .input-ingrediants {
+  width: 100%;
+  background-color: inherit;
+  border: none;
+}
+.list .search_list .ingredients-button .input-ingrediants:focus {
+  outline: none;
+}
+.list .search_list .ingredients-button .input-ingrediants::-moz-placeholder {
+  color: #fff;
+  font-size: 13px;
+}
+.list .search_list .ingredients-button .input-ingrediants::placeholder {
+  color: #fff;
+  font-size: 13px;
 }
 .list .search_list .appliance-button {
   background: #68D9A4;
@@ -75,6 +92,22 @@
   font-size: 14px;
   color: #FFFFFF;
 }
+.list .search_list .appliance-button .input-appliance {
+  width: 100%;
+  background-color: inherit;
+  border: none;
+}
+.list .search_list .appliance-button .input-appliance:focus {
+  outline: none;
+}
+.list .search_list .appliance-button .input-appliance::-moz-placeholder {
+  color: #fff;
+  font-size: 13px;
+}
+.list .search_list .appliance-button .input-appliance::placeholder {
+  color: #fff;
+  font-size: 13px;
+}
 .list .search_list .ustensil-button {
   background: #ED6454;
   border-radius: 5px;
@@ -84,6 +117,22 @@
   font-style: normal;
   font-size: 14px;
   color: #FFFFFF;
+}
+.list .search_list .ustensil-button .input-ustensil {
+  width: 100%;
+  background-color: inherit;
+  border: none;
+}
+.list .search_list .ustensil-button .input-ustensil:focus {
+  outline: none;
+}
+.list .search_list .ustensil-button .input-ustensil::-moz-placeholder {
+  color: #fff;
+  font-size: 13px;
+}
+.list .search_list .ustensil-button .input-ustensil::placeholder {
+  color: #fff;
+  font-size: 13px;
 }
 
 .container {
@@ -191,8 +240,7 @@
   height: 300px;
   border-radius: 5px;
   background-color: #ED6454;
-  -webkit-animation: rotateDropdown 400ms ease-in-out forwards;
-          animation: rotateDropdown 400ms ease-in-out forwards;
+  animation: rotateDropdown 400ms ease-in-out forwards;
   transform-origin: top center;
   position: absolute;
   left: 307px;
@@ -215,8 +263,7 @@
   height: 700px;
   border-radius: 5px;
   background-color: #3282F7;
-  -webkit-animation: rotateDropdown 400ms ease-in-out forwards;
-          animation: rotateDropdown 400ms ease-in-out forwards;
+  animation: rotateDropdown 400ms ease-in-out forwards;
   transform-origin: top center;
   position: absolute;
   left: 81px;
@@ -239,8 +286,7 @@
   height: 200px;
   border-radius: 5px;
   background-color: #68D9A4;
-  -webkit-animation: rotateDropdown 400ms ease-in-out forwards;
-          animation: rotateDropdown 400ms ease-in-out forwards;
+  animation: rotateDropdown 400ms ease-in-out forwards;
   transform-origin: top center;
   position: absolute;
   left: 195px;
@@ -253,18 +299,6 @@
   font-size: 12px;
   line-height: 22px;
   color: #fff;
-}
-
-@-webkit-keyframes rotateDropdown {
-  0% {
-    transform: rotateX(-90deg);
-  }
-  70% {
-    transform: rotateX(20deg);
-  }
-  100% {
-    transform: rotateX(0deg);
-  }
 }
 
 @keyframes rotateDropdown {

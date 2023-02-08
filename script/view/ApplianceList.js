@@ -18,7 +18,7 @@ export function getAppliance(appliance) {
     
     const button = document.createElement('button');
     button.classList.add('appliance-button')
-    button.innerHTML = 'Appliances';
+    button.innerHTML = '<input type="text" class="input-appliance" placeholder="Appliance">';
     const applianceBtn = document.querySelector('#appareils')
     applianceBtn.appendChild(button);
     

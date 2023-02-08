@@ -21,7 +21,7 @@ export function getUstensil(ustensil) {
 
     const button = document.createElement('button');
     button.classList.add('ustensil-button')
-    button.innerHTML = 'Ustensils';
+    button.innerHTML = '<input type="text" class="input-ustensil" placeholder="Ustensil">';
     const ustensilsBtn = document.querySelector('#ustensils')
     ustensilsBtn.appendChild(button);
 
