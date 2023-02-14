@@ -44,28 +44,23 @@ export function searchByText(recipes) {
 //dropdown: It takes an array of data and flattens it to a single array of items using the flatMap() method. Then it calls the function getIngrediants() passing the ingredients array and appends the returned result to the element with the class '.list-content' using container.append()
 
 function dropdown (data,type) {
+    const container = document.querySelector('.list-content');
     const items = data.flatMap(r => r[type])
     switch (type) {
         case "ingredients":
             const ingredientList = getIngrediants(items)
-            // Get a reference to the element where you want to display the list
-            const ingrediantContainer = document.querySelector('.list-content')
             // Append the ingredient list to the container
-            ingrediantContainer.append(ingredientList)
+            container.append(ingredientList)
             break;
         case "appliance":
             const applianceList = getAppliance(items)
-            // Get a reference to the element where you want to display the list
-            const applianceContainer = document.querySelector('.list-content')
             // Append the ingredient list to the container
-            applianceContainer.append(applianceList)
+            container.append(applianceList)
             break;
         case "ustensils":
             const ustensilList = getUstensil(items)
-            // Get a reference to the element where you want to display the list
-            const ustensilContainer = document.querySelector('.list-content')
             // Append the ingredient list to the container
-            ustensilContainer.append(ustensilList)
+            container.append(ustensilList)
             break;
         }
     }
