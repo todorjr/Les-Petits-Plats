@@ -10,6 +10,8 @@ export function getUstensil(ustensil) {
 
     const listElement = document.createElement('div')
     listElement.classList.add('ustensils-dropdown-content')
+    listElement.classList.add(`dropdown-content`)
+
 
     const listItemsElement = [...new Set(ustensil.map(getUstensilListItem))]
     const uniqueElementList = [...new Set(listItemsElement.map(item => item.innerHTML))].map(ustensil => {
@@ -25,7 +27,10 @@ export function getUstensil(ustensil) {
     ustensilsBtn.appendChild(button);
 
     button.addEventListener('click', function() {
-        listElement.classList.toggle('show');
+        const listElementContent = document.querySelector('.ustensils-dropdown-content')
+        const allDropdownContent = document.querySelectorAll('.dropdown-content');
+        Array.from(allDropdownContent).forEach(content => { content.classList.remove('show')})
+        listElementContent.classList.toggle('show')
     });
 
     return listElement

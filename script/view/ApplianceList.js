@@ -10,6 +10,8 @@ export function getAppliance(appliance) {
 
     const listElement = document.createElement('div')
     listElement.classList.add('appliance-dropdown-content')
+    listElement.classList.add(`dropdown-content`)
+
 
     const listItemsElement = [...new Set(appliance.map(getApplianceListItem))]
     const uniqueElementList = [...new Set(listItemsElement.map(item => item.innerHTML))].map(ingredient => {
@@ -23,8 +25,10 @@ export function getAppliance(appliance) {
     applianceBtn.appendChild(button);
     
     button.addEventListener('click', function() {
-        listElement.classList.toggle('show');
-  
+        const listElementContent = document.querySelector('.appliance-dropdown-content')
+        const allDropdownContent = document.querySelectorAll('.dropdown-content');
+        Array.from(allDropdownContent).forEach(content => { content.classList.remove('show')})
+        listElementContent.classList.toggle('show')
     });
 
     listElement.append(...uniqueElementList)

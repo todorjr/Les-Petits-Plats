@@ -10,6 +10,8 @@ export function getIngrediants(ingredients) {
 
     const listElement = document.createElement('div')
     listElement.classList.add('ingrediants-dropdown-content')
+    listElement.classList.add(`dropdown-content`)
+
     const listItemsElement = ingredients.map(getIngredientListItem)
 
     // creating a new Set from the innerHTML property of each element in the listItemsElement array
@@ -26,7 +28,10 @@ export function getIngrediants(ingredients) {
     const ingredientsBtn = document.querySelector('#ingredients')
     ingredientsBtn.appendChild(button);
     button.addEventListener('click', function() {
-        listElement.classList.toggle('show');
+        const listElementContent = document.querySelector('.ingrediants-dropdown-content')
+        const allDropdownContent = document.querySelectorAll('.dropdown-content');
+        Array.from(allDropdownContent).forEach(content => { content.classList.remove('show')})
+        listElementContent.classList.toggle('show')
     });
 
     listElement.append(...uniqueElementList)
