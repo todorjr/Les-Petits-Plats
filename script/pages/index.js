@@ -25,9 +25,9 @@ export function renderRecipes(recipes) {
     });
 }
 
-// searchByText uses the map() method to loop through the array of recipes and returns an array of objects with the recipe and the search text. The search text is a combination of the recipe name, ingredients and description.
+
 /**
- * 
+ *  mapRecipesWithSearchText uses the map() method to loop through the array of recipes and returns an array of objects with the recipe and the search text. The search text is a combination of the recipe name, ingredients and description.
  * @param {[ string ]} recipes 
  * @returns 
  */
