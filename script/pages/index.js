@@ -4,7 +4,7 @@ import { createSearchInputElement } from "../view/SearchRecipes.js";
 
 
 /**
- * 
+ *  renderRecipes() takes an array of recipes and renders them to the DOM.
  * @param {[ string ]} recipes 
  * @returns {HTMLDivElement}
  */
@@ -25,7 +25,6 @@ export function renderRecipes(recipes) {
     });
 }
 
-
 /**
  *  mapRecipesWithSearchText uses the map() method to loop through the array of recipes and returns an array of objects with the recipe and the search text. The search text is a combination of the recipe name, ingredients and description.
  * @param {[ string ]} recipes 
@@ -43,6 +42,12 @@ export function mapRecipesWithSearchText(recipes) {
     });
 }
 
+/**
+ * getListItem() takes an item and returns an anchor element with the class 'list-${type}-item' and the text content of the item.
+ * @param { string } item
+ * @param {'appliance' | 'ustensil' | 'ingredients'} type
+ * @returns {HTMLAnchorElement}
+ */
 export function getListItem(item, type) {
     const listItem = document.createElement('a');
     listItem.innerHTML = item;
@@ -51,6 +56,7 @@ export function getListItem(item, type) {
 }
 
 /**
+ * getListElement () takes an array of items and returns a div element with the class 'dropdown-content' and the class '${type}-dropdown-content' depending on the type parameter.
  * @param {*} items 
  * @param {*} type 
  * @returns {HTMLDivElement}
@@ -70,7 +76,6 @@ export function getListElement(items, type) {
     return listElement;
 }
 
-
 /**
  * It takes an array of data and flattens it to a single array of items using the flatMap() method. Then it calls the function getIngrediants() passing the ingredients array and appends the returned result to the element with the class '.list-content' using container.append().
  * 
@@ -88,14 +93,20 @@ function createDropdownElement(data, type, itemsResolver = recepie => recepie[ty
 
     // close dropdown
     button.addEventListener('click', () => {
+        // dropdownContent is the list of ingredients, appliances or ustensils
         const dropdownContent = document.querySelector(`.${type}-dropdown-content`);
+
+        // allDropdownContent is an array of all dropdowns
         const allDropdownContent = document.querySelectorAll('.dropdown-content');
+
+        // remove the 'show' class from all dropdowns and add it to the current dropdown
         allDropdownContent.forEach(e => e.classList.remove('show'));
         dropdownContent.classList.toggle('show');
     });
 }
 
 /**
+ * searchOptions() takes an input element, an array of data and a type and adds an event listener to the input element. The event listener calls the function getListElement() passing the filtered data and the type. Then it replaces the old dropdown list with the new one.
  * @param {HTMLInputElement} inputElement
  * @param {string[]} data 
  * @param {*} type 
