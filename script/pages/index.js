@@ -2,7 +2,12 @@ import { getRecipes } from "../api/index.js"
 import { getCard } from "../view/CardRecipe.js";
 import { createSearchInputElement } from "../view/SearchRecipes.js";
 
-// displayData: It takes an array of data and loops through it. For each element it creates a div element and appends it to the element with the class '.container' using section.appendChild()
+
+/**
+ * 
+ * @param {[ string ]} recipes 
+ * @returns {HTMLDivElement}
+ */
 export function renderRecipes(recipes) {
     const section = document.querySelector(".container");
     section.innerHTML = ''
@@ -21,7 +26,12 @@ export function renderRecipes(recipes) {
 }
 
 // searchByText uses the map() method to loop through the array of recipes and returns an array of objects with the recipe and the search text. The search text is a combination of the recipe name, ingredients and description.
-export function mapRecipesWithSearchText (recipes) {
+/**
+ * 
+ * @param {[ string ]} recipes 
+ * @returns 
+ */
+export function mapRecipesWithSearchText(recipes) {
     return recipes.map(recipe => {
         const ingredients = recipe.ingredients.reduce((acc, val) => acc + ' ' + val.ingredient, '');
         const searchText = recipe.name + " " + ingredients + " " + recipe.description;
@@ -33,24 +43,24 @@ export function mapRecipesWithSearchText (recipes) {
     });
 }
 
-export function getListItem(item, className) {
+export function getListItem(item, type) {
     const listItem = document.createElement('a');
     listItem.innerHTML = item;
-    listItem.classList.add(`list-${className}-item`);
+    listItem.classList.add(`list-${type}-item`);
     return listItem;
 }
 
 /**
  * @param {*} items 
- * @param {*} className 
+ * @param {*} type 
  * @returns {HTMLDivElement}
  */
-export function getListElement(items, className) {
+export function getListElement(items, type) {
     const listElement = document.createElement('div');
-    listElement.classList.add(`${className}-dropdown-content`);
+    listElement.classList.add(`${type}-dropdown-content`);
     listElement.classList.add(`dropdown-content`)
 
-    const listItemsElement = items.map(item => getListItem(item, className));
+    const listItemsElement = items.map(item => getListItem(item, type));
     const uniqueElementList = listItemsElement.map(item => item.innerHTML).map(item => {
         return listItemsElement.find(a => a.innerHTML === item)
     })
@@ -87,7 +97,7 @@ function createDropdownElement(data, type, itemsResolver = recepie => recepie[ty
 
 /**
  * @param {HTMLInputElement} inputElement
- * @param {string[]} data Values to search in
+ * @param {string[]} data 
  * @param {*} type 
  * @returns 
  */
@@ -95,14 +105,17 @@ export function searchOptions(inputElement, data, type) {
     inputElement.addEventListener("input", function () {
         // current dropdown list to replace with matched ingredients
         const ingredientsList = document.querySelector(`.${type}-dropdown-content`);
-        
-        // 1. filter recipes matching ingredient, appliance or ustensil (searchText)
+
+        //  filter recipes matching ingredient, appliance or ustensil (searchText)
         const ingredientsMatchingQuery = data.filter(ingredient => ingredient.toLowerCase().includes(this.value.toLowerCase()))
-        // 2. render recipes matching user input
+
+        // render recipes matching user input
         const ingredientsElements = getListElement(ingredientsMatchingQuery, type)
 
-        // add show to class to display dropdown
-        ingredientsElements.classList.add('show')
+        //  if no recipes match, display message
+        if (ingredientsMatchingQuery.length === 0) {
+            ingredientsElements.innerHTML = `<a class="list-${type}-item">Aucun ${type} ne correspond à votre critère...</a>`
+        }
         // replace old dropdown with new one
         ingredientsList.parentNode.replaceChild(ingredientsElements, ingredientsList);
     });
@@ -114,7 +127,7 @@ async function init() {
 
     // render list of recepies
     renderRecipes(recipes)
-    
+
     // render filters
     createDropdownElement(recipes, 'ingredients', recipe => recipe.ingredients.map(ingredient => ingredient.ingredient))
     createDropdownElement(recipes, "appliance")
@@ -127,14 +140,16 @@ async function init() {
         recipes.flatMap(recipe => recipe.ingredients.map(ingredient => ingredient.ingredient)),
         "ingredients"
     )
-
     searchOptions(
         document.querySelector('#input-appliance'),
         recipes.flatMap(recipe => recipe.appliance),
         "appliance"
     )
-    // searchOptions(recepies, "appliance")
-    // searchOptions(recepies, "ustensil")
+    searchOptions(
+        document.querySelector('#input-ustensils'),
+        recipes.flatMap(recipe => recipe.ustensils),
+        "ustensils"
+    )
 }
 
 document.addEventListener('DOMContentLoaded', function () {
