@@ -64,7 +64,7 @@
             font-size: 14px;
             color: #FFFFFF;
             width: 140px;
-            .input-ingrediants {
+            .input-ingredients {
                 display: flex;
                 flex-direction: row;
                 width: 100%;
@@ -109,7 +109,7 @@
                 }
             }
         }
-        .ustensil-button {
+        .ustensils-button {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
@@ -227,7 +227,7 @@
 .list-content {
     display: flex;
     flex-flow: row wrap;
-    .ingrediants-dropdown-content{
+    .ingredients-dropdown-content{
         display: none;
     }
     .appliance-dropdown-content{
@@ -260,7 +260,7 @@
             color: #fff;
         }
     }
-    .ingrediants-dropdown-content.show{
+    .ingredients-dropdown-content.show{
         padding: 5px;
         display: flex;
         flex-flow: column wrap;

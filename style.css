@@ -68,7 +68,7 @@
   color: #FFFFFF;
   width: 140px;
 }
-.list .search_list .ingredients-button .input-ingrediants {
+.list .search_list .ingredients-button .input-ingredients {
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -76,14 +76,14 @@
   border: none;
   color: #fff;
 }
-.list .search_list .ingredients-button .input-ingrediants:focus {
+.list .search_list .ingredients-button .input-ingredients:focus {
   outline: none;
 }
-.list .search_list .ingredients-button .input-ingrediants::-moz-placeholder {
+.list .search_list .ingredients-button .input-ingredients::-moz-placeholder {
   color: #fff;
   font-size: 13px;
 }
-.list .search_list .ingredients-button .input-ingrediants::placeholder {
+.list .search_list .ingredients-button .input-ingredients::placeholder {
   color: #fff;
   font-size: 13px;
 }
@@ -120,7 +120,7 @@
   color: #fff;
   font-size: 13px;
 }
-.list .search_list .ustensil-button {
+.list .search_list .ustensils-button {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -133,20 +133,20 @@
   font-size: 14px;
   color: #FFFFFF;
 }
-.list .search_list .ustensil-button .input-ustensil {
+.list .search_list .ustensils-button .input-ustensil {
   width: 100%;
   background-color: inherit;
   border: none;
   color: #fff;
 }
-.list .search_list .ustensil-button .input-ustensil:focus {
+.list .search_list .ustensils-button .input-ustensil:focus {
   outline: none;
 }
-.list .search_list .ustensil-button .input-ustensil::-moz-placeholder {
+.list .search_list .ustensils-button .input-ustensil::-moz-placeholder {
   color: #fff;
   font-size: 13px;
 }
-.list .search_list .ustensil-button .input-ustensil::placeholder {
+.list .search_list .ustensils-button .input-ustensil::placeholder {
   color: #fff;
   font-size: 13px;
 }
@@ -238,7 +238,7 @@
   display: flex;
   flex-flow: row wrap;
 }
-.list-content .ingrediants-dropdown-content {
+.list-content .ingredients-dropdown-content {
   display: none;
 }
 .list-content .appliance-dropdown-content {
@@ -270,7 +270,7 @@
   line-height: 22px;
   color: #fff;
 }
-.list-content .ingrediants-dropdown-content.show {
+.list-content .ingredients-dropdown-content.show {
   padding: 5px;
   display: flex;
   flex-flow: column wrap;
