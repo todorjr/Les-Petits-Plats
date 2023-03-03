@@ -1,4 +1,4 @@
-export async function getRecepies() {
+export async function getRecipes() {
     return fetch('data/recepies.json')
         .then((response) => {
         if (response.ok) {
