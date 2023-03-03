@@ -118,7 +118,8 @@ export function searchOptions(inputElement, data, type) {
         const ingredientsList = document.querySelector(`.${type}-dropdown-content`);
 
         //  filter recipes matching ingredient, appliance or ustensil (searchText)
-        const ingredientsMatchingQuery = data.filter(ingredient => ingredient.toLowerCase().includes(this.value.toLowerCase())) //! this.value is user input(inputElement)
+        const ingredientsMatchingQuery = data.filter(ingredient => ingredient.toLowerCase().includes(this.value.toLowerCase())) 
+        //! ES6 feature this.value is user input (inputElement)
 
         // render recipes matching user input
         const ingredientsElements = getListElement(ingredientsMatchingQuery, type)
