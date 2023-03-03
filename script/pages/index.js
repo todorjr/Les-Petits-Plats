@@ -56,7 +56,7 @@ export function getListItem(item, type) {
 }
 
 /**
- * getListElement () takes an array of items and returns a div element with the class 'dropdown-content' and the class '${type}-dropdown-content' depending on the type parameter.
+ * getListElement() takes an array of items and returns a div element with the class 'dropdown-content' and the class '${type}-dropdown-content' depending on the type parameter.
  * @param {*} items 
  * @param {*} type 
  * @returns {HTMLDivElement}
@@ -118,7 +118,7 @@ export function searchOptions(inputElement, data, type) {
         const ingredientsList = document.querySelector(`.${type}-dropdown-content`);
 
         //  filter recipes matching ingredient, appliance or ustensil (searchText)
-        const ingredientsMatchingQuery = data.filter(ingredient => ingredient.toLowerCase().includes(this.value.toLowerCase()))
+        const ingredientsMatchingQuery = data.filter(ingredient => ingredient.toLowerCase().includes(this.value.toLowerCase())) //! this.value is user input(inputElement)
 
         // render recipes matching user input
         const ingredientsElements = getListElement(ingredientsMatchingQuery, type)
