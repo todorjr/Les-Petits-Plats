@@ -113,13 +113,13 @@ function createDropdownElement(data, type, itemsResolver = recepie => recepie[ty
  * @returns 
  */
 export function searchOptions(inputElement, data, type) {
-    inputElement.addEventListener("input", function () {
+    inputElement.addEventListener("input", function (e) {
         // current dropdown list to replace with matched ingredients
         const ingredientsList = document.querySelector(`.${type}-dropdown-content`);
 
         //  filter recipes matching ingredient, appliance or ustensil (searchText)
-        const ingredientsMatchingQuery = data.filter(ingredient => ingredient.toLowerCase().includes(this.value.toLowerCase())) 
-        //! ES6 feature this.value is user input (inputElement)
+        const ingredientsMatchingQuery = data.filter(ingredient => ingredient.toLowerCase().includes(e.target.value.toLowerCase())) 
+        //! e.target corresponds to the input element
 
         // render recipes matching user input
         const ingredientsElements = getListElement(ingredientsMatchingQuery, type)
