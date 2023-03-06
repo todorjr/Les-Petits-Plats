@@ -34,8 +34,18 @@
     display: flex;
     flex-direction: row;
     gap: 10px;
-    .tag {
-        display: flex;
+    .tag{
+        display: none;
+    }
+    .tag1{
+        display: none;
+    }
+    .tag2{
+        display: none;
+    }
+    
+    .tag.show-tag {
+        display: flex;    
         flex-direction: row;
         justify-content: space-between;
         background: #3282F7;
@@ -48,9 +58,9 @@
         color: #FFFFFF;
         width: auto;
     }
-    .tag1{
-        display: flex;
-        flex-direction: row;
+    .tag1.show-tag{
+display: block;     
+   flex-direction: row;
         justify-content: space-between;
         background: #68D9A4;
         border-radius: 5px;
@@ -61,9 +71,9 @@
         font-size: 10px;
         color: #FFFFFF;
     }
-    .tag2{
-        display: flex;
-    flex-direction: row;
+    .tag2.show-tag{
+display: block;  
+  flex-direction: row;
     justify-content: space-between;
     background: #ED6454;
     border-radius: 5px;
