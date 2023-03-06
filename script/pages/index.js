@@ -133,6 +133,17 @@ export function searchOptions(inputElement, data, type) {
     });
 }
 
+function setupDropdownContent(dropdownContentClass, tagClass) {
+    const dropdownContent = document.querySelector(`.${dropdownContentClass}`);
+    const tag = document.querySelector(`.${tagClass}`);
+    dropdownContent.addEventListener('click', (e) => {
+      tag.innerHTML = e.target.textContent;
+      console.log(tag);
+    });
+  }
+  
+
+
 async function init() {
     const { recipes } = await getRecipes();
     const recipesForSearch = mapRecipesWithSearchText(recipes)
@@ -162,6 +173,10 @@ async function init() {
         recipes.flatMap(recipe => recipe.ustensils),
         "ustensils"
     )
+    setupDropdownContent('ingredients-dropdown-content', 'tag');
+    setupDropdownContent('appliance-dropdown-content', 'tag1');
+    setupDropdownContent('ustensils-dropdown-content', 'tag2');
+
 }
 
 document.addEventListener('DOMContentLoaded', function () {
