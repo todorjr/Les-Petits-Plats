@@ -133,7 +133,14 @@ export function searchOptions(inputElement, data, type) {
     });
 }
 
-function setupDropdownContent(dropdownContentClass, tagClass) {
+/**
+ * Sets up a dropdown content element with a click event listener that updates a tag element with the selected content.
+ *
+ * @param {string} dropdownContentClass - The class name of the dropdown content element.
+ * @param {string} tagClass - The class name of the tag element.
+ * @returns {void}
+ */
+function tagItems(dropdownContentClass, tagClass) {
     const dropdownContent = document.querySelector(`.${dropdownContentClass}`);
     const tag = document.querySelector(`.${tagClass}`);
     dropdownContent.addEventListener('click', (e) => {
@@ -173,9 +180,9 @@ async function init() {
         recipes.flatMap(recipe => recipe.ustensils),
         "ustensils"
     )
-    setupDropdownContent('ingredients-dropdown-content', 'tag');
-    setupDropdownContent('appliance-dropdown-content', 'tag1');
-    setupDropdownContent('ustensils-dropdown-content', 'tag2');
+    tagItems('ingredients-dropdown-content', 'tag');
+    tagItems('appliance-dropdown-content', 'tag1');
+    tagItems('ustensils-dropdown-content', 'tag2');
 
 }
 
