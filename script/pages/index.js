@@ -144,8 +144,8 @@ function tagItems(dropdownContentClass, tagClass) {
     const dropdownContent = document.querySelector(`.${dropdownContentClass}`);
     const tag = document.querySelector(`.${tagClass}`);
     dropdownContent.addEventListener('click', (e) => {
-      tag.innerHTML = e.target.textContent;
-      console.log(tag);
+        tag.innerHTML = `${e.target.textContent}<i class="far fa-times-circle"></i>`;
+        console.log(tag);
     });
   }
   
