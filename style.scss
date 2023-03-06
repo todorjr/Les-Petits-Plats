@@ -1,18 +1,20 @@
-
-.logo{
+.logo {
     display: flex;
     justify-content: center;
 }
-.title{
+
+.title {
     display: flex;
     justify-content: center;
     font-family: "DM Sans", sans-serif;
     font-weight: bold;
     color: rgb(208, 79, 79);
 }
-.search-bar__main{
+
+.search-bar__main {
     display: flex;
     justify-content: center;
+
     input {
         font-size: 18px;
         width: 92%;
@@ -23,29 +25,34 @@
         border-radius: 2px;
         background-color: rgb(231, 231, 231);
     }
-    i{
+
+    i {
         right: 90px;
         position: absolute;
         top: 160px;
         font-size: 20px;
     }
 }
+
 .tag-list {
     display: flex;
     flex-direction: row;
     gap: 10px;
-    .tag{
+
+    .tag {
         display: none;
     }
-    .tag1{
+
+    .tag1 {
         display: none;
     }
-    .tag2{
+
+    .tag2 {
         display: none;
     }
-    
+
     .tag.show-tag {
-        display: flex;    
+        display: flex;
         flex-direction: row;
         justify-content: space-between;
         background: #3282F7;
@@ -58,9 +65,10 @@
         color: #FFFFFF;
         width: auto;
     }
-    .tag1.show-tag{
-display: block;     
-   flex-direction: row;
+
+    .tag1.show-tag {
+        display: block;
+        flex-direction: row;
         justify-content: space-between;
         background: #68D9A4;
         border-radius: 5px;
@@ -71,25 +79,28 @@ display: block;
         font-size: 10px;
         color: #FFFFFF;
     }
-    .tag2.show-tag{
-display: block;  
-  flex-direction: row;
-    justify-content: space-between;
-    background: #ED6454;
-    border-radius: 5px;
-    border: none;
-    padding: 10px;
-    font-family: "Lato", sans-serif;
-    font-style: normal;
-    font-size: 10px;
-    color: #FFFFFF;
+
+    .tag2.show-tag {
+        display: block;
+        flex-direction: row;
+        justify-content: space-between;
+        background: #ED6454;
+        border-radius: 5px;
+        border: none;
+        padding: 10px;
+        font-family: "Lato", sans-serif;
+        font-style: normal;
+        font-size: 10px;
+        color: #FFFFFF;
     }
 }
+
 .list {
     display: flex;
     flex-direction: row;
     margin: 15px 0 0 60px;
-    .search_list{
+
+    .search_list {
         font-weight: 600;
         font-size: 0.75em;
         // width: 87px;
@@ -97,16 +108,17 @@ display: block;
         max-width: 397px;
         height: 19.7px;
         padding: 1em;
-        border: 1px solid ;
+        border: 1px solid;
         border-radius: 3px;
         color: #fff;
         font-family: 'Lato', sans-serif;
         font-weight: 700;
-        line-height: 22px;  
+        line-height: 22px;
         display: flex;
-        gap: 10px;    
-        align-items: baseline; 
-        .ingredients-button{
+        gap: 10px;
+        align-items: baseline;
+
+        .ingredients-button {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
@@ -119,6 +131,7 @@ display: block;
             font-size: 14px;
             color: #FFFFFF;
             width: 140px;
+
             .input-ingredients {
                 display: flex;
                 flex-direction: row;
@@ -126,19 +139,23 @@ display: block;
                 background-color: inherit;
                 border: none;
                 color: #fff;
+
                 &:focus {
                     outline: none;
                 }
+
                 &::placeholder {
                     color: #fff;
                     font-size: 13px;
                 }
             }
-            .open{
+
+            .open {
                 color: #000;
-             }
+            }
         }
-        .appliance-button{
+
+        .appliance-button {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
@@ -150,20 +167,24 @@ display: block;
             font-style: normal;
             font-size: 14px;
             color: #FFFFFF;
+
             .input-appliance {
                 width: 100%;
                 background-color: inherit;
                 border: none;
                 color: #fff;
+
                 &:focus {
                     outline: none;
                 }
+
                 &::placeholder {
                     color: #fff;
                     font-size: 13px;
                 }
             }
         }
+
         .ustensils-button {
             display: flex;
             flex-direction: row;
@@ -176,21 +197,23 @@ display: block;
             font-style: normal;
             font-size: 14px;
             color: #FFFFFF;
+
             .input-ustensil {
                 width: 100%;
                 background-color: inherit;
                 border: none;
                 color: #fff;
+
                 &:focus {
                     outline: none;
                 }
-                
+
                 &::placeholder {
                     color: #fff;
                     font-size: 13px;
                 }
             }
-            
+
         }
     }
 }
@@ -201,35 +224,40 @@ display: block;
     justify-content: center;
     gap: 20px;
     margin: 20px 20px 20px 33px;
+
     .no-results {
         font-family: 'Lato', sans-serif;
         font-style: normal;
         font-weight: 400;
         font-size: 32px;
         line-height: 40px;
-        }
-    .card{
+    }
+
+    .card {
         width: 380px;
         height: 370px;
         border-radius: 5px;
         background-color: #E7E7E7;
-         .empty{
+
+        .empty {
             background-color: #C7BEBE;
             width: 100%;
             height: 50%;
             border-radius: 5px;
         }
-        .title-section{
-           padding: 0 10px 5px 10px;
-           font-size: 12px;
+
+        .title-section {
+            padding: 0 10px 5px 10px;
+            font-size: 12px;
         }
-      
-        .title-content{
+
+        .title-content {
             display: flex;
             flex-direction: row;
             gap: 20px;
             align-items: baseline;
             justify-content: space-between;
+
             .title-recipe {
                 font-family: 'Lato', sans-serif;
                 font-style: normal;
@@ -237,7 +265,8 @@ display: block;
                 font-size: 18px;
                 line-height: 22px;
             }
-            .time{
+
+            .time {
                 font-family: 'Lato', sans-serif;
                 font-style: normal;
                 font-weight: 700;
@@ -245,12 +274,14 @@ display: block;
                 line-height: 22px;
             }
         }
+
         .content-section {
             display: flex;
             flex-direction: row;
             gap: 20px;
             align-items: baseline;
-            .description{
+
+            .description {
                 width: 200px;
                 display: -webkit-box;
                 -webkit-line-clamp: 4;
@@ -262,16 +293,18 @@ display: block;
                 font-size: 12px;
                 line-height: 100%;
             }
+
             ul {
-               width: 50%;
-               list-style: none;
-               padding: 0;
-               font-family: 'Lato', sans-serif;
-               font-style: normal;
-               font-weight: 700;
-               font-size: 12px;
-               line-height: 12px;
-                li{
+                width: 50%;
+                list-style: none;
+                padding: 0;
+                font-family: 'Lato', sans-serif;
+                font-style: normal;
+                font-weight: 700;
+                font-size: 12px;
+                line-height: 12px;
+
+                li {
                     font-weight: 400;
 
                 }
@@ -279,18 +312,23 @@ display: block;
         }
     }
 }
+
 .list-content {
     display: flex;
     flex-flow: row wrap;
-    .ingredients-dropdown-content{
+
+    .ingredients-dropdown-content {
         display: none;
     }
-    .appliance-dropdown-content{
+
+    .appliance-dropdown-content {
         display: none;
     }
-    .ustensils-dropdown-content{
+
+    .ustensils-dropdown-content {
         display: none;
     }
+
     .ustensils-dropdown-content.show {
         padding: 5px;
         display: flex;
@@ -298,14 +336,14 @@ display: block;
         gap: 10px;
         width: 500px;
         border-radius: 5px;
-        background-color: #ED6454; 
+        background-color: #ED6454;
         animation: rotateDropdown 400ms ease-in-out forwards;
         transform-origin: top center;
         position: absolute;
         left: 449px;
         margin-top: 10px;
-    
-        a{
+
+        a {
             font-family: 'Lato', sans-serif;
             font-style: normal;
             font-weight: 400;
@@ -314,7 +352,8 @@ display: block;
             color: #fff;
         }
     }
-    .ingredients-dropdown-content.show{
+
+    .ingredients-dropdown-content.show {
         padding: 5px;
         display: flex;
         flex-flow: row wrap;
@@ -328,37 +367,38 @@ display: block;
         left: 81px;
         margin-top: 10px;
     }
-        a{
+
+    a {
         font-family: 'Lato', sans-serif;
         font-style: normal;
         font-weight: 400;
         font-size: 12px;
         line-height: 22px;
         color: #fff;
+    }
+
+    .appliance-dropdown-content.show {
+        padding: 5px;
+        display: flex;
+        flex-flow: row wrap;
+        gap: 10px;
+        width: 300px;
+        border-radius: 5px;
+        background-color: #68D9A4;
+        animation: rotateDropdown 400ms ease-in-out forwards;
+        transform-origin: top center;
+        position: absolute;
+        left: 247px;
+        margin-top: 10px;
+
+        a {
+            font-family: 'Lato', sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 22px;
+            color: #fff;
         }
-    
-    .appliance-dropdown-content.show{
-            padding: 5px;
-            display: flex;
-            flex-flow: row wrap;
-            gap: 10px;
-            width: 300px;
-            border-radius: 5px;
-            background-color: #68D9A4;
-            animation: rotateDropdown 400ms ease-in-out forwards;
-            transform-origin: top center;
-            position: absolute;
-            left: 247px;
-            margin-top: 10px;
-        
-             a{
-                font-family: 'Lato', sans-serif;
-                font-style: normal;
-                font-weight: 400;
-                font-size: 12px;
-                line-height: 22px;
-                color: #fff;
-            }
     }
 }
 
@@ -366,10 +406,12 @@ display: block;
     0% {
         transform: rotateX(-90deg)
     }
+
     70% {
-        transform: rotateX(20deg) 
+        transform: rotateX(20deg)
     }
+
     100% {
-        transform: rotateX(0deg) 
+        transform: rotateX(0deg)
     }
 }
