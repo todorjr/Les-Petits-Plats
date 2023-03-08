@@ -99,6 +99,12 @@ function createDropdownElement(data, type, itemsResolver = recepie => recepie[ty
         // allDropdownContent is an array of all dropdowns
         const allDropdownContent = document.querySelectorAll('.dropdown-content');
 
+        // close the dropdown if it is already open
+        if (dropdownContent.classList.contains('show')) {
+            dropdownContent.classList.remove('show');
+            return;
+        }
+
         // remove the 'show' class from all dropdowns and add it to the current dropdown
         allDropdownContent.forEach(e => e.classList.remove('show'));
         dropdownContent.classList.toggle('show');
@@ -118,7 +124,7 @@ export function searchOptions(inputElement, data, type) {
         const ingredientsList = document.querySelector(`.${type}-dropdown-content`);
 
         //  filter recipes matching ingredient, appliance or ustensil (searchText)
-        const ingredientsMatchingQuery = data.filter(ingredient => ingredient.toLowerCase().includes(e.target.value.toLowerCase())) 
+        const ingredientsMatchingQuery = data.filter(ingredient => ingredient.toLowerCase().includes(e.target.value.toLowerCase()))
         //! e.target corresponds to the input element
 
         // render recipes matching user input
@@ -148,8 +154,8 @@ function tagItems(dropdownContentClass, tagClass) {
         tag.innerHTML = `${e.target.textContent}<i class="far fa-times-circle"></i>`;
         console.log(tag);
     });
-  }
-  
+}
+
 
 
 async function init() {
