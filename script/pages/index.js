@@ -102,12 +102,15 @@ function createDropdownElement(data, type, itemsResolver = recepie => recepie[ty
         // close the dropdown if it is already open
         if (dropdownContent.classList.contains('show')) {
             dropdownContent.classList.remove('show');
+            dropdownContent.classList.add('hide'); /* Add hide class */
+
             return;
         }
 
         // remove the 'show' class from all dropdowns and add it to the current dropdown
         allDropdownContent.forEach(e => e.classList.remove('show'));
         dropdownContent.classList.toggle('show');
+        dropdownContent.classList.remove('hide'); /* Remove hide class */
     });
 }
 
