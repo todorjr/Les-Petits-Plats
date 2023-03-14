@@ -2,7 +2,6 @@ import { getRecipes } from "../api/index.js"
 import { getCard } from "../view/CardRecipe.js";
 import { createSearchInputElement } from "../view/SearchRecipes.js";
 
-
 /**
  *  renderRecipes() takes an array of recipes and renders them to the DOM.
  * @param {[ string ]} recipes 
@@ -173,9 +172,6 @@ function tagItems(dropdownContentClass, tagContainerClass) {
         tagContainer.appendChild(tag);
     });
 }
-
-
-
 
 async function init() {
     const { recipes } = await getRecipes();
