@@ -147,31 +147,26 @@ export function searchOptions(inputElement, data, type) {
  * Sets up a dropdown content element with a click event listener that updates a tag element with the selected content.
  *
  * @param {string} dropdownContentClass - The class name of the dropdown content element.
+ * @param {string} tagContainerClass - The class name of the tag container element.
  * @param {string} tagClass - The class name of the tag element.
  * @returns {void}
  */
-// function tagItems(dropdownContentClass, tagClass) {
-//     const dropdownContent = document.querySelector(`.${dropdownContentClass}`);
-//     const tag = document.querySelector(`.${tagClass}`);
-//     dropdownContent.addEventListener('click', (e) => {
-//         console.log(e.target);
-//         tag.classList.add('show-tag');
-//         tag.innerHTML = `${e.target.textContent}<i class="far fa-times-circle"></i>`;
-//         console.log(tag);
-//     });
-// }
-
 function tagItems(dropdownContentClass, tagContainerClass) {
     const dropdownContent = document.querySelector(`.${dropdownContentClass}`);
     const tagContainer = document.querySelector(`.${tagContainerClass}`);
 
     dropdownContent.addEventListener('click', (e) => {
-        const tag = document.createElement('p');
-        tag.classList.add(`show-tag_${dropdownContentClass}`);
-        tag.innerHTML = `${e.target.textContent}  <i class="far fa-times-circle"></i>`;
-        tagContainer.appendChild(tag);
+        const tagText = e.target.textContent;
+        const existingTag = Array.from(tagContainer.children).find((tag) => tag.textContent.includes(tagText));
+        if (!existingTag) {
+            const tag = document.createElement('p');
+            tag.classList.add(`show-tag_${dropdownContentClass}`);
+            tag.innerHTML = `${tagText} <i class="far fa-times-circle"></i>`;
+            tagContainer.appendChild(tag);
+        }
     });
 }
+
 
 async function init() {
     const { recipes } = await getRecipes();
