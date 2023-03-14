@@ -138,7 +138,9 @@ export function searchOptions(inputElement, data, type) {
             ingredientsElements.innerHTML = `<a class="list-${type}-item">Aucun ${type} ne correspond à votre critère...</a>`
         }
         // replace old dropdown with new one
-        ingredientsList.parentNode.replaceChild(ingredientsElements, ingredientsList); //! fix this code to prevent closing dropdown
+        // ingredientsList.parentNode.replaceChild(ingredientsElements, ingredientsList); //! fix this code to prevent closing dropdown
+        ingredientsList.innerHTML = '';
+        ingredientsList.append(...ingredientsElements.childNodes);
     });
 }
 
