@@ -151,15 +151,29 @@ export function searchOptions(inputElement, data, type) {
  * @param {string} tagClass - The class name of the tag element.
  * @returns {void}
  */
-function tagItems(dropdownContentClass, tagClass) {
+// function tagItems(dropdownContentClass, tagClass) {
+//     const dropdownContent = document.querySelector(`.${dropdownContentClass}`);
+//     const tag = document.querySelector(`.${tagClass}`);
+//     dropdownContent.addEventListener('click', (e) => {
+//         console.log(e.target);
+//         tag.classList.add('show-tag');
+//         tag.innerHTML = `${e.target.textContent}<i class="far fa-times-circle"></i>`;
+//         console.log(tag);
+//     });
+// }
+
+function tagItems(dropdownContentClass, tagContainerClass) {
     const dropdownContent = document.querySelector(`.${dropdownContentClass}`);
-    const tag = document.querySelector(`.${tagClass}`);
+    const tagContainer = document.querySelector(`.${tagContainerClass}`);
+
     dropdownContent.addEventListener('click', (e) => {
-        tag.classList.add('show-tag');
-        tag.innerHTML = `${e.target.textContent}<i class="far fa-times-circle"></i>`;
-        console.log(tag);
+        const tag = document.createElement('p');
+        tag.classList.add(`show-tag_${dropdownContentClass}`);
+        tag.innerHTML = `${e.target.textContent}  <i class="far fa-times-circle"></i>`;
+        tagContainer.appendChild(tag);
     });
 }
+
 
 
 

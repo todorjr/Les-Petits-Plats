@@ -40,19 +40,20 @@
     gap: 10px;
     margin-left: 73px;
 
-    .tag {
-        display: none;
-    }
+    // .tag {
+    //     display: none;
+    // }
 
-    .tag1 {
-        display: none;
-    }
+    // .tag1 {
+    //     display: none;
+    // }
 
-    .tag2 {
-        display: none;
-    }
+    // .tag2 {
+    //     display: none;
+    // }
 
-    .tag.show-tag {
+
+    .show-tag_ingredients-dropdown-content{
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -67,7 +68,7 @@
         width: auto;
     }
 
-    .tag1.show-tag {
+    .show-tag_appliance-dropdown-content {
         display: block;
         flex-direction: row;
         justify-content: space-between;
@@ -81,7 +82,7 @@
         color: #FFFFFF;
     }
 
-    .tag2.show-tag {
+    .show-tag_ustensils-dropdown-content{
         display: block;
         flex-direction: row;
         justify-content: space-between;
