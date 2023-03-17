@@ -38,6 +38,13 @@
   gap: 10px;
   margin-left: 73px;
 }
+.tag-list .tag,
+.tag-list .tag1,
+.tag-list .tag2 {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
 .tag-list .show-tag_ingredients-dropdown-content {
   display: flex;
   flex-direction: row;

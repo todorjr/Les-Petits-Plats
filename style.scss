@@ -40,18 +40,13 @@
     gap: 10px;
     margin-left: 73px;
 
-    // .tag {
-    //     display: none;
-    // }
-
-    // .tag1 {
-    //     display: none;
-    // }
-
-    // .tag2 {
-    //     display: none;
-    // }
-
+    .tag,
+    .tag1,
+    .tag2 {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
 
     .show-tag_ingredients-dropdown-content{
         display: flex;
