@@ -161,11 +161,18 @@ function tagItems(dropdownContentClass, tagContainerClass) {
         if (!existingTag) {
             const tag = document.createElement('p');
             tag.classList.add(`show-tag_${dropdownContentClass}`);
-            tag.innerHTML = `${tagText} <i class="far fa-times-circle"></i>`;
+            tag.innerHTML = `${tagText} <i class="far fa-times-circle close-icon"></i>`;
             tagContainer.appendChild(tag);
         }
     });
+
+    tagContainer.addEventListener('click', (e) => {
+        if (e.target.classList.contains('close-icon')) {
+            e.target.parentNode.remove();
+        }
+    });
 }
+
 
 
 async function init() {
@@ -200,8 +207,21 @@ async function init() {
     tagItems('ingredients-dropdown-content', 'tag');
     tagItems('appliance-dropdown-content', 'tag1');
     tagItems('ustensils-dropdown-content', 'tag2');
-
 }
+
+function deleteTag () {
+    const tags = document.querySelectorAll('.close-icon');
+    console.log(tags,'tags');
+    tags.forEach(tag => {
+        tag.addEventListener('click', (e) => {
+            if (e.target.classList.contains('close-icon')) {
+                console.log('clicked');
+                tag.remove();
+            }
+        })
+    })
+}
+
 
 document.addEventListener('DOMContentLoaded', function () {
     init();
