@@ -6,7 +6,6 @@ import { renderRecipes } from "../pages/index.js";
 @param {Array} recipes An array of recipe objects to search through.
 @returns {Array} An array of recipe objects that match the given user input.
 */
-
 export function searchAllRecipes(userInput, recipes) {
     const filteredRecipes = recipes.filter(recipe => {
         return recipe.searchText && recipe.searchText.includes(userInput);
@@ -94,13 +93,10 @@ export function updateOptions(type, options) {
     });
 }
 
-
-
 /** 
  * createSearchInputElement() creates a search input element and attaches an event listener that listens to input changes. If the input value is 3 or more characters long, it searches through the given data for matching recipes and renders them. If the input value is less than 3 characters long, it renders all the recipes from the given data. If no matching recipes are found, it renders a message indicating that no results were found.
 @param {Array} data An array of recipe objects to search through and render.
 */
-
 export function createSearchInputElement(data) {
     const userInput = document.querySelector("#userInput");
     const resultsContainer = document.querySelector(".container");
