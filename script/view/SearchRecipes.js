@@ -48,32 +48,34 @@ export function searchAllRecipes(userInput, recipes) {
  */
 export function getUniqueIngredients(recipes) {
     const ingredientsSet = new Set();
-
+  
     recipes.forEach((recipe) => {
-        recipe.ingredients.forEach((ingredient) => {
-            ingredientsSet.add(ingredient.ingredient.toLowerCase());
-        });
+      recipe.ingredients.forEach((ingredient) => {
+        ingredientsSet.add(ingredient.ingredient.toLowerCase());
+      });
     });
-
+  
     const uniqueIngredients = Array.from(ingredientsSet);
     return uniqueIngredients;
-}
-
-/**
-* Given an array of options, updates the corresponding dropdown menu with the new options
-* @param {string} dropdownType The type of dropdown to update (appliance, utensil or ingredient)
-* @param {Array} options An array of strings representing the options to display in the dropdown
-*/
+  }
+  
+  /**
+ * Given an array of options, updates the corresponding dropdown menu with the new options
+ * @param {string} dropdownType The type of dropdown to update (appliance, utensil or ingredient)
+ * @param {Array} options An array of strings representing the options to display in the dropdown
+ */
 export function updateOptions(type, options) {
-    const dropdownContent = document.querySelectorAll(`.${type}-dropdown-content`);
+    const dropdownContent = document.querySelector(`.${type}-dropdown-content`);
+    // Clear old options
+    dropdownContent.innerHTML = '';
     // Add new options
     options.forEach((option) => {
-        const optionElement = document.createElement('a');
-        optionElement.textContent = option;
-        dropdownContent.appendChild(optionElement);
+      const optionElement = document.createElement('a');
+      optionElement.textContent = option;
+      dropdownContent.appendChild(optionElement);
     });
-}
-
+    }
+  
 
 /**
  * createSearchInputElement() creates a search input element and attaches an event listener that listens to input changes. 
@@ -86,41 +88,47 @@ export function updateOptions(type, options) {
 export function createSearchInputElement(data) {
     const userInput = document.querySelector("#userInput");
     const resultsContainer = document.querySelector(".container");
-
+  
     // Define empty arrays for the filtered recipes and their respective ingredients, utensils, and appliances
     let filteredRecipes = [];
     let filteredIngredients = [];
-
-
+    let filteredUtensils = [];
+    let filteredAppliances = [];
+  
     // Update the dropdowns with the ingredients, utensils, and appliances for the filtered recipes
     const updateDropdowns = () => {
-        // Get the unique ingredients, utensils, and appliances for the filtered recipes
-        filteredIngredients = getUniqueIngredients(filteredRecipes);
-
-        // Update the dropdowns with the new options
-        updateOptions("ingredient", filteredIngredients);
+      // Get the unique ingredients, utensils, and appliances for the filtered recipes
+      filteredIngredients = getUniqueIngredients(filteredRecipes);
+    //   filteredUtensils = getUniqueUtensils(filteredRecipes);
+    //   filteredAppliances = getUniqueAppliances(filteredRecipes);
+  
+      // Update the dropdowns with the new options
+      updateOptions("ingredients", filteredIngredients, "ingredient");
+    //   updateOptions("#utensils", filteredUtensils, "utensil");
+    //   updateOptions("#appliances", filteredAppliances, "appliance");
     };
-
+  
     userInput.addEventListener("input", () => {
-        if (userInput.value.length >= 3) {
-            // Filter the recipes based on the user input
-            filteredRecipes = searchAllRecipes(userInput.value, data);
-
-            if (filteredRecipes.length === 0) {
-                resultsContainer.innerHTML = `<p class="no-results">No results found for "${userInput.value}" ! 🚫</p>`;
-            } else {
-                // Update the dropdowns with the ingredients, utensils, and appliances for the filtered recipes
-                updateDropdowns();
-                // Render the filtered recipes
-                renderRecipes(filteredRecipes.map(recipe => recipe.recipe));
-            }
+      if (userInput.value.length >= 3) {
+        // Filter the recipes based on the user input
+        filteredRecipes = searchAllRecipes(userInput.value, data);
+  
+        if (filteredRecipes.length === 0) {
+          resultsContainer.innerHTML = `<p class="no-results">No results found for "${userInput.value}" ! 🚫</p>`;
         } else {
-            if (userInput.value.length < 1) {
-                // If the user input is empty, render all the recipes and update the dropdowns
-                filteredRecipes = data;
-                updateDropdowns();
-                renderRecipes(data.map(recipe => recipe.recipe));
-            }
+          // Update the dropdowns with the ingredients, utensils, and appliances for the filtered recipes
+          updateDropdowns();
+          // Render the filtered recipes
+          renderRecipes(filteredRecipes.map(recipe => recipe.recipe));
         }
+      } else {
+        if (userInput.value.length < 1) {
+          // If the user input is empty, render all the recipes and update the dropdowns
+          filteredRecipes = data;
+          updateDropdowns();
+          renderRecipes(data.map(recipe => recipe.recipe));
+        }
+      }
     });
-}
+  }
+  

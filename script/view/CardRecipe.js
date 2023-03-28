@@ -1,4 +1,3 @@
-// function getCard
 
 /**
  * Format quantity depending on unit.
