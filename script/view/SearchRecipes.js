@@ -16,119 +16,140 @@ export function searchAllRecipes(userInput, recipes) {
     });
 }
 
-/** 
- * createSearchInputElement() creates a search input element and attaches an event listener that listens to input changes. If the input value is 3 or more characters long, it searches through the given data for matching recipes and renders them. If the input value is less than 3 characters long, it renders all the recipes from the given data. If no matching recipes are found, it renders a message indicating that no results were found.
-@param {Array} data An array of recipe objects to search through and render.
-*/
-// export function createSearchInputElement(data) {
-//     const userInput = document.querySelector("#userInput");
-//     const resultsContainer = document.querySelector(".container");
-
-//     userInput.addEventListener("input", () => {
-//         if (userInput.value.length >= 3) {
-//             const recipes = searchAllRecipes(userInput.value, data);
-//             if (recipes.length === 0) {
-//                 resultsContainer.innerHTML = `<p class="no-results">No results found for "${userInput.value}" ! 🚫</p>`;
-//             } else {
-//                 renderRecipes(recipes);
-//             }
-//         } else {
-//             if (userInput.value.length < 1) {
-//                 renderRecipes(data.map(recipe => recipe.recipe))
-//             }
-//         }
-//     });
-// }
-
-
 /**
  * Given an array of recipe objects, returns an array of unique ingredients
  * @param {Array} recipes An array of recipe objects
  * @returns {Array} An array of unique ingredients
  */
 export function getUniqueIngredients(recipes) {
+    if (!Array.isArray(recipes)) {
+        throw new Error("Expected an array of recipes");
+    }
+
     const ingredientsSet = new Set();
-  
+
     recipes.forEach((recipe) => {
-      recipe.ingredients.forEach((ingredient) => {
-        ingredientsSet.add(ingredient.ingredient.toLowerCase());
-      });
+        if (recipe && recipe.ingredients) {
+            recipe.ingredients.forEach((ingredient) => {
+                if (ingredient && ingredient.ingredient) {
+                    ingredientsSet.add(ingredient.ingredient.toLowerCase());
+                }
+            });
+        }
     });
-  
+
     const uniqueIngredients = Array.from(ingredientsSet);
     return uniqueIngredients;
-  }
-  
-  /**
- * Given an array of options, updates the corresponding dropdown menu with the new options
- * @param {string} dropdownType The type of dropdown to update (appliance, utensil or ingredient)
- * @param {Array} options An array of strings representing the options to display in the dropdown
- */
-export function updateOptions(type, options) {
-    const dropdownContent = document.querySelector(`.${type}-dropdown-content`);
-    // Clear old options
-    dropdownContent.innerHTML = '';
-    // Add new options
-    options.forEach((option) => {
-      const optionElement = document.createElement('a');
-      optionElement.textContent = option;
-      dropdownContent.appendChild(optionElement);
+}
+
+export function getUniqueAppliances(recipes) {
+    const appliancesSet = new Set();
+
+    recipes.forEach((recipe) => {
+        if (recipe && recipe.appliance) {
+            appliancesSet.add(recipe.appliance.toLowerCase());
+        }
     });
-    }
-  
+
+    const uniqueAppliances = Array.from(appliancesSet);
+    return uniqueAppliances;
+}
+
+export function getUniqueUstensils(recipes) {
+    const ustensilsSet = new Set();
+
+    recipes.forEach((recipe) => {
+        if (recipe && recipe.ustensils) {
+            recipe.ustensils.forEach((ustensil) => {
+                ustensilsSet.add(ustensil.toLowerCase());
+            });
+        }
+    });
+    const uniqueUstensils = Array.from(ustensilsSet);
+    return uniqueUstensils;
+}
+
 
 /**
- * createSearchInputElement() creates a search input element and attaches an event listener that listens to input changes. 
- * If the input value is 3 or more characters long, it searches through the given data for matching recipes and renders them. 
- * If the input value is less than 3 characters long, it renders all the recipes from the given data. 
- * If no matching recipes are found, it renders a message indicating that no results were found.
- * @param {Array} data An array of recipe objects to search through and render.
- */
+* Given an array of options, updates the corresponding dropdown menu with the new options
+* @param {string} dropdownType The type of dropdown to update (appliance, utensil or ingredient)
+* @param {Array} options An array of strings representing the options to display in the dropdown
+*/
+/**
+* Given an array of options, updates the corresponding dropdown menu with the new options
+* @param {string} dropdownType The type of dropdown to update (appliance, utensil or ingredient)
+* @param {Array} options An array of strings representing the options to display in the dropdown
+*/
+export function updateOptions(type, options) {
+    const dropdownContents = document.querySelectorAll(`.${type}-dropdown-content`);
+    dropdownContents.forEach((dropdownContent) => {
+        // Clear old options
+        dropdownContent.innerHTML = '';
+        // Add new options
+        options.forEach((option) => {
+            const optionElement = document.createElement('a');
+            optionElement.innerHTML = option;
+            dropdownContent.append(optionElement);
+        });
+    });
+}
+
+
+
+/** 
+ * createSearchInputElement() creates a search input element and attaches an event listener that listens to input changes. If the input value is 3 or more characters long, it searches through the given data for matching recipes and renders them. If the input value is less than 3 characters long, it renders all the recipes from the given data. If no matching recipes are found, it renders a message indicating that no results were found.
+@param {Array} data An array of recipe objects to search through and render.
+*/
 
 export function createSearchInputElement(data) {
     const userInput = document.querySelector("#userInput");
     const resultsContainer = document.querySelector(".container");
-  
+    const ingredientDropdown = document.querySelector(".ingredients-dropdown-content");
+    const applianceDropdown = document.querySelector(".appliance-dropdown-content");
+    const ustensilDropdown = document.querySelector(".ustensils-dropdown-content");
+
+
     // Define empty arrays for the filtered recipes and their respective ingredients, utensils, and appliances
     let filteredRecipes = [];
     let filteredIngredients = [];
     let filteredUtensils = [];
     let filteredAppliances = [];
-  
+
     // Update the dropdowns with the ingredients, utensils, and appliances for the filtered recipes
     const updateDropdowns = () => {
-      // Get the unique ingredients, utensils, and appliances for the filtered recipes
-      filteredIngredients = getUniqueIngredients(filteredRecipes);
-    //   filteredUtensils = getUniqueUtensils(filteredRecipes);
-    //   filteredAppliances = getUniqueAppliances(filteredRecipes);
-  
-      // Update the dropdowns with the new options
-      updateOptions("ingredients", filteredIngredients, "ingredient");
-    //   updateOptions("#utensils", filteredUtensils, "utensil");
-    //   updateOptions("#appliances", filteredAppliances, "appliance");
+        // Get the unique ingredients, utensils, and appliances for the filtered recipes
+        filteredIngredients = getUniqueIngredients(filteredRecipes);
+        filteredUtensils = getUniqueUstensils(filteredRecipes);
+        filteredAppliances = getUniqueAppliances(filteredRecipes);
+
+        // Update the dropdowns with the new options
+        updateOptions("ingredients", filteredIngredients);
+        updateOptions("ustensils", filteredUtensils);
+        updateOptions("appliance", filteredAppliances);
     };
-  
+
     userInput.addEventListener("input", () => {
-      if (userInput.value.length >= 3) {
-        // Filter the recipes based on the user input
-        filteredRecipes = searchAllRecipes(userInput.value, data);
-  
-        if (filteredRecipes.length === 0) {
-          resultsContainer.innerHTML = `<p class="no-results">No results found for "${userInput.value}" ! 🚫</p>`;
+        if (userInput.value.length >= 3) {
+            // Filter the recipes based on the user input
+            filteredRecipes = searchAllRecipes(userInput.value, data);
+
+            if (filteredRecipes.length === 0) {
+                resultsContainer.innerHTML = `<p class="no-results">No results found for "${userInput.value}" ! 🚫</p>`;
+                ingredientDropdown.innerHTML = `<a class="list-item">Aucun item ne correspond à votre critère...</a>`
+                applianceDropdown.innerHTML = `<a class="list-item">Aucun item ne correspond à votre critère...</a>`
+                ustensilDropdown.innerHTML = `<a class="list-item">Aucun item ne correspond à votre critère...</a>`
+            } else {
+                // Update the dropdowns with the ingredients, utensils, and appliances for the filtered recipes
+                updateDropdowns();
+                renderRecipes(filteredRecipes)
+            }
         } else {
-          // Update the dropdowns with the ingredients, utensils, and appliances for the filtered recipes
-          updateDropdowns();
-          // Render the filtered recipes
-          renderRecipes(filteredRecipes.map(recipe => recipe.recipe));
+            if (userInput.value.length < 1) {
+                // If the user input is empty, render all the recipes and update the dropdowns
+                filteredRecipes = data;
+                updateDropdowns();
+                renderRecipes(data.map(recipe => recipe.recipe));
+            }
         }
-      } else {
-        if (userInput.value.length < 1) {
-          // If the user input is empty, render all the recipes and update the dropdowns
-          filteredRecipes = data;
-          updateDropdowns();
-          renderRecipes(data.map(recipe => recipe.recipe));
-        }
-      }
     });
-  }
-  
+}
