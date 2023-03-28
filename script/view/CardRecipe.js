@@ -27,7 +27,6 @@ export function quantityUnitFormatter (quantity, unit) {
  */
 export function getIngredientItem (ingredient) {
     const item = document.createElement('li')
-
     const quantityText = quantityUnitFormatter(ingredient.quantity, ingredient.unit)
     const message = `${ingredient.ingredient}: ${quantityText}`
 
@@ -39,15 +38,12 @@ export function getCard(recipe) {
     const cardElement = document.createElement('article')
     const titleContainer = document.createElement('div')
     const contentContainer = document.createElement('div')
-
     const titleElement = document.createElement('h2')
     const timeElement = document.createElement('p')
     const listElement = document.createElement('ul')
     const descriptionElement = document.createElement('p')
-
     const listItemsElement = recipe.ingredients.map(getIngredientItem)
     listElement.append(...listItemsElement)
-
 
     timeElement.classList.add('time')
     timeElement.innerHTML = `<i class="fa-regular fa-clock"></i> ${recipe.time} min`
@@ -59,7 +55,6 @@ export function getCard(recipe) {
     descriptionElement.classList.add('description')
     descriptionElement.innerText = recipe.description
 
-    
     titleElement.classList.add('title-recipe')
     titleElement.innerText = recipe.name
     
@@ -69,7 +64,6 @@ export function getCard(recipe) {
 
     cardElement.append(titleContainer)
     cardElement.appendChild(contentContainer)
-   
     
     cardElement.classList.add('title-section')
 
