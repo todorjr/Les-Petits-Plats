@@ -112,7 +112,7 @@ export function createSearchInputElement(data) {
     let filteredAppliances = [];
 
     // Update the dropdowns with the ingredients, utensils, and appliances for the filtered recipes
-    const updateDropdowns = () => {
+    function updateDropdowns() {
         // Get the unique ingredients, utensils, and appliances for the filtered recipes
         filteredIngredients = getUniqueIngredients(filteredRecipes);
         filteredUtensils = getUniqueUstensils(filteredRecipes);
@@ -143,7 +143,6 @@ export function createSearchInputElement(data) {
             if (userInput.value.length < 1) {
                 // If the user input is empty, render all the recipes and update the dropdowns
                 filteredRecipes = data;
-                updateDropdowns();
                 renderRecipes(data.map(recipe => recipe.recipe));
             }
         }
