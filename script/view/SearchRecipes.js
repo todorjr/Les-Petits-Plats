@@ -138,6 +138,9 @@ export function createSearchInputElement(data) {
                 // If the user input is empty, render all the recipes and update the dropdowns
                 filteredRecipes = data;
                 renderRecipes(data.map(recipe => recipe.recipe));
+                updateDropdowns();
+                console.log("Dropdowns cleared");
+
             }
         }
     });
