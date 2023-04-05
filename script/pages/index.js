@@ -187,6 +187,22 @@ async function init() {
     createDropdownElement(recipes, "ustensils")
 
     createSearchInputElement(recipesForSearch)
+    
+    searchOptions(
+        document.querySelector('#input-ingredients'),
+        recipes.flatMap(recipe => recipe.ingredients.map(ingredient => ingredient.ingredient)),
+        "ingredients"
+    )
+    searchOptions(
+        document.querySelector('#input-appliance'),
+        recipes.flatMap(recipe => recipe.appliance),
+        "appliance"
+    )
+    searchOptions(
+        document.querySelector('#input-ustensils'),
+        recipes.flatMap(recipe => recipe.ustensils),
+        "ustensils"
+    )
 
     tagItems('ingredients-dropdown-content', 'tag');
     tagItems('appliance-dropdown-content', 'tag1');
