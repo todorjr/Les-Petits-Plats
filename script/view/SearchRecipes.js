@@ -69,11 +69,7 @@ export function getUniqueUstensils(recipes) {
 }
 
 
-/**
-* Given an array of options, updates the corresponding dropdown menu with the new options
-* @param {string} dropdownType The type of dropdown to update (appliance, utensil or ingredient)
-* @param {Array} options An array of strings representing the options to display in the dropdown
-*/
+
 /**
 * Given an array of options, updates the corresponding dropdown menu with the new options
 * @param {string} type The type of dropdown to update (appliance, ustensil or ingredient)
