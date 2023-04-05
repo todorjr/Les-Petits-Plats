@@ -68,8 +68,6 @@ export function getUniqueUstensils(recipes) {
     return uniqueUstensils;
 }
 
-
-
 /**
 * Given an array of options, updates the corresponding dropdown menu with the new options
 * @param {string} type The type of dropdown to update (appliance, ustensil or ingredient)
