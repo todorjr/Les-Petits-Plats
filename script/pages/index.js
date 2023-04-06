@@ -154,7 +154,7 @@ export function searchOptions(inputElement, data, type) {
  * @returns {void}
  */
 
-function tagItems(dropdownContentClass, tagContainerClass) {
+export function tagItems(dropdownContentClass, tagContainerClass) {
     const dropdownContent = document.querySelector(`.${dropdownContentClass}`);
     const tagContainer = document.querySelector(`.${tagContainerClass}`);
 

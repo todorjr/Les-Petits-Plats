@@ -1,7 +1,5 @@
 import { renderRecipes } from "../pages/index.js";
-
-
-let selectedTags = [];
+import { tagItems } from "../pages/index.js";
 
 /**
  * Searches through the given array of recipe objects for matching recipes based on the given user input. Each recipe object must have a searchText property  which contains a string of keywords that can be used for searching. Returns an array of recipe objects that match the given user input.
@@ -9,7 +7,7 @@ let selectedTags = [];
 @param {Array} recipes An array of recipe objects to search through.
 @returns {Array} An array of recipe objects that match the given user input.
 */
-export function searchAllRecipes(userInput, recipes, selectedTags) {
+export function searchAllRecipes(userInput, recipes, selectedTags=[]) {
     const filteredRecipes = recipes.filter(recipe => {
         const tags = selectedTags.map(tag => tag.textContent.trim());
         return recipe.searchText && recipe.searchText.includes(userInput) && tags.every(tag => recipe.tags.includes(tag));
@@ -96,14 +94,17 @@ export function updateOptions(type, options) {
  * createSearchInputElement() creates a search input element and attaches an event listener that listens to input changes. If the input value is 3 or more characters long, it searches through the given data for matching recipes and renders them. If the input value is less than 3 characters long, it renders all the recipes from the given data. If no matching recipes are found, it renders a message indicating that no results were found.
 @param {Array} data An array of recipe objects to search through and render.
 */
-export function createSearchInputElement(data) {
+export function createSearchInputElement(data, selectedTags) {
     const userInput = document.querySelector("#userInput");
     const resultsContainer = document.querySelector(".container");
     const ingredientDropdown = document.querySelector(".ingredients-dropdown-content");
     const applianceDropdown = document.querySelector(".appliance-dropdown-content");
     const ustensilDropdown = document.querySelector(".ustensils-dropdown-content");
 
-
+    const selectedIngredientsContainer = document.querySelector("tag");
+    const selectedAppliancesContainer = document.querySelector("tag1");
+    const selectedUstensilsContainer = document.querySelector(".tag2");
+    
     // Define empty arrays for the filtered recipes and their respective ingredients, utensils, and appliances
     let filteredRecipes = [];
     let filteredIngredients = [];
@@ -123,11 +124,20 @@ export function createSearchInputElement(data) {
         updateOptions("appliance", filteredAppliances);
     };
 
+    // Define the tags array
+    let tagsArray = [];
+
+    // Call the tagItems function for each dropdown and tag container
+    tagItems("ingredients-dropdown-content", "tag");
+    tagItems("appliance-dropdown-content", "tag1");
+    tagItems("ustensils-dropdown-content", "tag2");
+
     userInput.addEventListener("input", () => {
         if (userInput.value.length >= 3) {
             // Filter the recipes based on the user input
             filteredRecipes = searchAllRecipes(userInput.value, data, selectedTags);
 
+            console.log(tagsArray.concat(selectedTags));
             if (filteredRecipes.length === 0) {
                 resultsContainer.innerHTML = `<p class="no-results">No results found for "${userInput.value}" ! 🚫</p>`;
                 ingredientDropdown.innerHTML = `<a class="list-item">Aucun item ne correspond à votre critère...</a>`
