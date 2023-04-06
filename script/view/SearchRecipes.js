@@ -1,15 +1,20 @@
 import { renderRecipes } from "../pages/index.js";
 
+
+let selectedTags = [];
+
 /**
  * Searches through the given array of recipe objects for matching recipes based on the given user input. Each recipe object must have a searchText property  which contains a string of keywords that can be used for searching. Returns an array of recipe objects that match the given user input.
 @param {string} userInput The user input to search for.
 @param {Array} recipes An array of recipe objects to search through.
 @returns {Array} An array of recipe objects that match the given user input.
 */
-export function searchAllRecipes(userInput, recipes) {
+export function searchAllRecipes(userInput, recipes, selectedTags) {
     const filteredRecipes = recipes.filter(recipe => {
-        return recipe.searchText && recipe.searchText.includes(userInput);
+        const tags = selectedTags.map(tag => tag.textContent.trim());
+        return recipe.searchText && recipe.searchText.includes(userInput) && tags.every(tag => recipe.tags.includes(tag));
     });
+    console.log(filteredRecipes, "filteredRecipes");
     return filteredRecipes.map(recipe => {
         return recipe.recipe;
     });
@@ -121,7 +126,7 @@ export function createSearchInputElement(data) {
     userInput.addEventListener("input", () => {
         if (userInput.value.length >= 3) {
             // Filter the recipes based on the user input
-            filteredRecipes = searchAllRecipes(userInput.value, data);
+            filteredRecipes = searchAllRecipes(userInput.value, data, selectedTags);
 
             if (filteredRecipes.length === 0) {
                 resultsContainer.innerHTML = `<p class="no-results">No results found for "${userInput.value}" ! 🚫</p>`;

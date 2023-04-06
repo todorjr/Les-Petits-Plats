@@ -2,6 +2,9 @@ import { getRecipes } from "../api/index.js"
 import { getCard } from "../view/CardRecipe.js";
 import { createSearchInputElement } from "../view/SearchRecipes.js";
 
+
+let tagsArray = []; // Create an array to store tags
+
 /**
  *  renderRecipes() takes an array of recipes and renders them to the DOM.
  * @param {[ string ]} recipes 
@@ -150,6 +153,7 @@ export function searchOptions(inputElement, data, type) {
  * @param {string} tagClass - The class name of the tag element.
  * @returns {void}
  */
+
 function tagItems(dropdownContentClass, tagContainerClass) {
     const dropdownContent = document.querySelector(`.${dropdownContentClass}`);
     const tagContainer = document.querySelector(`.${tagContainerClass}`);
@@ -162,16 +166,25 @@ function tagItems(dropdownContentClass, tagContainerClass) {
             tag.classList.add(`show-tag_${dropdownContentClass}`);
             tag.innerHTML = `${tagText}  <i class="far fa-times-circle close-icon"></i>`;
             tagContainer.appendChild(tag);
+            tagsArray.push(tagText); // Add tag text to the array
+            console.log(tagsArray, "tagsArray");
+
         }
     });
-
     tagContainer.addEventListener('click', (e) => {
         if (e.target.classList.contains('close-icon')) {
+            const tagText = e.target.parentNode.textContent.trim();
+            const tagIndex = tagsArray.indexOf(tagText);
+            if (tagIndex !== -1) {
+                tagsArray.splice(tagIndex, 1);
+            }
+            console.log(tagsArray, "deletedTagsArray");
+
             e.target.parentNode.remove();
+            // call your search function here to update the results based on the remaining selected tags
         }
     });
 }
-
 
 
 async function init() {
@@ -187,7 +200,7 @@ async function init() {
     createDropdownElement(recipes, "ustensils")
 
     createSearchInputElement(recipesForSearch)
-    
+
     searchOptions(
         document.querySelector('#input-ingredients'),
         recipes.flatMap(recipe => recipe.ingredients.map(ingredient => ingredient.ingredient)),
