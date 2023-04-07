@@ -2,7 +2,6 @@ import { getRecipes } from "../api/index.js"
 import { getCard } from "../view/CardRecipe.js";
 import { createSearchInputElement } from "../view/SearchRecipes.js";
 
-
 let tagsArray = []; // Create an array to store tags
 
 /**
@@ -181,7 +180,6 @@ export function tagItems(dropdownContentClass, tagContainerClass) {
             console.log(tagsArray, "deletedTagsArray");
 
             e.target.parentNode.remove();
-            // call your search function here to update the results based on the remaining selected tags
         }
     });
 }

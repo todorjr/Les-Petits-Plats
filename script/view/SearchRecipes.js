@@ -100,10 +100,6 @@ export function createSearchInputElement(data, selectedTags) {
     const ingredientDropdown = document.querySelector(".ingredients-dropdown-content");
     const applianceDropdown = document.querySelector(".appliance-dropdown-content");
     const ustensilDropdown = document.querySelector(".ustensils-dropdown-content");
-
-    const selectedIngredientsContainer = document.querySelector("tag");
-    const selectedAppliancesContainer = document.querySelector("tag1");
-    const selectedUstensilsContainer = document.querySelector(".tag2");
     
     // Define empty arrays for the filtered recipes and their respective ingredients, utensils, and appliances
     let filteredRecipes = [];
@@ -123,14 +119,6 @@ export function createSearchInputElement(data, selectedTags) {
         updateOptions("ustensils", filteredUtensils);
         updateOptions("appliance", filteredAppliances);
     };
-
-    // Define the tags array
-    let tagsArray = [];
-
-    // Call the tagItems function for each dropdown and tag container
-    tagItems("ingredients-dropdown-content", "tag");
-    tagItems("appliance-dropdown-content", "tag1");
-    tagItems("ustensils-dropdown-content", "tag2");
 
     userInput.addEventListener("input", () => {
         if (userInput.value.length >= 3) {
