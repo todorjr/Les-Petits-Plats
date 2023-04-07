@@ -1,6 +1,6 @@
 import { getRecipes } from "../api/index.js"
 import { getCard } from "../view/CardRecipe.js";
-import { createSearchInputElement } from "../view/SearchRecipes.js";
+import { createSearchInputElement, searchByTag } from "../view/SearchRecipes.js";
 
 let tagsArray = []; // Create an array to store tags
 
@@ -147,11 +147,13 @@ export function searchOptions(inputElement, data, type) {
 /**
  * Sets up a dropdown content element with a click event listener that updates a tag element with the selected content.
  *
- * @param {string} dropdownContentClass - The class name of the dropdown content element.
- * @param {string} tagContainerClass - The class name of the tag container element.
- * @param {string} tagClass - The class name of the tag element.
+ * @param {string} dropdownContentClass The class name of the dropdown content element.
+ * @param {string} tagContainerClass The class name of the tag container element.
+ * @param {string} tagClass The class name of the tag element.
  * @returns {void}
  */
+
+let newCommonRecipes = [];
 
 export function tagItems(dropdownContentClass, tagContainerClass) {
     const dropdownContent = document.querySelector(`.${dropdownContentClass}`);
@@ -165,9 +167,8 @@ export function tagItems(dropdownContentClass, tagContainerClass) {
             tag.classList.add(`show-tag_${dropdownContentClass}`);
             tag.innerHTML = `${tagText}  <i class="far fa-times-circle close-icon"></i>`;
             tagContainer.appendChild(tag);
+            searchByTag(newCommonRecipes, 'ingredient', tagText)
             tagsArray.push(tagText); // Add tag text to the array
-            console.log(tagsArray, "tagsArray");
-
         }
     });
     tagContainer.addEventListener('click', (e) => {
@@ -175,10 +176,8 @@ export function tagItems(dropdownContentClass, tagContainerClass) {
             const tagText = e.target.parentNode.textContent.trim();
             const tagIndex = tagsArray.indexOf(tagText);
             if (tagIndex !== -1) {
-                tagsArray.splice(tagIndex, 1);
+                tagsArray.splice(tagIndex, 1); // Remove tag text from the array
             }
-            console.log(tagsArray, "deletedTagsArray");
-
             e.target.parentNode.remove();
         }
     });
@@ -187,6 +186,7 @@ export function tagItems(dropdownContentClass, tagContainerClass) {
 
 async function init() {
     const { recipes } = await getRecipes();
+    newCommonRecipes = recipes;
     const recipesForSearch = mapRecipesWithSearchText(recipes)
 
     // render list of recepies
@@ -219,7 +219,6 @@ async function init() {
     tagItems('appliance-dropdown-content', 'tag1');
     tagItems('ustensils-dropdown-content', 'tag2');
 }
-
 
 document.addEventListener('DOMContentLoaded', function () {
     init();

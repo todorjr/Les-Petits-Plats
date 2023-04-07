@@ -1,21 +1,57 @@
 import { renderRecipes } from "../pages/index.js";
-import { tagItems } from "../pages/index.js";
+    
+/**
+ * Filters an array of recipes by a specific tag.
+ * @param {Array} recipes The array of recipes to filter.
+ * @param {string} type The type of tag to filter by (e.g. "ingredient").
+ * @param {string} tag The specific tag to filter by (e.g. "chicken").
+ * @returns {Array} An array of filtered recipe objects.
+ */
+export function searchByTag(recipes, type, tag) {
+    let filteredRecipes = recipes.filter((recipe) =>
+        recipe.ingredients.some((ingredient) => ingredient[type] === tag)
+    );
+    const commonRecipes = getCommonRecipes({ filteredRecipes });
+    return commonRecipes;
+}
 
 /**
  * Searches through the given array of recipe objects for matching recipes based on the given user input. Each recipe object must have a searchText property  which contains a string of keywords that can be used for searching. Returns an array of recipe objects that match the given user input.
 @param {string} userInput The user input to search for.
 @param {Array} recipes An array of recipe objects to search through.
+@param {Array} selectedTags An array of tags to filter by.
 @returns {Array} An array of recipe objects that match the given user input.
 */
-export function searchAllRecipes(userInput, recipes, selectedTags=[]) {
-    const filteredRecipes = recipes.filter(recipe => {
-        const tags = selectedTags.map(tag => tag.textContent.trim());
-        return recipe.searchText && recipe.searchText.includes(userInput) && tags.every(tag => recipe.tags.includes(tag));
+export function searchAllRecipes(userInput, recipes, selectedTags = []) {
+    let filteredRecipes = recipes.filter(
+        (recipe) => recipe.searchText && recipe.searchText.toLowerCase().includes(userInput.toLowerCase())
+    );
+
+    if (selectedTags.length > 0) {
+        selectedTags.forEach((tag) => {
+            filteredRecipes = searchByTag(filteredRecipes, "ingredient", tag);
+        });
+    }
+    const commonRecipes = getCommonRecipes({ filteredRecipes });
+    return commonRecipes;
+}
+
+/**
+ * Finds the intersection of the arrays of recipe objects in a given object and returns the resulting recipes.
+ * @param {Object} resultObject The object containing arrays of recipe objects.
+ * @returns {Array} An array of recipe objects that are common across all arrays in the input object.
+ */
+export function getCommonRecipes(resultObject) {
+    const tabArrays = Object.values(resultObject);
+
+    if (tabArrays.length === 0) {
+        return [];
+    }
+    const commonRecipes = tabArrays.reduce((common, current) => {
+        return common.filter((recipe) => current.some((item) => item.id === recipe.id));
     });
-    console.log(filteredRecipes, "filteredRecipes");
-    return filteredRecipes.map(recipe => {
-        return recipe.recipe;
-    });
+
+    return commonRecipes;
 }
 
 /**
@@ -100,7 +136,7 @@ export function createSearchInputElement(data, selectedTags) {
     const ingredientDropdown = document.querySelector(".ingredients-dropdown-content");
     const applianceDropdown = document.querySelector(".appliance-dropdown-content");
     const ustensilDropdown = document.querySelector(".ustensils-dropdown-content");
-    
+
     // Define empty arrays for the filtered recipes and their respective ingredients, utensils, and appliances
     let filteredRecipes = [];
     let filteredIngredients = [];
@@ -125,7 +161,6 @@ export function createSearchInputElement(data, selectedTags) {
             // Filter the recipes based on the user input
             filteredRecipes = searchAllRecipes(userInput.value, data, selectedTags);
 
-            console.log(tagsArray.concat(selectedTags));
             if (filteredRecipes.length === 0) {
                 resultsContainer.innerHTML = `<p class="no-results">No results found for "${userInput.value}" ! 🚫</p>`;
                 ingredientDropdown.innerHTML = `<a class="list-item">Aucun item ne correspond à votre critère...</a>`
