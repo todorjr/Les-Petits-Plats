@@ -7,13 +7,16 @@ import { renderRecipes } from "../pages/index.js";
 @returns {Array} An array of recipe objects that match the given user input.
 */
 export function searchAllRecipes(userInput, recipes) {
-    const filteredRecipes = recipes.filter(recipe => {
-        return recipe.searchText && recipe.searchText.includes(userInput);
-    });
-    return filteredRecipes.map(recipe => {
-        return recipe.recipe;
-    });
-}
+    const matchingRecipes = [];
+
+    for (let i = 0; i < recipes.length; i++) {
+    const recipe = recipes[i];
+    if (recipe.searchText && recipe.searchText.includes(userInput)) {
+        matchingRecipes.push(recipe.recipe);
+        }
+    }
+    return matchingRecipes;
+}  
 
 /**
  * Given an array of recipe objects, returns an array of unique ingredients, appliances and ustensils.
