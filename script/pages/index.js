@@ -1,8 +1,9 @@
 import { getRecipes } from "../api/index.js"
 import { getCard } from "../view/CardRecipe.js";
-import { createSearchInputElement, searchByTag } from "../view/SearchRecipes.js";
+import { createSearchInputElement, searchAllRecipes } from "../view/SearchRecipes.js";
 
-let tagsArray = []; // Create an array to store tags
+// let tagsArray = ['ail','tomate','pomme de terre', 'poivron'];  // Create an array to store tags
+let tagsArray=[];
 
 /**
  *  renderRecipes() takes an array of recipes and renders them to the DOM.
@@ -27,21 +28,23 @@ export function renderRecipes(recipes) {
 }
 
 /**
- *  mapRecipesWithSearchText uses the map() method to loop through the array of recipes and returns an array of objects with the recipe and the search text. The search text is a combination of the recipe name, ingredients and description.
+ * mapRecipesWithSearchText uses the map() method to loop through the array of recipes and returns an array of objects with the recipe and the search text. The search text is a combination of the recipe name, ingredients and description.
  * @param {[ string ]} recipes 
+ * @param {[ string ]} tags 
  * @returns 
  */
-export function mapRecipesWithSearchText(recipes) {
+export function mapRecipesWithSearchText(recipes, tags) {
     return recipes.map(recipe => {
         const ingredients = recipe.ingredients.reduce((acc, val) => acc + ' ' + val.ingredient, '');
         const searchText = recipe.name + " " + ingredients + " " + recipe.description;
-
+        
         return {
             searchText: searchText,
             recipe,
         };
     });
 }
+
 
 /**
  * getListItem() takes an item and returns an anchor element with the class 'list-${type}-item' and the text content of the item.
@@ -153,7 +156,6 @@ export function searchOptions(inputElement, data, type) {
  * @returns {void}
  */
 
-let newCommonRecipes = [];
 
 export function tagItems(dropdownContentClass, tagContainerClass) {
     const dropdownContent = document.querySelector(`.${dropdownContentClass}`);
@@ -164,19 +166,26 @@ export function tagItems(dropdownContentClass, tagContainerClass) {
         const existingTag = Array.from(tagContainer.children).find((tag) => tag.textContent.includes(tagText));
         if (!existingTag) {
             const tag = document.createElement('p');
-            tag.classList.add(`show-tag_${dropdownContentClass}`);
+            tag.classList.add(`show-tag_${dropdownContentClass}`, `tags`);
             tag.innerHTML = `${tagText}  <i class="far fa-times-circle close-icon"></i>`;
             tagContainer.appendChild(tag);
-            searchByTag(newCommonRecipes, 'ingredient', tagText)
             tagsArray.push(tagText); // Add tag text to the array
+            
+            let filteredRecipes = searchAllRecipes(userInput.value, recipes, tagsArray);
+
+            console.log(tagsArray, 'addedTagsArray');
+
+            renderRecipes(filteredRecipes);
         }
     });
+
     tagContainer.addEventListener('click', (e) => {
         if (e.target.classList.contains('close-icon')) {
             const tagText = e.target.parentNode.textContent.trim();
             const tagIndex = tagsArray.indexOf(tagText);
             if (tagIndex !== -1) {
                 tagsArray.splice(tagIndex, 1); // Remove tag text from the array
+                console.log(tagsArray, 'deletedTagsArray');
             }
             e.target.parentNode.remove();
         }
@@ -184,10 +193,11 @@ export function tagItems(dropdownContentClass, tagContainerClass) {
 }
 
 
+
 async function init() {
     const { recipes } = await getRecipes();
-    newCommonRecipes = recipes;
     const recipesForSearch = mapRecipesWithSearchText(recipes)
+    const userInput = document.querySelector("#userInput");
 
     // render list of recepies
     renderRecipes(recipes)
@@ -215,9 +225,9 @@ async function init() {
         "ustensils"
     )
 
-    tagItems('ingredients-dropdown-content', 'tag');
-    tagItems('appliance-dropdown-content', 'tag1');
-    tagItems('ustensils-dropdown-content', 'tag2');
+    tagItems('ingredients-dropdown-content', 'tag', userInput.value);
+    tagItems('appliance-dropdown-content', 'tag1', userInput.value);
+    tagItems('ustensils-dropdown-content', 'tag2', userInput.value);
 }
 
 document.addEventListener('DOMContentLoaded', function () {

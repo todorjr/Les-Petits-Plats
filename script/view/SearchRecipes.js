@@ -1,57 +1,48 @@
 import { renderRecipes } from "../pages/index.js";
-    
-/**
- * Filters an array of recipes by a specific tag.
- * @param {Array} recipes The array of recipes to filter.
- * @param {string} type The type of tag to filter by (e.g. "ingredient").
- * @param {string} tag The specific tag to filter by (e.g. "chicken").
- * @returns {Array} An array of filtered recipe objects.
- */
-export function searchByTag(recipes, type, tag) {
-    let filteredRecipes = recipes.filter((recipe) =>
-        recipe.ingredients.some((ingredient) => ingredient[type] === tag)
-    );
-    const commonRecipes = getCommonRecipes({ filteredRecipes });
-    return commonRecipes;
-}
 
 /**
  * Searches through the given array of recipe objects for matching recipes based on the given user input. Each recipe object must have a searchText property  which contains a string of keywords that can be used for searching. Returns an array of recipe objects that match the given user input.
 @param {string} userInput The user input to search for.
 @param {Array} recipes An array of recipe objects to search through.
-@param {Array} selectedTags An array of tags to filter by.
+@param {Array} tags An array of tags to search for.
 @returns {Array} An array of recipe objects that match the given user input.
 */
-export function searchAllRecipes(userInput, recipes, selectedTags = []) {
-    let filteredRecipes = recipes.filter(
-        (recipe) => recipe.searchText && recipe.searchText.toLowerCase().includes(userInput.toLowerCase())
-    );
+export function searchAllRecipes(userInput, recipes, tags) {
+    const filteredRecipes = recipes.filter(recipe => {
+        const searchText = recipe.searchText && recipe.searchText.toLowerCase();
+        const isMatchingInput = input => searchText ? searchText.includes(input.toLowerCase()) : true
 
-    if (selectedTags.length > 0) {
-        selectedTags.forEach((tag) => {
-            filteredRecipes = searchByTag(filteredRecipes, "ingredient", tag);
-        });
-    }
-    const commonRecipes = getCommonRecipes({ filteredRecipes });
-    return commonRecipes;
-}
+        if (tags.length) {
+            return (
+                isMatchingInput(userInput) &&
+                tags.every(tag => isMatchingInput(tag))
+            )
+        }
 
-/**
- * Finds the intersection of the arrays of recipe objects in a given object and returns the resulting recipes.
- * @param {Object} resultObject The object containing arrays of recipe objects.
- * @returns {Array} An array of recipe objects that are common across all arrays in the input object.
- */
-export function getCommonRecipes(resultObject) {
-    const tabArrays = Object.values(resultObject);
-
-    if (tabArrays.length === 0) {
-        return [];
-    }
-    const commonRecipes = tabArrays.reduce((common, current) => {
-        return common.filter((recipe) => current.some((item) => item.id === recipe.id));
+        return isMatchingInput(userInput)
     });
 
-    return commonRecipes;
+    return filteredRecipes.map(recipe => recipe.recipe);
+}
+
+export function searchRecipesByTags(recipes, tags) {
+    const filteredRecipes = recipes.filter(recipe => {
+        return recipe.hasTag;
+    });      
+    return filteredRecipes.map(recipe => {
+        return recipe.recipe;
+    });
+
+}
+
+export function searchAllRecipesByUserInput (userInput, recipes) {
+    const filteredRecipes = recipes.filter(recipe => {
+        return recipe.searchText && recipe.searchText.toLowerCase().includes(userInput.toLowerCase());
+    });      
+    console.log(filteredRecipes,'searchAllFilteredRecipes');
+    return filteredRecipes.map(recipe => {
+        return recipe.recipe;
+    });
 }
 
 /**
@@ -130,13 +121,14 @@ export function updateOptions(type, options) {
  * createSearchInputElement() creates a search input element and attaches an event listener that listens to input changes. If the input value is 3 or more characters long, it searches through the given data for matching recipes and renders them. If the input value is less than 3 characters long, it renders all the recipes from the given data. If no matching recipes are found, it renders a message indicating that no results were found.
 @param {Array} data An array of recipe objects to search through and render.
 */
-export function createSearchInputElement(data, selectedTags) {
-    const userInput = document.querySelector("#userInput");
+export function createSearchInputElement(data) {
+    // const userInput = document.querySelector("#userInput");
+    const selectedTags = [];
     const resultsContainer = document.querySelector(".container");
     const ingredientDropdown = document.querySelector(".ingredients-dropdown-content");
     const applianceDropdown = document.querySelector(".appliance-dropdown-content");
     const ustensilDropdown = document.querySelector(".ustensils-dropdown-content");
-
+    
     // Define empty arrays for the filtered recipes and their respective ingredients, utensils, and appliances
     let filteredRecipes = [];
     let filteredIngredients = [];
@@ -158,7 +150,7 @@ export function createSearchInputElement(data, selectedTags) {
 
     userInput.addEventListener("input", () => {
         if (userInput.value.length >= 3) {
-            // Filter the recipes based on the user input
+            // Filter the recipes based on the user input and the selected tags
             filteredRecipes = searchAllRecipes(userInput.value, data, selectedTags);
 
             if (filteredRecipes.length === 0) {
@@ -177,7 +169,6 @@ export function createSearchInputElement(data, selectedTags) {
                 filteredRecipes = data;
                 renderRecipes(data.map(recipe => recipe.recipe));
                 updateDropdowns();
-                console.log("Dropdowns cleared");
 
             }
         }
