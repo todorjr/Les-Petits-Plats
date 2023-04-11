@@ -25,25 +25,6 @@ export function searchAllRecipes(userInput, recipes, tags) {
     return filteredRecipes.map(recipe => recipe.recipe);
 }
 
-export function searchRecipesByTags(recipes, tags) {
-    const filteredRecipes = recipes.filter(recipe => {
-        return recipe.hasTag;
-    });      
-    return filteredRecipes.map(recipe => {
-        return recipe.recipe;
-    });
-
-}
-
-export function searchAllRecipesByUserInput (userInput, recipes) {
-    const filteredRecipes = recipes.filter(recipe => {
-        return recipe.searchText && recipe.searchText.toLowerCase().includes(userInput.toLowerCase());
-    });      
-    console.log(filteredRecipes,'searchAllFilteredRecipes');
-    return filteredRecipes.map(recipe => {
-        return recipe.recipe;
-    });
-}
 
 /**
  * Given an array of recipe objects, returns an array of unique ingredients

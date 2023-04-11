@@ -161,7 +161,7 @@ export function tagItems(dropdownContentClass, tagContainerClass) {
     const dropdownContent = document.querySelector(`.${dropdownContentClass}`);
     const tagContainer = document.querySelector(`.${tagContainerClass}`);
 
-    dropdownContent.addEventListener('click', (e) => {
+    dropdownContent.addEventListener('click', (e,recipes) => {
         const tagText = e.target.textContent;
         const existingTag = Array.from(tagContainer.children).find((tag) => tag.textContent.includes(tagText));
         if (!existingTag) {
@@ -172,6 +172,7 @@ export function tagItems(dropdownContentClass, tagContainerClass) {
             tagsArray.push(tagText); // Add tag text to the array
             
             let filteredRecipes = searchAllRecipes(userInput.value, recipes, tagsArray);
+            console.log(userInput.value,'userInput')
 
             console.log(tagsArray, 'addedTagsArray');
 
