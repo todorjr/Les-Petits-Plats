@@ -297,12 +297,15 @@
 }
 .list-content .ingredients-dropdown-content {
   display: none;
+  list-style: none;
 }
 .list-content .appliance-dropdown-content {
   display: none;
+  list-style: none;
 }
 .list-content .ustensils-dropdown-content {
   display: none;
+  list-style: none;
 }
 .list-content .ustensils-dropdown-content.show {
   padding: 5px;

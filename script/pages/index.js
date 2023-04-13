@@ -3,7 +3,7 @@ import { getCard } from "../view/CardRecipe.js";
 import { createSearchInputElement, searchAllRecipes } from "../view/SearchRecipes.js";
 
 // let tagsArray = ['ail','tomate','pomme de terre', 'poivron'];  // Create an array to store tags
-let tagsArray=[];
+let tagsArray = [];
 
 /**
  *  renderRecipes() takes an array of recipes and renders them to the DOM.
@@ -24,6 +24,7 @@ export function renderRecipes(recipes) {
         recepiesSection.appendChild(emptyElement)
         recepiesSection.append(recepieCard)
         section.appendChild(recepiesSection)
+        
     });
 }
 
@@ -37,7 +38,7 @@ export function mapRecipesWithSearchText(recipes, tags) {
     return recipes.map(recipe => {
         const ingredients = recipe.ingredients.reduce((acc, val) => acc + ' ' + val.ingredient, '');
         const searchText = recipe.name + " " + ingredients + " " + recipe.description;
-        
+
         return {
             searchText: searchText,
             recipe,
@@ -45,20 +46,18 @@ export function mapRecipesWithSearchText(recipes, tags) {
     });
 }
 
-
 /**
- * getListItem() takes an item and returns an anchor element with the class 'list-${type}-item' and the text content of the item.
- * @param { string } item
- * @param {'appliance' | 'ustensil' | 'ingredients'} type
- * @returns {HTMLAnchorElement}
- */
-export function getListItem(item, type) {
-    const listItem = document.createElement('a');
-    listItem.innerHTML = item;
-    listItem.classList.add(`list-${type}-item`);
-    return listItem;
+* Creates a string of HTML unordered list elements with dropdown content for a specified type.
+* @param {string[]} items An array of strings to be displayed as dropdown items.
+* @param {string} type A string representing the type of dropdown menu, which is used to set the class name for the dropdown content.
+* @returns {string} - A string of HTML elements representing the dropdown menu items.
+*/
+export function createDropdownItems(items, type) {
+    return `<ul class="${type}-dropdown-content dropdown-content">
+                ${items.map(item => `<li class="list-${type}-item"><a data-type="${type}">${item}</a></li>`).join(' ')}
+            </ul>
+            `
 }
-
 /**
  * getListElement() takes an array of items and returns a div element with the class 'dropdown-content' and the class '${type}-dropdown-content' depending on the type parameter.
  * @param {*} items 
@@ -67,16 +66,12 @@ export function getListItem(item, type) {
  */
 export function getListElement(items, type) {
     const listElement = document.createElement('div');
-    listElement.classList.add(`${type}-dropdown-content`);
-    listElement.classList.add(`dropdown-content`)
+    // Create a new Set with unique items
+    const uniqueItems = new Set(items);
 
-    const listItemsElement = items.map(item => getListItem(item, type));
-    const uniqueElementList = listItemsElement.map(item => item.innerHTML).map(item => {
-        return listItemsElement.find(a => a.innerHTML === item)
-    })
-
-    listElement.append(...uniqueElementList);
-
+    // Convert the Set back to an array
+    const uniqueArray = [...uniqueItems];
+    listElement.innerHTML = createDropdownItems(uniqueArray, type)
     return listElement;
 }
 
@@ -147,59 +142,107 @@ export function searchOptions(inputElement, data, type) {
     });
 }
 
+function filterByTags(tag, recipes) {
+    switch (tag.type) {
+        case 'ingredients':
+            return recipes.filter(recipe => recipe.ingredients.some(ing => ing.ingredient === tag.value))
+        case 'ustensils':
+            return recipes.filter(recipe => recipe.ustensils.includes(tag.value))
+        case 'appliances':
+            return recipes.filter(recipe => recipe.appliance.inlcudes(tag.value))
+        default:
+            return recipes;
+    }
+}
+
+
 /**
  * Sets up a dropdown content element with a click event listener that updates a tag element with the selected content.
- *
  * @param {string} dropdownContentClass The class name of the dropdown content element.
  * @param {string} tagContainerClass The class name of the tag container element.
  * @param {string} tagClass The class name of the tag element.
  * @returns {void}
  */
-
-
-export function tagItems(dropdownContentClass, tagContainerClass) {
+export function tagItems(dropdownContentClass, tagContainerClass, recipes) {
+    const resultsContainer = document.querySelector(".container");
     const dropdownContent = document.querySelector(`.${dropdownContentClass}`);
     const tagContainer = document.querySelector(`.${tagContainerClass}`);
 
-    dropdownContent.addEventListener('click', (e,recipes) => {
+    dropdownContent.addEventListener('click', (e) => {
         const tagText = e.target.textContent;
+        const type = e.target.dataset.type
         const existingTag = Array.from(tagContainer.children).find((tag) => tag.textContent.includes(tagText));
         if (!existingTag) {
             const tag = document.createElement('p');
             tag.classList.add(`show-tag_${dropdownContentClass}`, `tags`);
             tag.innerHTML = `${tagText}  <i class="far fa-times-circle close-icon"></i>`;
             tagContainer.appendChild(tag);
-            tagsArray.push(tagText); // Add tag text to the array
-            
-            let filteredRecipes = searchAllRecipes(userInput.value, recipes, tagsArray);
-            console.log(userInput.value,'userInput')
+            tagsArray.push({ value: tagText, type: type }); // Add tag text to the array
 
-            console.log(tagsArray, 'addedTagsArray');
+            let results = recipes;
+            tagsArray.forEach(tag => {
+                console.log('Filtering by tag:', tag);
+                results = filterByTags(tag, results);
+            });
+            console.log('----',results.length)
 
-            renderRecipes(filteredRecipes);
+            if (results.length === 0) {
+                // If we don't have any recipes for the chosen tags, return a message
+                resultsContainer.innerHTML = `<p class="no-results">No results found ! 🚫</p>`;
+                console.log('No results found for the selected tags.');
+            } else {
+                renderRecipes(results);
+            }
         }
-    });
+        console.log(tagsArray, 'addedTagsArray');
+    })
 
+    // tagContainer.addEventListener('click', (e) => {
+    //     if (e.target.classList.contains('close-icon')) {
+    //         const tagText = e.target.parentNode.textContent.trim();
+    //         const tagIndex = tagsArray.indexOf(tagText);
+    //         if (tagIndex !== -1) {
+    //             tagsArray.splice(tagIndex, 1); // Remove tag text from the array
+    //             console.log(tagsArray, 'deletedTagsArray');
+    //         }
+    //         e.target.parentNode.remove();
+    //     }
+    // });
     tagContainer.addEventListener('click', (e) => {
         if (e.target.classList.contains('close-icon')) {
             const tagText = e.target.parentNode.textContent.trim();
-            const tagIndex = tagsArray.indexOf(tagText);
+            const tagIndex = tagsArray.findIndex(tag => tag.value === tagText);
             if (tagIndex !== -1) {
-                tagsArray.splice(tagIndex, 1); // Remove tag text from the array
-                console.log(tagsArray, 'deletedTagsArray');
+                tagsArray.splice(tagIndex, 1); // Remove tag text from the array    
+                let results = recipes;
+                tagsArray.forEach(tag => {
+                    results = filterByTags(tag, results);
+                });
+                if (results.length === 0) {
+                    // If we don't have any recipes for the chosen tags, return a message
+                    resultsContainer.innerHTML = `<p class="no-results">No results found ! 🚫</p>`;
+                } else {
+                    renderRecipes(results);
+                }
             }
             e.target.parentNode.remove();
         }
     });
+    
 }
 
-
+function filterAndSearchRecipes(tags, userInput, recipes) {
+    let filteredRecipes = recipes;
+    for (let i = 0; i < tags.length; i++) {
+        filteredRecipes = filterByTags(tags[i], filteredRecipes);
+    }
+    const searchResult = searchAllRecipes(userInput, filteredRecipes);
+    return searchResult;
+}
 
 async function init() {
     const { recipes } = await getRecipes();
     const recipesForSearch = mapRecipesWithSearchText(recipes)
-    const userInput = document.querySelector("#userInput");
-
     // render list of recepies
     renderRecipes(recipes)
 
@@ -225,10 +268,9 @@ async function init() {
         recipes.flatMap(recipe => recipe.ustensils),
         "ustensils"
     )
-
-    tagItems('ingredients-dropdown-content', 'tag', userInput.value);
-    tagItems('appliance-dropdown-content', 'tag1', userInput.value);
-    tagItems('ustensils-dropdown-content', 'tag2', userInput.value);
+    tagItems('ingredients-dropdown-content', 'tag', recipes);
+    tagItems('appliance-dropdown-content', 'tag1', recipes);
+    tagItems('ustensils-dropdown-content', 'tag2', recipes);
 }
 
 document.addEventListener('DOMContentLoaded', function () {

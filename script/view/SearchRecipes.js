@@ -4,25 +4,15 @@ import { renderRecipes } from "../pages/index.js";
  * Searches through the given array of recipe objects for matching recipes based on the given user input. Each recipe object must have a searchText property  which contains a string of keywords that can be used for searching. Returns an array of recipe objects that match the given user input.
 @param {string} userInput The user input to search for.
 @param {Array} recipes An array of recipe objects to search through.
-@param {Array} tags An array of tags to search for.
 @returns {Array} An array of recipe objects that match the given user input.
 */
-export function searchAllRecipes(userInput, recipes, tags) {
+export function searchAllRecipes(userInput, recipes) {
     const filteredRecipes = recipes.filter(recipe => {
-        const searchText = recipe.searchText && recipe.searchText.toLowerCase();
-        const isMatchingInput = input => searchText ? searchText.includes(input.toLowerCase()) : true
-
-        if (tags.length) {
-            return (
-                isMatchingInput(userInput) &&
-                tags.every(tag => isMatchingInput(tag))
-            )
-        }
-
-        return isMatchingInput(userInput)
+        return recipe.searchText && recipe.searchText.includes(userInput);
     });
-
-    return filteredRecipes.map(recipe => recipe.recipe);
+    return filteredRecipes.map(recipe => {
+        return recipe.recipe;
+    });
 }
 
 
@@ -103,8 +93,6 @@ export function updateOptions(type, options) {
 @param {Array} data An array of recipe objects to search through and render.
 */
 export function createSearchInputElement(data) {
-    // const userInput = document.querySelector("#userInput");
-    const selectedTags = [];
     const resultsContainer = document.querySelector(".container");
     const ingredientDropdown = document.querySelector(".ingredients-dropdown-content");
     const applianceDropdown = document.querySelector(".appliance-dropdown-content");
@@ -132,7 +120,7 @@ export function createSearchInputElement(data) {
     userInput.addEventListener("input", () => {
         if (userInput.value.length >= 3) {
             // Filter the recipes based on the user input and the selected tags
-            filteredRecipes = searchAllRecipes(userInput.value, data, selectedTags);
+            filteredRecipes = searchAllRecipes(userInput.value, data);
 
             if (filteredRecipes.length === 0) {
                 resultsContainer.innerHTML = `<p class="no-results">No results found for "${userInput.value}" ! 🚫</p>`;
