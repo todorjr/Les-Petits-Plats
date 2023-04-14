@@ -97,7 +97,7 @@ export function createSearchInputElement(data) {
     const ingredientDropdown = document.querySelector(".ingredients-dropdown-content");
     const applianceDropdown = document.querySelector(".appliance-dropdown-content");
     const ustensilDropdown = document.querySelector(".ustensils-dropdown-content");
-    
+
     // Define empty arrays for the filtered recipes and their respective ingredients, utensils, and appliances
     let filteredRecipes = [];
     let filteredIngredients = [];
@@ -106,16 +106,24 @@ export function createSearchInputElement(data) {
 
     // Update the dropdowns with the ingredients, utensils, and appliances for the filtered recipes
     function updateDropdowns() {
-        // Get the unique ingredients, utensils, and appliances for the filtered recipes
-        filteredIngredients = getUniqueIngredients(filteredRecipes);
-        filteredUtensils = getUniqueUstensils(filteredRecipes);
-        filteredAppliances = getUniqueAppliances(filteredRecipes);
+        if (filteredRecipes.length === 0) {
+            // If there are no filtered recipes, populate the dropdowns with all the options
+            updateOptions("ingredients", getUniqueIngredients(data));
+            updateOptions("ustensils", getUniqueUstensils(data));
+            updateOptions("appliance", getUniqueAppliances(data));
+        } else {
+            // Get the unique ingredients, utensils, and appliances for the filtered recipes
+            filteredIngredients = getUniqueIngredients(filteredRecipes);
+            filteredUtensils = getUniqueUstensils(filteredRecipes);
+            filteredAppliances = getUniqueAppliances(filteredRecipes);
 
-        // Update the dropdowns with the new options
-        updateOptions("ingredients", filteredIngredients);
-        updateOptions("ustensils", filteredUtensils);
-        updateOptions("appliance", filteredAppliances);
-    };
+            // Update the dropdowns with the new options
+            updateOptions("ingredients", filteredIngredients);
+            updateOptions("ustensils", filteredUtensils);
+            updateOptions("appliance", filteredAppliances);
+        }
+    }
+
 
     userInput.addEventListener("input", () => {
         if (userInput.value.length >= 3) {
@@ -137,7 +145,7 @@ export function createSearchInputElement(data) {
                 // If the user input is empty, render all the recipes and update the dropdowns
                 filteredRecipes = data;
                 renderRecipes(data.map(recipe => recipe.recipe));
-                updateDropdowns();
+                // updateDropdowns();
 
             }
         }

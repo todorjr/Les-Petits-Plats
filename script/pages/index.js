@@ -155,7 +155,6 @@ function filterByTags(tag, recipes) {
     }
 }
 
-
 /**
  * Sets up a dropdown content element with a click event listener that updates a tag element with the selected content.
  * @param {string} dropdownContentClass The class name of the dropdown content element.
@@ -169,45 +168,37 @@ export function tagItems(dropdownContentClass, tagContainerClass, recipes) {
     const tagContainer = document.querySelector(`.${tagContainerClass}`);
 
     dropdownContent.addEventListener('click', (e) => {
-        const tagText = e.target.textContent;
-        const type = e.target.dataset.type
-        const existingTag = Array.from(tagContainer.children).find((tag) => tag.textContent.includes(tagText));
-        if (!existingTag) {
-            const tag = document.createElement('p');
-            tag.classList.add(`show-tag_${dropdownContentClass}`, `tags`);
-            tag.innerHTML = `${tagText}  <i class="far fa-times-circle close-icon"></i>`;
-            tagContainer.appendChild(tag);
-            tagsArray.push({ value: tagText, type: type }); // Add tag text to the array
-
-            let results = recipes;
-            tagsArray.forEach(tag => {
-                console.log('Filtering by tag:', tag);
-                results = filterByTags(tag, results);
-            });
-            console.log('----',results.length)
-
-            if (results.length === 0) {
-                // If we don't have any recipes for the chosen tags, return a message
-                resultsContainer.innerHTML = `<p class="no-results">No results found ! 🚫</p>`;
-                console.log('No results found for the selected tags.');
-            } else {
-                renderRecipes(results);
+        if (e.target.hasAttribute('data-type')) {
+            const tagText = e.target.textContent;
+            const type = e.target.dataset.type
+            const existingTag = Array.from(tagContainer.children).find((tag) => tag.textContent.includes(tagText));
+            if (!existingTag) {
+                const tag = document.createElement('p');
+                tag.classList.add(`show-tag_${dropdownContentClass}`, `tags`);
+                tag.innerHTML = `${tagText}  <i class="far fa-times-circle close-icon"></i>`;
+                tagContainer.appendChild(tag);
+                tagsArray.push({ value: tagText, type: type }); // Add tag text to the array
+    
+                let results = recipes;
+                tagsArray.forEach(tag => {
+                    console.log('Filtering by tag:', tag);
+                    results = filterByTags(tag, results);
+                });
+                console.log('----',results.length)
+    
+                if (results.length === 0) {
+                    // If we don't have any recipes for the chosen tags, return a message
+                    resultsContainer.innerHTML = `<p class="no-results">No results found ! 🚫</p>`;
+                    console.log('No results found for the selected tags.');
+                } else {
+                    renderRecipes(results);
+                }
             }
+            console.log(tagsArray, 'addedTagsArray');
         }
-        console.log(tagsArray, 'addedTagsArray');
-    })
+    });
+    
 
-    // tagContainer.addEventListener('click', (e) => {
-    //     if (e.target.classList.contains('close-icon')) {
-    //         const tagText = e.target.parentNode.textContent.trim();
-    //         const tagIndex = tagsArray.indexOf(tagText);
-    //         if (tagIndex !== -1) {
-    //             tagsArray.splice(tagIndex, 1); // Remove tag text from the array
-    //             console.log(tagsArray, 'deletedTagsArray');
-    //         }
-    //         e.target.parentNode.remove();
-    //     }
-    // });
     tagContainer.addEventListener('click', (e) => {
         if (e.target.classList.contains('close-icon')) {
             const tagText = e.target.parentNode.textContent.trim();
@@ -229,15 +220,6 @@ export function tagItems(dropdownContentClass, tagContainerClass, recipes) {
         }
     });
     
-}
-
-function filterAndSearchRecipes(tags, userInput, recipes) {
-    let filteredRecipes = recipes;
-    for (let i = 0; i < tags.length; i++) {
-        filteredRecipes = filterByTags(tags[i], filteredRecipes);
-    }
-    const searchResult = searchAllRecipes(userInput, filteredRecipes);
-    return searchResult;
 }
 
 async function init() {
