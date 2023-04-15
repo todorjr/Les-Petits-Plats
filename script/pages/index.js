@@ -13,6 +13,9 @@ let tagsArray = [];
 export function renderRecipes(recipes) {
     const section = document.querySelector(".container");
     section.innerHTML = ''
+    if(recipes.length===0){
+        section.innerHTML =  `<p class="no-results">No results found ! 🚫</p>`;
+    }
     recipes.forEach((recepie) => {
         const emptyElement = document.createElement('div')
         emptyElement.classList.add('empty')
@@ -26,6 +29,14 @@ export function renderRecipes(recipes) {
         section.appendChild(recepiesSection)
         
     });
+    // render filters
+    createDropdownElement(recipes, 'ingredients', recipe => recipe.ingredients.map(ingredient => ingredient.ingredient))
+    createDropdownElement(recipes, "appliance")
+    createDropdownElement(recipes, "ustensils")
+
+    tagItems('ingredients-dropdown-content', 'tag', recipes);
+    tagItems('appliance-dropdown-content', 'tag1', recipes);
+    tagItems('ustensils-dropdown-content', 'tag2', recipes);
 }
 
 /**
@@ -66,6 +77,8 @@ export function createDropdownItems(items, type) {
  */
 export function getListElement(items, type) {
     const listElement = document.createElement('div');
+    listElement.setAttribute('data-family',type)
+    
     // Create a new Set with unique items
     const uniqueItems = new Set(items);
 
@@ -84,33 +97,14 @@ export function getListElement(items, type) {
  */
 function createDropdownElement(data, type, itemsResolver = recepie => recepie[type]) {
     const container = document.querySelector('.list-content');
-    const button = document.querySelector(`.${type}-button`);
     const items = data.flatMap(itemsResolver)
     const dropdownList = getListElement(items, type)
+    const list=container.querySelector(`[data-family=${type}]`)
+    if(list){
+        list.remove()
+    }
+    container.appendChild   (dropdownList)
 
-    container.append(dropdownList)
-
-    // close dropdown
-    button.addEventListener('click', () => {
-        // dropdownContent is the list of ingredients, appliances or ustensils
-        const dropdownContent = document.querySelector(`.${type}-dropdown-content`);
-
-        // allDropdownContent is an array of all dropdowns
-        const allDropdownContent = document.querySelectorAll('.dropdown-content');
-
-        // close the dropdown if it is already open
-        if (dropdownContent.classList.contains('show')) {
-            dropdownContent.classList.remove('show');
-            dropdownContent.classList.add('hide'); /* Add hide class */
-
-            return;
-        }
-
-        // remove the 'show' class from all dropdowns and add it to the current dropdown
-        allDropdownContent.forEach(e => e.classList.remove('show'));
-        dropdownContent.classList.toggle('show');
-        dropdownContent.classList.remove('hide'); /* Remove hide class */
-    });
 }
 
 /**
@@ -168,6 +162,7 @@ export function tagItems(dropdownContentClass, tagContainerClass, recipes) {
     const tagContainer = document.querySelector(`.${tagContainerClass}`);
 
     dropdownContent.addEventListener('click', (e) => {
+        const mainText=document.querySelector('#userInput').value
         if (e.target.hasAttribute('data-type')) {
             const tagText = e.target.textContent;
             const type = e.target.dataset.type
@@ -179,20 +174,13 @@ export function tagItems(dropdownContentClass, tagContainerClass, recipes) {
                 tagContainer.appendChild(tag);
                 tagsArray.push({ value: tagText, type: type }); // Add tag text to the array
     
-                let results = recipes;
+                let results = searchAllRecipes(mainText, mapRecipesWithSearchText(recipes));
+                console.log('Result --- ', results)
                 tagsArray.forEach(tag => {
                     console.log('Filtering by tag:', tag);
                     results = filterByTags(tag, results);
                 });
-                console.log('----',results.length)
-    
-                if (results.length === 0) {
-                    // If we don't have any recipes for the chosen tags, return a message
-                    resultsContainer.innerHTML = `<p class="no-results">No results found ! 🚫</p>`;
-                    console.log('No results found for the selected tags.');
-                } else {
-                    renderRecipes(results);
-                }
+                renderRecipes(results);
             }
             console.log(tagsArray, 'addedTagsArray');
         }
@@ -200,21 +188,19 @@ export function tagItems(dropdownContentClass, tagContainerClass, recipes) {
     
 
     tagContainer.addEventListener('click', (e) => {
+        const mainText=document.querySelector('#userInput').value
         if (e.target.classList.contains('close-icon')) {
             const tagText = e.target.parentNode.textContent.trim();
             const tagIndex = tagsArray.findIndex(tag => tag.value === tagText);
             if (tagIndex !== -1) {
                 tagsArray.splice(tagIndex, 1); // Remove tag text from the array    
-                let results = recipes;
+                let results = searchAllRecipes(mainText, mapRecipesWithSearchText(recipes));
+                console.log(recipes, '- ',mainText, 'remove Result --- ', results)
                 tagsArray.forEach(tag => {
                     results = filterByTags(tag, results);
                 });
-                if (results.length === 0) {
-                    // If we don't have any recipes for the chosen tags, return a message
-                    resultsContainer.innerHTML = `<p class="no-results">No results found ! 🚫</p>`;
-                } else {
-                    renderRecipes(results);
-                }
+                
+                renderRecipes(results);
             }
             e.target.parentNode.remove();
         }
@@ -222,16 +208,40 @@ export function tagItems(dropdownContentClass, tagContainerClass, recipes) {
     
 }
 
+function initDropdownEvent(){
+    const buttons=document.querySelectorAll('.btn-dropDown')
+    buttons.forEach(button=>{
+    // close dropdown
+        button.addEventListener('click', (e) => {
+            const type=button.dataset.type
+            // dropdownContent is the list of ingredients, appliances or ustensils
+            const dropdownContent = document.querySelector(`.${type}-dropdown-content`);
+
+            // allDropdownContent is an array of all dropdowns
+            const allDropdownContent = document.querySelectorAll('.dropdown-content');
+
+            // close the dropdown if it is already open
+            if (dropdownContent.classList.contains('show')) {
+                dropdownContent.classList.remove('show');
+                dropdownContent.classList.add('hide'); /* Add hide class */
+
+                return;
+            }
+
+            // remove the 'show' class from all dropdowns and add it to the current dropdown
+            allDropdownContent.forEach(e => e.classList.remove('show'));
+            dropdownContent.classList.toggle('show');
+            dropdownContent.classList.remove('hide'); /* Remove hide class */
+        });
+    })
+}
+
 async function init() {
     const { recipes } = await getRecipes();
     const recipesForSearch = mapRecipesWithSearchText(recipes)
     // render list of recepies
     renderRecipes(recipes)
-
-    // render filters
-    createDropdownElement(recipes, 'ingredients', recipe => recipe.ingredients.map(ingredient => ingredient.ingredient))
-    createDropdownElement(recipes, "appliance")
-    createDropdownElement(recipes, "ustensils")
+    initDropdownEvent()
 
     createSearchInputElement(recipesForSearch)
 
@@ -250,9 +260,7 @@ async function init() {
         recipes.flatMap(recipe => recipe.ustensils),
         "ustensils"
     )
-    tagItems('ingredients-dropdown-content', 'tag', recipes);
-    tagItems('appliance-dropdown-content', 'tag1', recipes);
-    tagItems('ustensils-dropdown-content', 'tag2', recipes);
+
 }
 
 document.addEventListener('DOMContentLoaded', function () {

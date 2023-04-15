@@ -123,11 +123,10 @@ export function createSearchInputElement(data) {
             updateOptions("appliance", filteredAppliances);
         }
     }
-
-
     userInput.addEventListener("input", () => {
         if (userInput.value.length >= 3) {
             // Filter the recipes based on the user input and the selected tags
+            console.log(data)
             filteredRecipes = searchAllRecipes(userInput.value, data);
 
             if (filteredRecipes.length === 0) {
@@ -137,17 +136,20 @@ export function createSearchInputElement(data) {
                 ustensilDropdown.innerHTML = `<a class="list-item">Aucun item ne correspond à votre critère...</a>`
             } else {
                 // Update the dropdowns with the ingredients, utensils, and appliances for the filtered recipes
-                updateDropdowns();
-                renderRecipes(filteredRecipes)
+                //updateDropdowns();
+                //renderRecipes(filteredRecipes)
             }
+            renderRecipes(filteredRecipes)
         } else {
-            if (userInput.value.length < 1) {
+            renderRecipes(data.map(recipe => recipe.recipe));
+            //if (userInput.value.length < 1) {
                 // If the user input is empty, render all the recipes and update the dropdowns
-                filteredRecipes = data;
-                renderRecipes(data.map(recipe => recipe.recipe));
+              //  filteredRecipes = data;
+              //  renderRecipes(data.map(recipe => recipe.recipe));
                 // updateDropdowns();
 
-            }
+           // }
         }
     });
+
 }
