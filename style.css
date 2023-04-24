@@ -17,10 +17,10 @@
 }
 .search-bar__main input {
   font-size: 18px;
-  width: 92%;
-  height: 65px;
+  width: 90.5%;
+  height: 40px;
   padding: 15px;
-  margin-left: 10px;
+  margin-left: 12px;
   border: none;
   border-radius: 2px;
   background-color: rgb(231, 231, 231);
