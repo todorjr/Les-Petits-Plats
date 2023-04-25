@@ -175,14 +175,11 @@ export function tagItems(dropdownContentClass, tagContainerClass, recipes) {
                 tagsArray.push({ value: tagText, type: type }); // Add tag text to the array
     
                 let results = searchAllRecipes(mainText, mapRecipesWithSearchText(recipes));
-                console.log('Result --- ', results)
                 tagsArray.forEach(tag => {
-                    console.log('Filtering by tag:', tag);
                     results = filterByTags(tag, results);
                 });
                 renderRecipes(results);
             }
-            console.log(tagsArray, 'addedTagsArray');
         }
     });
     
@@ -195,7 +192,6 @@ export function tagItems(dropdownContentClass, tagContainerClass, recipes) {
             if (tagIndex !== -1) {
                 tagsArray.splice(tagIndex, 1); // Remove tag text from the array    
                 let results = searchAllRecipes(mainText, mapRecipesWithSearchText(recipes));
-                console.log(recipes, '- ',mainText, 'remove Result --- ', results)
                 tagsArray.forEach(tag => {
                     results = filterByTags(tag, results);
                 });
