@@ -489,15 +489,6 @@
                     "ingredient": "Fromage à raclette",
                     "quantity": 300,
                     "unit":"grammes"
-                },
-                {
-                    "ingredient": "Oignon",
-                    "quantity": 1
-                },
-                {
-                    "ingredient": "Beurre",
-                    "quantity": 75,
-                    "unit": "grammes"
                 }
     
             ],

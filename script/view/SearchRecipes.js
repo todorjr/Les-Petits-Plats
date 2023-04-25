@@ -126,7 +126,6 @@ export function createSearchInputElement(data) {
     userInput.addEventListener("input", () => {
         if (userInput.value.length >= 3) {
             // Filter the recipes based on the user input and the selected tags
-            console.log(data)
             filteredRecipes = searchAllRecipes(userInput.value, data);
 
             if (filteredRecipes.length === 0) {
