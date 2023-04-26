@@ -204,12 +204,12 @@ export function tagItems(dropdownContentClass, tagContainerClass, recipes) {
     
 }
 
-function initDropdownEvent(){
-    const buttons=document.querySelectorAll('.btn-dropDown')
-    buttons.forEach(button=>{
-    // close dropdown
+function initDropdownEvent() {
+    const buttons = document.querySelectorAll('.btn-dropDown');
+    buttons.forEach(button => {
+        // close dropdown
         button.addEventListener('click', (e) => {
-            const type=button.dataset.type
+            const type = button.dataset.type;
             // dropdownContent is the list of ingredients, appliances or ustensils
             const dropdownContent = document.querySelector(`.${type}-dropdown-content`);
 
@@ -220,7 +220,6 @@ function initDropdownEvent(){
             if (dropdownContent.classList.contains('show')) {
                 dropdownContent.classList.remove('show');
                 dropdownContent.classList.add('hide'); /* Add hide class */
-
                 return;
             }
 
@@ -229,8 +228,21 @@ function initDropdownEvent(){
             dropdownContent.classList.toggle('show');
             dropdownContent.classList.remove('hide'); /* Remove hide class */
         });
-    })
+
+        // close dropdown when user clicks outside
+        document.addEventListener('click', (e) => {
+            if (!button.contains(e.target)) {
+                const type = button.dataset.type;
+                const dropdownContent = document.querySelector(`.${type}-dropdown-content`);
+                dropdownContent.classList.remove('show');
+                dropdownContent.classList.add('hide');
+            }
+        });
+    });
 }
+
+
+
 
 async function init() {
     const { recipes } = await getRecipes();
