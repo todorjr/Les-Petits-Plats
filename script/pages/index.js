@@ -65,9 +65,9 @@ export function mapRecipesWithSearchText(recipes, tags) {
 */
 export function createDropdownItems(items, type) {
     return `<ul class="${type}-dropdown-content dropdown-content">
-                ${items.map(item => `<li class="list-${type}-item"><a data-type="${type}">${item}</a></li>`).join(' ')}
-            </ul>
-            `
+    ${items.map(item => `<li class="list-${type}-item"><a data-type="${type}">${item.charAt(0).toUpperCase() + item.slice(1)}</a></li>`).join(' ')}
+    </ul>`
+
 }
 /**
  * getListElement() takes an array of items and returns a div element with the class 'dropdown-content' and the class '${type}-dropdown-content' depending on the type parameter.
@@ -157,7 +157,6 @@ function filterByTags(tag, recipes) {
  * @returns {void}
  */
 export function tagItems(dropdownContentClass, tagContainerClass, recipes) {
-    const resultsContainer = document.querySelector(".container");
     const dropdownContent = document.querySelector(`.${dropdownContentClass}`);
     const tagContainer = document.querySelector(`.${tagContainerClass}`);
 
@@ -240,9 +239,6 @@ function initDropdownEvent() {
         });
     });
 }
-
-
-
 
 async function init() {
     const { recipes } = await getRecipes();
