@@ -352,18 +352,19 @@
   color: #fff;
 }
 .list-content .appliance-dropdown-content.show {
-  padding: 5px;
-  display: flex;
-  flex-flow: row wrap;
-  gap: 10px;
   width: 300px;
-  border-radius: 5px;
   background-color: #68D9A4;
-  animation: rotateDropdown 400ms ease-in-out forwards;
-  transform-origin: top center;
   position: absolute;
   left: 247px;
-  margin-top: 10px;
+  margin-top: -1px;
+  padding: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  border-radius: 5px;
+  border-top-left-radius: 0;
+  animation: rotateDropdown 400ms ease-in-out forwards;
+  transform-origin: top center;
 }
 .list-content .appliance-dropdown-content.show a {
   font-family: "Lato", sans-serif;
