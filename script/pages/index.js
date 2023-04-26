@@ -212,6 +212,14 @@ function initDropdownEvent() {
             // dropdownContent is the list of ingredients, appliances or ustensils
             const dropdownContent = document.querySelector(`.${type}-dropdown-content`);
 
+            setTimeout(() => {
+                const buttonWidth = dropdownContent.offsetWidth;
+                // Modify the width of the button element
+                button.style.width = `${buttonWidth}px`;
+                }, 50);
+
+
+
             // allDropdownContent is an array of all dropdowns
             const allDropdownContent = document.querySelectorAll('.dropdown-content');
 
