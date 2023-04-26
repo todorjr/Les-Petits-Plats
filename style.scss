@@ -358,16 +358,22 @@
     .ingredients-dropdown-content.show {
         padding: 5px;
         display: flex;
-        flex-flow: row wrap;
+        flex-wrap: wrap;
         gap: 10px;
-        width: 850px;
         border-radius: 5px;
+        border-top-left-radius: 0;
         background-color: #3282F7;
         animation: rotateDropdown 400ms ease-in-out forwards;
         transform-origin: top center;
         position: absolute;
         left: 81px;
-        margin-top: 10px;
+        margin-top: -1px;
+        width: 840px;
+    }
+
+    li{
+        width: calc(33.33% - 10px);
+
     }
 
     a {
