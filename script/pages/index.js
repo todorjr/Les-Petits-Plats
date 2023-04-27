@@ -217,9 +217,20 @@ function initDropdownEvent() {
     };
 
     buttons.forEach(button => {
-        // close dropdown
+        const type = button.dataset.type;
+    
         button.addEventListener('click', (e) => {
-            const type = button.dataset.type;
+                // set initial button width
+            let initialButtonWidth = button.offsetWidth;
+            console.log(initialButtonWidth, 'initialButtonWidth');
+
+            setTimeout(() => {
+                const initialDropdownWidth = document.querySelector(`.${type}-dropdown-content`).offsetWidth;
+                button.style.width = initialDropdownWidth + 'px';
+                }, 0);
+          
+            
+
             // dropdownContent is the list of ingredients, appliances or ustensils
             const dropdownContent = document.querySelector(`.${type}-dropdown-content`);
             // allDropdownContent is an array of all dropdowns
@@ -235,8 +246,11 @@ function initDropdownEvent() {
             if (dropdownContent.classList.contains('show')) {
                 dropdownContent.classList.remove('show');
                 dropdownContent.classList.add('hide'); /* Add hide class */
-                // reset the placeholder for the clicked button
                 inputs[type].setAttribute('placeholder', originalPlaceholders[type]);
+                setTimeout(() => {
+                    button.style.width = '200px';
+                }, 0);
+                
                 return;
             }
 
@@ -256,12 +270,12 @@ function initDropdownEvent() {
                 dropdownContent.classList.add('hide');
                 // reset the placeholder for the clicked button
                 inputs[type].setAttribute('placeholder', originalPlaceholders[type]);
+                button.style.width = '200px';
+
             }
         });
     });
 }
-
-
 
 async function init() {
     const { recipes } = await getRecipes();
