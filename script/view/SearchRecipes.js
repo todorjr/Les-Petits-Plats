@@ -142,12 +142,12 @@ export function createSearchInputElement(data) {
         } else {
             renderRecipes(data.map(recipe => recipe.recipe));
             //if (userInput.value.length < 1) {
-                // If the user input is empty, render all the recipes and update the dropdowns
-              //  filteredRecipes = data;
-              //  renderRecipes(data.map(recipe => recipe.recipe));
-                // updateDropdowns();
+            // If the user input is empty, render all the recipes and update the dropdowns
+            //  filteredRecipes = data;
+            //  renderRecipes(data.map(recipe => recipe.recipe));
+            // updateDropdowns();
 
-           // }
+            // }
         }
     });
 
