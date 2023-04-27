@@ -13,8 +13,8 @@ let tagsArray = [];
 export function renderRecipes(recipes) {
     const section = document.querySelector(".container");
     section.innerHTML = ''
-    if(recipes.length===0){
-        section.innerHTML =  `<p class="no-results">No results found ! 🚫</p>`;
+    if (recipes.length === 0) {
+        section.innerHTML = `<p class="no-results">No results found ! 🚫</p>`;
     }
     recipes.forEach((recepie) => {
         const emptyElement = document.createElement('div')
@@ -27,7 +27,7 @@ export function renderRecipes(recipes) {
         recepiesSection.appendChild(emptyElement)
         recepiesSection.append(recepieCard)
         section.appendChild(recepiesSection)
-        
+
     });
     // render filters
     createDropdownElement(recipes, 'ingredients', recipe => recipe.ingredients.map(ingredient => ingredient.ingredient))
@@ -77,8 +77,8 @@ export function createDropdownItems(items, type) {
  */
 export function getListElement(items, type) {
     const listElement = document.createElement('div');
-    listElement.setAttribute('data-family',type)
-    
+    listElement.setAttribute('data-family', type)
+
     // Create a new Set with unique items
     const uniqueItems = new Set(items);
 
@@ -99,11 +99,11 @@ function createDropdownElement(data, type, itemsResolver = recepie => recepie[ty
     const container = document.querySelector('.list-content');
     const items = data.flatMap(itemsResolver)
     const dropdownList = getListElement(items, type)
-    const list=container.querySelector(`[data-family=${type}]`)
-    if(list){
+    const list = container.querySelector(`[data-family=${type}]`)
+    if (list) {
         list.remove()
     }
-    container.appendChild   (dropdownList)
+    container.appendChild(dropdownList)
 
 }
 
@@ -161,7 +161,7 @@ export function tagItems(dropdownContentClass, tagContainerClass, recipes) {
     const tagContainer = document.querySelector(`.${tagContainerClass}`);
 
     dropdownContent.addEventListener('click', (e) => {
-        const mainText=document.querySelector('#userInput').value
+        const mainText = document.querySelector('#userInput').value
         if (e.target.hasAttribute('data-type')) {
             const tagText = e.target.textContent;
             const type = e.target.dataset.type
@@ -172,7 +172,7 @@ export function tagItems(dropdownContentClass, tagContainerClass, recipes) {
                 tag.innerHTML = `${tagText}  <i class="far fa-times-circle close-icon"></i>`;
                 tagContainer.appendChild(tag);
                 tagsArray.push({ value: tagText, type: type }); // Add tag text to the array
-    
+
                 let results = searchAllRecipes(mainText, mapRecipesWithSearchText(recipes));
                 tagsArray.forEach(tag => {
                     results = filterByTags(tag, results);
@@ -181,10 +181,10 @@ export function tagItems(dropdownContentClass, tagContainerClass, recipes) {
             }
         }
     });
-    
+
 
     tagContainer.addEventListener('click', (e) => {
-        const mainText=document.querySelector('#userInput').value
+        const mainText = document.querySelector('#userInput').value
         if (e.target.classList.contains('close-icon')) {
             const tagText = e.target.parentNode.textContent.trim();
             const tagIndex = tagsArray.findIndex(tag => tag.value === tagText);
@@ -194,39 +194,49 @@ export function tagItems(dropdownContentClass, tagContainerClass, recipes) {
                 tagsArray.forEach(tag => {
                     results = filterByTags(tag, results);
                 });
-                
+
                 renderRecipes(results);
             }
             e.target.parentNode.remove();
         }
     });
-    
+
 }
 
 function initDropdownEvent() {
     const buttons = document.querySelectorAll('.btn-dropDown');
+    const inputs = {
+        'ustensils': document.querySelector('#input-ustensils'),
+        'ingredients': document.querySelector('#input-ingredients'),
+        'appliance': document.querySelector('#input-appliance')
+    };
+    const originalPlaceholders = {
+        'ustensils': inputs.ustensils.getAttribute('placeholder'),
+        'ingredients': inputs.ingredients.getAttribute('placeholder'),
+        'appliance': inputs.appliance.getAttribute('placeholder')
+    };
+
     buttons.forEach(button => {
         // close dropdown
         button.addEventListener('click', (e) => {
             const type = button.dataset.type;
             // dropdownContent is the list of ingredients, appliances or ustensils
             const dropdownContent = document.querySelector(`.${type}-dropdown-content`);
-
-            setTimeout(() => {
-                const buttonWidth = dropdownContent.offsetWidth;
-                // Modify the width of the button element
-                button.style.width = `${buttonWidth}px`;
-                }, 50);
-
-
-
             // allDropdownContent is an array of all dropdowns
             const allDropdownContent = document.querySelectorAll('.dropdown-content');
+
+            // reset all placeholders
+            Object.values(inputs).forEach(input => input.setAttribute('placeholder', originalPlaceholders[input.id]));
+
+            // change the placeholder for the clicked button
+            inputs[type].setAttribute('placeholder', `Rechercher un ${type}`);
 
             // close the dropdown if it is already open
             if (dropdownContent.classList.contains('show')) {
                 dropdownContent.classList.remove('show');
                 dropdownContent.classList.add('hide'); /* Add hide class */
+                // reset the placeholder for the clicked button
+                inputs[type].setAttribute('placeholder', originalPlaceholders[type]);
                 return;
             }
 
@@ -234,6 +244,7 @@ function initDropdownEvent() {
             allDropdownContent.forEach(e => e.classList.remove('show'));
             dropdownContent.classList.toggle('show');
             dropdownContent.classList.remove('hide'); /* Remove hide class */
+
         });
 
         // close dropdown when user clicks outside
@@ -243,10 +254,14 @@ function initDropdownEvent() {
                 const dropdownContent = document.querySelector(`.${type}-dropdown-content`);
                 dropdownContent.classList.remove('show');
                 dropdownContent.classList.add('hide');
+                // reset the placeholder for the clicked button
+                inputs[type].setAttribute('placeholder', originalPlaceholders[type]);
             }
         });
     });
 }
+
+
 
 async function init() {
     const { recipes } = await getRecipes();
