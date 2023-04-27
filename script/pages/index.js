@@ -205,6 +205,7 @@ export function tagItems(dropdownContentClass, tagContainerClass, recipes) {
 
 function initDropdownEvent() {
     const buttons = document.querySelectorAll('.btn-dropDown');
+
     const inputs = {
         'ustensils': document.querySelector('#input-ustensils'),
         'ingredients': document.querySelector('#input-ingredients'),
@@ -218,18 +219,13 @@ function initDropdownEvent() {
 
     buttons.forEach(button => {
         const type = button.dataset.type;
-    
-        button.addEventListener('click', (e) => {
-                // set initial button width
-            let initialButtonWidth = button.offsetWidth;
-            console.log(initialButtonWidth, 'initialButtonWidth');
 
+        button.addEventListener('click', (e) => {
+            // set the width of the button to the width of the dropdown
             setTimeout(() => {
                 const initialDropdownWidth = document.querySelector(`.${type}-dropdown-content`).offsetWidth;
                 button.style.width = initialDropdownWidth + 'px';
-                }, 0);
-          
-            
+            }, 0);
 
             // dropdownContent is the list of ingredients, appliances or ustensils
             const dropdownContent = document.querySelector(`.${type}-dropdown-content`);
@@ -250,7 +246,7 @@ function initDropdownEvent() {
                 setTimeout(() => {
                     button.style.width = '200px';
                 }, 0);
-                
+
                 return;
             }
 
@@ -268,10 +264,10 @@ function initDropdownEvent() {
                 const dropdownContent = document.querySelector(`.${type}-dropdown-content`);
                 dropdownContent.classList.remove('show');
                 dropdownContent.classList.add('hide');
+
                 // reset the placeholder for the clicked button
                 inputs[type].setAttribute('placeholder', originalPlaceholders[type]);
                 button.style.width = '200px';
-
             }
         });
     });
