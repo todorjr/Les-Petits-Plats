@@ -117,22 +117,22 @@ function createDropdownElement(data, type, itemsResolver = recepie => recepie[ty
 export function searchOptions(inputElement, data, type) {
     inputElement.addEventListener("input", function (e) {
         // current dropdown list to replace with matched ingredients
-        const ingredientsList = document.querySelector(`.${type}-dropdown-content`);
+        const dropdownLists = document.querySelector(`.${type}-dropdown-content`);
 
         //  filter recipes matching ingredient, appliance or ustensil (searchText)
-        const ingredientsMatchingQuery = data.filter(ingredient => ingredient.toLowerCase().includes(e.target.value.toLowerCase()))
+        const itemsMatchingQuery = data.filter(ingredient => ingredient.toLowerCase().includes(e.target.value.toLowerCase()))
         //! e.target corresponds to the input element
 
         // render recipes matching user input
-        const ingredientsElements = getListElement(ingredientsMatchingQuery, type)
+        const dropdownElements = getListElement(itemsMatchingQuery, type)
 
         //  if no recipes match, display message
-        if (ingredientsMatchingQuery.length === 0) {
-            ingredientsElements.innerHTML = `<a class="list-${type}-item">Aucun ${type} ne correspond à votre critère...</a>`
+        if (itemsMatchingQuery.length === 0) {
+            dropdownElements.innerHTML = `<a class="list-${type}-item">Aucun ${type} ne correspond à votre critère...</a>`
         }
         // replace old dropdown with new one
-        ingredientsList.innerHTML = '';
-        ingredientsList.append(...ingredientsElements.childNodes);
+        dropdownLists.innerHTML = '';
+        dropdownLists.append(...dropdownElements.childNodes);
     });
 }
 
@@ -271,6 +271,7 @@ function initDropdownEvent() {
             }
         });
     });
+    
 }
 
 async function init() {
@@ -281,22 +282,6 @@ async function init() {
     initDropdownEvent()
 
     createSearchInputElement(recipesForSearch)
-
-    searchOptions(
-        document.querySelector('#input-ingredients'),
-        recipes.flatMap(recipe => recipe.ingredients.map(ingredient => ingredient.ingredient)),
-        "ingredients"
-    )
-    searchOptions(
-        document.querySelector('#input-appliance'),
-        recipes.flatMap(recipe => recipe.appliance),
-        "appliance"
-    )
-    searchOptions(
-        document.querySelector('#input-ustensils'),
-        recipes.flatMap(recipe => recipe.ustensils),
-        "ustensils"
-    )
 
 }
 
