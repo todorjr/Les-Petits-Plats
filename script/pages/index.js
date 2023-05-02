@@ -14,7 +14,8 @@ export function renderRecipes(recipes) {
     const section = document.querySelector(".container");
     section.innerHTML = ''
     if (recipes.length === 0) {
-        section.innerHTML = `<p class="no-results">No results found ! 🚫</p>`;
+        section.innerHTML = `<p class="no-results"> Aucune recette ne correspond à votre critère… Vous pouvez
+chercher "tarte aux pommes", "poisson", ...</p>`;
     }
     recipes.forEach((recepie) => {
         const emptyElement = document.createElement('div')
@@ -57,6 +58,8 @@ export function mapRecipesWithSearchText(recipes, tags) {
     });
 }
 
+
+
 /**
 * Creates a string of HTML unordered list elements with dropdown content for a specified type.
 * @param {string[]} items An array of strings to be displayed as dropdown items.
@@ -64,10 +67,9 @@ export function mapRecipesWithSearchText(recipes, tags) {
 * @returns {string} - A string of HTML elements representing the dropdown menu items.
 */
 export function createDropdownItems(items, type) {
-    return `<ul class="${type}-dropdown-content dropdown-content">
+    return `<ul class="${type}-dropdown-content dropdown-content ">
     ${items.map(item => `<li class="list-${type}-item"><a data-type="${type}">${item.charAt(0).toUpperCase() + item.slice(1)}</a></li>`).join(' ')}
     </ul>`
-
 }
 /**
  * getListElement() takes an array of items and returns a div element with the class 'dropdown-content' and the class '${type}-dropdown-content' depending on the type parameter.
@@ -104,7 +106,6 @@ function createDropdownElement(data, type, itemsResolver = recepie => recepie[ty
         list.remove()
     }
     container.appendChild(dropdownList)
-
 }
 
 /**
@@ -118,6 +119,7 @@ export function searchOptions(inputElement, data, type) {
     inputElement.addEventListener("input", function (e) {
         // current dropdown list to replace with matched ingredients
         const dropdownLists = document.querySelector(`.${type}-dropdown-content`);
+        console.log(dropdownLists);
 
         //  filter recipes matching ingredient, appliance or ustensil (searchText)
         const itemsMatchingQuery = data.filter(ingredient => ingredient.toLowerCase().includes(e.target.value.toLowerCase()))
