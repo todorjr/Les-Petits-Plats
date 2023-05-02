@@ -65,9 +65,7 @@ export function mapRecipesWithSearchText(recipes, tags) {
 * @returns {string} - A string of HTML elements representing the dropdown menu items.
 */
 export function createDropdownItems(items, type) {
-    return `<ul class="${type}-dropdown-content dropdown-content ">
-    ${items.map(item => `<li class="list-${type}-item"><a data-type="${type}">${item.charAt(0).toUpperCase() + item.slice(1)}</a></li>`).join(' ')}
-    </ul>`
+    return `${items.map(item => `<li class="list-${type}-item"><a data-type="${type}">${item.charAt(0).toUpperCase() + item.slice(1)}</a></li>`).join(' ')}`
 }
 /**
  * getListElement() takes an array of items and returns a div element with the class 'dropdown-content' and the class '${type}-dropdown-content' depending on the type parameter.
@@ -76,16 +74,16 @@ export function createDropdownItems(items, type) {
  * @returns {HTMLDivElement}
  */
 export function getListElement(items, type) {
-    const listElement = document.createElement('div');
+    const listElement = document.createElement('ul');
     listElement.setAttribute('data-family', type)
-    listElement.classList.add('dropdown-content');
-
+    listElement.classList.add('dropdown-content', `${type}-dropdown-content`);
     // Create a new Set with unique items
     const uniqueItems = new Set(items);
 
     // Convert the Set back to an array
     const uniqueArray = [...uniqueItems];
     listElement.innerHTML = createDropdownItems(uniqueArray, type)
+
     return listElement;
 }
 
@@ -118,14 +116,14 @@ export function searchOptions(inputElement, data, type) {
     inputElement.addEventListener("input", function (e) {
         // current dropdown list to replace with matched ingredients
         const dropdownLists = document.querySelector(`.${type}-dropdown-content`);
-        console.log(dropdownLists);
-        //! e.target corresponds to the input element
 
         //  filter recipes matching ingredient, appliance or ustensil (searchText)
         const itemsMatchingQuery = data.filter(ingredient => ingredient.toLowerCase().includes(e.target.value.toLowerCase()))
+        console.log(itemsMatchingQuery, 'itemsMatchingQuery'); //list of items matching user input
 
         // render recipes matching user input
         const dropdownElements = getListElement(itemsMatchingQuery, type)
+        console.log(dropdownElements,'elements'); //data-family="ingredients"
 
         //  if no recipes match, display message
         if (itemsMatchingQuery.length === 0) {
