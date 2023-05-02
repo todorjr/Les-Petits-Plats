@@ -15,7 +15,7 @@ export function renderRecipes(recipes) {
     section.innerHTML = ''
     if (recipes.length === 0) {
         section.innerHTML = `<p class="no-results"> Aucune recette ne correspond à votre critère… Vous pouvez
-chercher "tarte aux pommes", "poisson", ...</p>`;
+        chercher "tarte aux pommes", "poisson", ...</p>`;
     }
     recipes.forEach((recepie) => {
         const emptyElement = document.createElement('div')
@@ -58,8 +58,6 @@ export function mapRecipesWithSearchText(recipes, tags) {
     });
 }
 
-
-
 /**
 * Creates a string of HTML unordered list elements with dropdown content for a specified type.
 * @param {string[]} items An array of strings to be displayed as dropdown items.
@@ -80,6 +78,7 @@ export function createDropdownItems(items, type) {
 export function getListElement(items, type) {
     const listElement = document.createElement('div');
     listElement.setAttribute('data-family', type)
+    listElement.classList.add('dropdown-content');
 
     // Create a new Set with unique items
     const uniqueItems = new Set(items);
@@ -97,11 +96,11 @@ export function getListElement(items, type) {
  * @param {'appliance' | 'ustensil' | 'ingredients'} type 
  * @param {(recepie: object) => string[]} itemsResolver 
  */
-function createDropdownElement(data, type, itemsResolver = recepie => recepie[type]) {
+function createDropdownElement(data, type, itemsResolver = recipe => recipe[type]) {
     const container = document.querySelector('.list-content');
     const items = data.flatMap(itemsResolver)
     const dropdownList = getListElement(items, type)
-    const list = container.querySelector(`[data-family=${type}]`)
+    const list = container.querySelector(`[data-family="${type}"]`)
     if (list) {
         list.remove()
     }
@@ -120,10 +119,10 @@ export function searchOptions(inputElement, data, type) {
         // current dropdown list to replace with matched ingredients
         const dropdownLists = document.querySelector(`.${type}-dropdown-content`);
         console.log(dropdownLists);
+        //! e.target corresponds to the input element
 
         //  filter recipes matching ingredient, appliance or ustensil (searchText)
         const itemsMatchingQuery = data.filter(ingredient => ingredient.toLowerCase().includes(e.target.value.toLowerCase()))
-        //! e.target corresponds to the input element
 
         // render recipes matching user input
         const dropdownElements = getListElement(itemsMatchingQuery, type)
@@ -273,7 +272,7 @@ function initDropdownEvent() {
             }
         });
     });
-    
+
 }
 
 async function init() {
