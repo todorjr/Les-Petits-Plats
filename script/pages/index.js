@@ -336,7 +336,6 @@ async function init() {
  * @memberof document
  * @param {function} init - The function to be executed after the DOM is fully loaded.
  */
-
 document.addEventListener('DOMContentLoaded', function () {
     init();
 })
