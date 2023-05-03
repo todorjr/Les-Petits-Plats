@@ -15,17 +15,15 @@ export function searchAllRecipes(userInput, recipes) {
     });
 }
 
-
 /**
- * Given an array of recipe objects, returns an array of unique ingredients
- * @param {Array} recipes An array of recipe objects
- * @returns {Array} An array of unique ingredients
+ * Given an array of recipe objects, returns an array of unique ingredients, appliances and ustensils.
+ * @param {Array} recipes An array of recipe objects, each of which must have an ingredients, appliance and ustensils property
+ * @returns {Array} An array of unique ingredients, appliances and ustensils
  */
 export function getUniqueIngredients(recipes) {
     if (!Array.isArray(recipes)) {
         throw new Error("Expected an array of recipes");
     }
-
     const ingredientsSet = new Set();
 
     recipes.forEach((recipe) => {
@@ -93,62 +91,17 @@ export function updateOptions(type, options) {
 @param {Array} data An array of recipe objects to search through and render.
 */
 export function createSearchInputElement(data) {
-    const resultsContainer = document.querySelector(".container");
-    const ingredientDropdown = document.querySelector(".ingredients-dropdown-content");
-    const applianceDropdown = document.querySelector(".appliance-dropdown-content");
-    const ustensilDropdown = document.querySelector(".ustensils-dropdown-content");
-
     // Define empty arrays for the filtered recipes and their respective ingredients, utensils, and appliances
     let filteredRecipes = [];
-    let filteredIngredients = [];
-    let filteredUtensils = [];
-    let filteredAppliances = [];
 
     // Update the dropdowns with the ingredients, utensils, and appliances for the filtered recipes
-    function updateDropdowns() {
-        if (filteredRecipes.length === 0) {
-            // If there are no filtered recipes, populate the dropdowns with all the options
-            updateOptions("ingredients", getUniqueIngredients(data));
-            updateOptions("ustensils", getUniqueUstensils(data));
-            updateOptions("appliance", getUniqueAppliances(data));
-        } else {
-            // Get the unique ingredients, utensils, and appliances for the filtered recipes
-            filteredIngredients = getUniqueIngredients(filteredRecipes);
-            filteredUtensils = getUniqueUstensils(filteredRecipes);
-            filteredAppliances = getUniqueAppliances(filteredRecipes);
-
-            // Update the dropdowns with the new options
-            updateOptions("ingredients", filteredIngredients);
-            updateOptions("ustensils", filteredUtensils);
-            updateOptions("appliance", filteredAppliances);
-        }
-    }
     userInput.addEventListener("input", () => {
         if (userInput.value.length >= 3) {
             // Filter the recipes based on the user input and the selected tags
             filteredRecipes = searchAllRecipes(userInput.value, data);
-
-            if (filteredRecipes.length === 0) {
-                resultsContainer.innerHTML = `<p class="no-results">No results found for "${userInput.value}" ! 🚫</p>`;
-                ingredientDropdown.innerHTML = `<a class="list-item">Aucun item ne correspond à votre critère...</a>`
-                applianceDropdown.innerHTML = `<a class="list-item">Aucun item ne correspond à votre critère...</a>`
-                ustensilDropdown.innerHTML = `<a class="list-item">Aucun item ne correspond à votre critère...</a>`
-            } else {
-                // Update the dropdowns with the ingredients, utensils, and appliances for the filtered recipes
-                //updateDropdowns();
-                //renderRecipes(filteredRecipes)
-            }
             renderRecipes(filteredRecipes)
         } else {
             renderRecipes(data.map(recipe => recipe.recipe));
-            //if (userInput.value.length < 1) {
-            // If the user input is empty, render all the recipes and update the dropdowns
-            //  filteredRecipes = data;
-            //  renderRecipes(data.map(recipe => recipe.recipe));
-            // updateDropdowns();
-
-            // }
         }
     });
-
 }
