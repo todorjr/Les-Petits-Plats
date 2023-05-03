@@ -2,8 +2,7 @@ import { getRecipes } from "../api/index.js"
 import { getCard } from "../view/CardRecipe.js";
 import { createSearchInputElement, searchAllRecipes } from "../view/SearchRecipes.js";
 
-// let tagsArray = ['ail','tomate','pomme de terre', 'poivron'];  // Create an array to store tags
-let tagsArray = [];
+let tagsArray = []; // global variable to store tags
 
 /**
  *  renderRecipes() takes an array of recipes and renders them to the DOM.
@@ -35,9 +34,9 @@ export function renderRecipes(recipes) {
     createDropdownElement(recipes, "appliance")
     createDropdownElement(recipes, "ustensils")
 
-    tagItems('ingredients-dropdown-content', 'tag', recipes);
-    tagItems('appliance-dropdown-content', 'tag1', recipes);
-    tagItems('ustensils-dropdown-content', 'tag2', recipes);
+    tagItems('ingredients-dropdown-content', 'tag-list', recipes);
+    tagItems('appliance-dropdown-content', 'tag-list', recipes);
+    tagItems('ustensils-dropdown-content', 'tag-list', recipes);
 }
 
 /**
@@ -67,6 +66,7 @@ export function mapRecipesWithSearchText(recipes, tags) {
 export function createDropdownItems(items, type) {
     return `${items.map(item => `<li class="list-${type}-item"><a data-type="${type}">${item.charAt(0).toUpperCase() + item.slice(1)}</a></li>`).join(' ')}`
 }
+
 /**
  * getListElement() takes an array of items and returns a div element with the class 'dropdown-content' and the class '${type}-dropdown-content' depending on the type parameter.
  * @param {*} items 
@@ -135,6 +135,14 @@ export function searchOptions(inputElement, data, type) {
     });
 }
 
+/**
+ * filterByTags() filters the given array of recipes based on the provided tag object. The tag object should have a 'type' property (ingredients, ustensils, or appliances) and a 'value' property.
+ * @param {Object} tag - The tag object used to filter the recipes.
+ * @param {string} tag.type - The type of the tag (ingredients, ustensils, or appliances).
+ * @param {string} tag.value - The value of the tag to filter the recipes by.
+ * @param {Array<Object>} recipes - The array of recipe objects to filter.
+ * @returns {Array<Object>} The filtered array of recipe objects based on the tag.
+ */
 function filterByTags(tag, recipes) {
     switch (tag.type) {
         case 'ingredients':
@@ -181,27 +189,31 @@ export function tagItems(dropdownContentClass, tagContainerClass, recipes) {
         }
     });
 
-
+    // Listen for clicks on the close icons of the tags
     tagContainer.addEventListener('click', (e) => {
-        const mainText = document.querySelector('#userInput').value
         if (e.target.classList.contains('close-icon')) {
-            const tagText = e.target.parentNode.textContent.trim();
-            const tagIndex = tagsArray.findIndex(tag => tag.value === tagText);
-            if (tagIndex !== -1) {
-                tagsArray.splice(tagIndex, 1); // Remove tag text from the array    
+            const tag = e.target.parentElement;
+            const tagText = tag.textContent.slice(0, -2).trim(); // Remove the trailing whitespace and close icon
+            const index = tagsArray.findIndex(t => t.value === tagText);
+
+            if (index !== -1) {
+                tagsArray.splice(index, 1); // Remove the tag object from the array
+                tag.remove(); // Remove the tag element from the DOM
+
+                const mainText = document.querySelector('#userInput').value;
                 let results = searchAllRecipes(mainText, mapRecipesWithSearchText(recipes));
                 tagsArray.forEach(tag => {
                     results = filterByTags(tag, results);
                 });
-
                 renderRecipes(results);
             }
-            e.target.parentNode.remove();
         }
     });
-
 }
 
+/**
+ * initDropdownEvent() initializes the event listeners for the dropdown buttons in the application. This function manages the opening, closing, and interactions with the dropdowns for ingredients, appliances, and ustensils. When a dropdown button is clicked, it displays the associated dropdown and changes the placeholder for the input field. Clicking outside the dropdown or on another button will close the dropdown and reset the input field placeholder.
+ */
 function initDropdownEvent() {
     const buttons = document.querySelectorAll('.btn-dropDown');
 
@@ -270,7 +282,6 @@ function initDropdownEvent() {
             }
         });
     });
-
 }
 
 async function init() {

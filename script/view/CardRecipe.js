@@ -1,10 +1,7 @@
-
 /**
  * Format quantity depending on unit.
- * 
  * @param {string|number} quantity
  * @param {string|undefined} unit
- * 
  * @returns {string}
  */
 export function quantityUnitFormatter (quantity, unit) {
@@ -20,7 +17,6 @@ export function quantityUnitFormatter (quantity, unit) {
 
 /**
  * Format an ingredient to a item of a list.
- * 
  * @param {object} ingredient Ingredient to be formatted
  * @returns {HTMLLIElement}
  */
@@ -33,6 +29,15 @@ export function getIngredientItem (ingredient) {
     return item
 }
 
+/**
+ * Creates and returns a recipe card element based on the provided recipe object. The recipe card includes the recipe name, preparation time, list of ingredients, and description.
+ * @param {Object} recipe The recipe object to generate the card for.
+ * @param {string} recipe.name The name of the recipe.
+ * @param {number} recipe.time The preparation time of the recipe in minutes.
+ * @param {Array<Object>} recipe.ingredients The array of ingredient objects for the recipe.
+ * @param {string} recipe.description The description of the recipe.
+ * @returns {HTMLElement} The recipe card element.
+ */
 export function getCard(recipe) {
     const cardElement = document.createElement('article')
     const titleContainer = document.createElement('div')
