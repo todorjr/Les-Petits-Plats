@@ -295,7 +295,13 @@ function initDropdownEvent() {
     });
 }
 
-
+/**
+ *  Initializes the page by fetching a list of recipes, mapping each recipe with its search text, rendering the list of recipes, initializing dropdown event, creating search input element and setting up search options for ingredients, appliances, and utensils.
+ * @async
+ * @function
+ * @name init
+ * @returns {Promise<void>}
+ */
 async function init() {
     const { recipes } = await getRecipes();
     const recipesForSearch = mapRecipesWithSearchText(recipes)
@@ -322,6 +328,14 @@ async function init() {
     )
 
 }
+
+/**
+ *  DOMContentLoaded is an event listener that waits for the HTML document to be fully loaded before executing the init() function. This ensures that all the necessary elements on the page are present and can be accessed by the init() function. Adds an event listener to the 'DOMContentLoaded' event of the document object. When the event is fired, the 'init' function will be executed.
+ * @function
+ * @name addDOMContentLoadedListener
+ * @memberof document
+ * @param {function} init - The function to be executed after the DOM is fully loaded.
+ */
 
 document.addEventListener('DOMContentLoaded', function () {
     init();
