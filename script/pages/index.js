@@ -230,6 +230,7 @@ function initDropdownEvent() {
 
     buttons.forEach(button => {
         const type = button.dataset.type;
+        let icon = button.querySelector('.fa-solid');
 
         button.addEventListener('click', (e) => {
             // set the width of the button to the width of the dropdown
@@ -257,6 +258,10 @@ function initDropdownEvent() {
                 setTimeout(() => {
                     button.style.width = '200px';
                 }, 0);
+                
+                // Change icon to chevron down
+                icon.classList.remove('fa-chevron-up');
+                icon.classList.add('fa-chevron-down');
 
                 return;
             }
@@ -265,6 +270,10 @@ function initDropdownEvent() {
             allDropdownContent.forEach(e => e.classList.remove('show'));
             dropdownContent.classList.toggle('show');
             dropdownContent.classList.remove('hide'); /* Remove hide class */
+            
+            // Change icon to chevron up
+            icon.classList.remove('fa-chevron-down');
+            icon.classList.add('fa-chevron-up');
 
         });
 
@@ -279,10 +288,15 @@ function initDropdownEvent() {
                 // reset the placeholder for the clicked button
                 inputs[type].setAttribute('placeholder', originalPlaceholders[type]);
                 button.style.width = '200px';
+                
+                // Change icon to chevron down
+                icon.classList.remove('fa-chevron-up');
+                icon.classList.add('fa-chevron-down');
             }
         });
     });
 }
+
 
 async function init() {
     const { recipes } = await getRecipes();
