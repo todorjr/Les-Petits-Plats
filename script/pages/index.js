@@ -119,11 +119,9 @@ export function searchOptions(inputElement, data, type) {
 
         //  filter recipes matching ingredient, appliance or ustensil (searchText)
         const itemsMatchingQuery = data.filter(ingredient => ingredient.toLowerCase().includes(e.target.value.toLowerCase()))
-        console.log(itemsMatchingQuery, 'itemsMatchingQuery'); //list of items matching user input
 
         // render recipes matching user input
         const dropdownElements = getListElement(itemsMatchingQuery, type)
-        console.log(dropdownElements,'elements'); //data-family="ingredients"
 
         //  if no recipes match, display message
         if (itemsMatchingQuery.length === 0) {
