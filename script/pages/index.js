@@ -64,7 +64,7 @@ export function mapRecipesWithSearchText(recipes, tags) {
 * @returns {string} - A string of HTML elements representing the dropdown menu items.
 */
 export function createDropdownItems(items, type) {
-    return `${items.map(item => `<li class="list-${type}-item"><a data-type="${type}">${item.charAt(0).toUpperCase() + item.slice(1)}</a></li>`).join(' ')}`
+    return `${items.map(item => `<li class="list-${type}-item"><a data-type="${type}">${item}</a></li>`).join(' ')}`
 }
 
 /**
