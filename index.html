@@ -1,65 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Discover a variety of delicious recipes with Les Petits Plats. Find your favorite ingredients, appliances, and utensils to create the perfect dish.">
+    <meta name="keywords" content="recipes, cooking, ingredients, appliances, utensils, Les Petits Plats">
+    <meta name="author" content="Your Name">
     <script src="https://kit.fontawesome.com/9e5222f7b9.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
     <title>Les Petits Plats</title>
 </head>
+
 <body>
     <header>
-			<span aria-label="logo" class="logo">
-                <a href="index.html">
-                    <img src="images/logo.png" alt="Icône les petits plats" aria-label="Icône les petits plats"  />
-                </a>
-			</span>
-			<h1 class="title">Les petits plats</h1>
-			<nav>
-				<div class="search-bar__main">
-					<label for="searchBar"></label>
-					<input
-                    name="search"
-                    placeholder="Rechercher une recette"
-                    autocomplete='off'
-                    aria-label="Rechercher un ingrédient, appareil, ustensiles ou une recette"
-					class="searchBar"
-					id="userInput"
-					/>
-                    <i class="fas fa-search"></i> <!-- todo: style for magnifying glass-->
-				</div>
-			</nav>
-            <div class="tag-list">
-                <!-- <div class="tag"></div>
-                <div class="tag1"></div>
-                <div class="tag2"></div> -->
+        <span class="logo">
+            <a href="index.html">
+                <img src="images/logo.png" alt="Icône les petits plats" aria-label="Icône les petits plats">
+            </a>
+        </span>
+        <h1 class="title">Les petits plats</h1>
+        <nav>
+            <div class="search-bar__main">
+                <label for="userInput" class="visually-hidden">Rechercher une recette</label>
+                <input name="search" 
+                        placeholder="Rechercher une recette"
+                        autocomplete='off'
+                        aria-label="Rechercher un ingrédient, appareil, ustensiles ou une recette" 
+                        class="searchBar"
+                        id="userInput"
+                        >
+                <i class="fas fa-search"></i>
             </div>
-            <div class="list-content">
-                    <div id="ingredients" class="search_list" tabindex="0">
-                        <button class="ingredients-button btn-dropDown" data-type="ingredients">
-                            <input id="input-ingredients" type="text" class="input-ingredients" placeholder="Ingredients">
-                            <i class="fa-solid fa-chevron-down"></i>
-                        </button>
-                    </div> 
-                    <div id="appareils" class="search_list" tabindex="0">
-                        <button class="appliance-button btn-dropDown" data-type="appliance">
-                            <input id="input-appliance" type="text" class="input-appliance" placeholder="Appliance">
-                            <i class="fa-solid fa-chevron-down"></i>
-                        </button>
-                    </div> 
-                    <div id="ustensils" class="search_list" tabindex="0">
-                        <button class="ustensils-button btn-dropDown" data-type="ustensils">
-                            <input id="input-ustensils" type="text" class="input-ustensil" placeholder="Ustensils">
-                            <i class="fa-solid fa-chevron-down"></i>
-                        </button>
-                    </div> 
+        </nav>
+        <div class="tag-list">
+        </div>
+        <div class="list-content">
+            <div id="ingredients" class="search_list" tabindex="0">
+                <label for="input-ingredients"></label>
+                <input id="input-ingredients" type="text" class="input-ingredients" placeholder="Ingredients">
+                <button class="ingredients-button btn-dropDown" data-type="ingredients">
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
             </div>
-		</header>
-		<main>
-			<section class="container">
-            </section>
-		</main>
-    </body>
+            
+            <div id="appareils" class="search_list" tabindex="0">
+                <label for="input-appliance"></label>
+                <input id="input-appliance" type="text" class="input-appliance" placeholder="Appliance">
+                <button class="appliance-button btn-dropDown" data-type="appliance">
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+            </div>
+            <div id="ustensils" class="search_list" tabindex="0">
+                <label for="input-ustensils"></label>
+                <input id="input-ustensils" type="text" class="input-ustensil" placeholder="Ustensils">
+                <button class="ustensils-button btn-dropDown" data-type="ustensils">
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="container">
+            <h2 class="visually-hidden">Recipe List</h2>
+        </section>
+    </main>
     <script src="./script/pages/index.js" type="module"></script>
+</body>
+
 </html>
