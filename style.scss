@@ -2,11 +2,9 @@
     display: flex;
     justify-content: center;
 }
-
 .visually-hidden {
     display: none;
 }
-
 .title {
     display: flex;
     justify-content: center;
@@ -334,6 +332,8 @@
     }
 
     .ustensils-dropdown-content.show {
+        max-height: 400px;
+        overflow-y: auto;
         padding: 5px;
         display: flex;
         flex-flow: row wrap;
@@ -360,6 +360,8 @@
     }
 
     .ingredients-dropdown-content.show {
+        max-height: 400px;
+        overflow-y: auto;
         padding: 5px;
         display: flex;
         flex-wrap: wrap;
@@ -391,6 +393,8 @@
     }
 
     .appliance-dropdown-content.show {
+        max-height: 400px;
+        overflow-y: auto;
         width: 300px;
         border-radius: 5px;
         background-color: #68D9A4;
